@@ -2,8 +2,8 @@ name: schedule
 
 on:
   schedule:
-    # 0时区15点，北京时间23点
-    - cron: '0 15 * * *'
+    # 0时区15:50点，北京时间23:50点
+    - cron: '50 15 * * *'
 
 jobs:
   build:
