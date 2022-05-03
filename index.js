@@ -62,9 +62,13 @@ const getUserTodayAcSubmissions = async (userInfo, date = today) => {
   const exists = await isFileExists(filePath);
   if (!exists) {
     // 创建文件
-    fs.writeFileSync(filePath, `# ${displayName}(${userSlug}) 的刷题记录`, {
-      encoding: 'utf8',
-    });
+    fs.writeFileSync(
+      filePath,
+      `# ${displayName}(${userSlug}) 的刷题记录\n > 用户主页: https://leetcode-cn.com/u/${userSlug}/`,
+      {
+        encoding: 'utf8',
+      }
+    );
   }
 
   try {
