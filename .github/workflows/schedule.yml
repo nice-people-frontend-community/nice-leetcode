@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      TZ: Asia/Shanghai # 时区
+
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
