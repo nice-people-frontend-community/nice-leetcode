@@ -1,0 +1,20 @@
+{
+  "name": "leetcode-submission",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.3",
+    "axios": "^0.27.2",
+    "dayjs": "^1.11.1",
+    "dotenv": "^16.0.0",
+    "node-fetch": "2"
+  }
+}
