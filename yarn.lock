@@ -12,11 +12,6 @@
   resolved "https://registry.npmmirror.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
   integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
 
-async-es@^3.2.3:
-  version "3.2.3"
-  resolved "https://registry.npmmirror.com/async-es/-/async-es-3.2.3.tgz#79e771b64c4f1a835fdaab8befa450ab05cf9c63"
-  integrity sha512-Wk2Lu2UmwScooActfrWSqcsYtlLt8Kl21d8ly3A5kbbXgRN8pVy4cCotXnoBAiKGjuE2XqSUw+0uj9b7x18aoQ==
-
 async@^3.2.3:
   version "3.2.3"
   resolved "https://registry.npmmirror.com/async/-/async-3.2.3.tgz#ac53dafd3f4720ee9e8a160628f18ea91df196c9"
