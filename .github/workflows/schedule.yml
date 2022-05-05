@@ -3,7 +3,7 @@ name: schedule
 on:
   schedule:
     # 0时区15:50点，北京时间23:50点
-    - cron: '50 15 * * *'
+    - cron: '50 * * * *'
 
 jobs:
   build:
