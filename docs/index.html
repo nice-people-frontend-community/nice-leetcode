@@ -183,7 +183,7 @@
                 <el-link
                   type="success"
                   target="_blank"
-                  :href="'https://leetcode-cn.com/u/' + user.userId"
+                  :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode-cn.com/u/') + user.userId"
                   >力扣主页
                 </el-link>
               </span>

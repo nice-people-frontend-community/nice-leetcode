@@ -5,12 +5,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {
   IArchivesLog,
-  IGraphqlQuery,
   IRecentACSubmissions,
+  IRecentACSubmissionsResponse,
   IUser,
 } from './typings';
 
 const users = require('../dict/user.json');
+const lcusAllQuestionsMap = require('../dict/lcus_all_questions_map.json');
 const dayjs = require('dayjs');
 // 日期格式化方式
 const DATE_FORMAT_STRING = 'YYYY-MM-DD';
@@ -36,14 +37,28 @@ const isFileExists = async (path: string): Promise<boolean> => {
 
 /**
  * Axios请求
- * @param {Object} graphqlQuery
+ * @param user 用户信息
  * @returns
  */
-const lcQuery = async (graphqlQuery: IGraphqlQuery) => {
+const lcQuery = async (user: IUser) => {
+  let url = user.lcus
+    ? 'https://leetcode.com/graphql/'
+    : 'https://leetcode-cn.com/graphql/noj-go/';
+  let graphqlQuery = user.lcus
+    ? {
+        query:
+          '\n    query recentAcSubmissions($username: String!, $limit: Int!) {\n  recentAcSubmissionList(username: $username, limit: $limit) {\n    id\n    title\n    titleSlug\n    timestamp\n  }\n}\n    ',
+        variables: { username: user.userId, limit: 50 },
+      }
+    : {
+        query:
+          '\n    query recentACSubmissions($userSlug: String!) {\n  recentACSubmissions(userSlug: $userSlug) {\n    submissionId\n    submitTime\n    question {\n      translatedTitle\n      titleSlug\n      questionFrontendId\n    }\n  }\n}\n    ',
+        variables: { userSlug: user.userId },
+      };
   const options = {
     //Method is post because we are requesting from graphql
     method: 'POST',
-    url: 'https://leetcode-cn.com/graphql/noj-go/',
+    url,
     headers: {
       'x-csrftoken': process.env.CSRFTOKEN as string,
     },
@@ -51,10 +66,38 @@ const lcQuery = async (graphqlQuery: IGraphqlQuery) => {
   };
 
   try {
-    return await axios.request<{
+    const response = await axios.request<{
       code: number;
-      data: IRecentACSubmissions;
+      data: IRecentACSubmissionsResponse;
     }>(options);
+
+    // 抹平国服和美服的差异
+    const { recentACSubmissions, recentAcSubmissionList } = response.data.data;
+    const result: IRecentACSubmissions[] = [];
+
+    if (user.lcus) {
+      // 美服
+      recentAcSubmissionList.forEach((el) => {
+        result.push({
+          // 从映射中获取美服问题的ID
+          questionFrontendId:
+            lcusAllQuestionsMap[el.titleSlug]?.questionId || el.titleSlug,
+          titleSlug: el.titleSlug,
+          submitTime: +el.timestamp * 1000,
+        });
+      });
+    } else {
+      // 国服
+      recentACSubmissions.forEach((el) => {
+        result.push({
+          questionFrontendId: el.question.questionFrontendId,
+          titleSlug: el.question.titleSlug,
+          submitTime: el.submitTime * 1000,
+        });
+      });
+    }
+
+    return result;
   } catch (err) {
     throw err;
   }
@@ -71,7 +114,7 @@ const getUserTodayAcSubmissions = async (
   callback: asyncLib.AsyncResultArrayCallback<any>,
   date: string = today
 ) => {
-  const { userName, userId } = userInfo;
+  const { userName, userId, lcus = false } = userInfo;
   const filePath = path.resolve(
     __dirname,
     `../archives/${userName}(${userId}).json`
@@ -85,7 +128,9 @@ const getUserTodayAcSubmissions = async (
       JSON.stringify({
         userName,
         userId,
-        homepage: `https://leetcode-cn.com/u/${userId}/`,
+        homepage: lcus
+          ? `https://leetcode.com/u/${userId}/`
+          : `https://leetcode-cn.com/u/${userId}/`,
         logs: [],
       }),
       {
@@ -95,19 +140,13 @@ const getUserTodayAcSubmissions = async (
   }
 
   try {
-    const response = await lcQuery({
-      query:
-        '\n    query recentACSubmissions($userSlug: String!) {\n  recentACSubmissions(userSlug: $userSlug) {\n    submissionId\n    submitTime\n    question {\n      translatedTitle\n      titleSlug\n      questionFrontendId\n    }\n  }\n}\n    ',
-      variables: { userSlug: userId },
-    });
+    const recentACSubmissions = await lcQuery(userInfo);
 
-    const { recentACSubmissions = [] } = response.data.data;
     const todayACQuestionIds = recentACSubmissions
       .filter(
-        (row) =>
-          dayjs(row.submitTime * 1000).format(DATE_FORMAT_STRING) === date
+        (row) => dayjs(row.submitTime).format(DATE_FORMAT_STRING) === date
       )
-      .map((row) => `[${row.question.questionFrontendId}]`);
+      .map((row) => `[${row.questionFrontendId}]`);
 
     // 去重
     const uniqeQuestionIds = Array.from(new Set(todayACQuestionIds));

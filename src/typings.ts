@@ -8,9 +8,15 @@ export interface IUser {
   userName: string;
   /** LeetCode 用户唯一ID */
   userId: string;
+  /**
+   * 是否是美服
+   * @default false 默认是国服
+   */
+  lcus?: boolean;
 }
 
-export interface IRecentACSubmissions {
+export interface IRecentACSubmissionsResponse {
+  /** 国服的返回值 */
   recentACSubmissions: {
     /** 提交时间 */
     submitTime: number;
@@ -25,6 +31,26 @@ export interface IRecentACSubmissions {
       translatedTitle: string;
     };
   }[];
+  /** 美服的返回值 */
+  recentAcSubmissionList: {
+    /** 提交ID */
+    id: string;
+    /** 提交时间 */
+    timestamp: string;
+    /** 标题 */
+    title: string;
+    /** 题目链接后缀 */
+    titleSlug: string;
+  }[];
+}
+
+export interface IRecentACSubmissions {
+  /** 提交时间 */
+  submitTime: number;
+  /** 问题的英文名称 */
+  titleSlug: string;
+  /** 问题ID */
+  questionFrontendId: string;
 }
 
 /** 归档日志 */
