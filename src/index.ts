@@ -144,10 +144,8 @@ const getUserTodayAcSubmissions = async (
       encoding: 'utf8',
     });
   } catch (err: any) {
-    console.log(err.message);
-    fs.appendFileSync(
-      filePath,
-      `\n\n## ${today}\n统计失败。可以手动前往用户主页查看 https://leetcode-cn.com/u/${userId}/`
+    console.error(
+      `用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode-cn.com/u/${userId}/`
     );
   } finally {
     console.log(`用户 [${userId}] --- ok`);
