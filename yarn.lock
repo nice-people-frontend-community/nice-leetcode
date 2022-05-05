@@ -2,9 +2,25 @@
 # yarn lockfile v1
 
 
+"@types/async@^3.2.13":
+  version "3.2.13"
+  resolved "https://registry.npmmirror.com/@types/async/-/async-3.2.13.tgz#ec023074c70180d17cbc9117ddc3cec2f3894ea4"
+  integrity sha512-7Q3awrhnvm89OzfsmqeqRQh8mh+8Pxfgq1UvSAn2nWQ5y/F3+NrbIF0RbkWq8+5dY99ozgap2b3DNBNwjLVOxw==
+
+"@types/node@^17.0.31":
+  version "17.0.31"
+  resolved "https://registry.npmmirror.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
+  integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
+
+async-es@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.npmmirror.com/async-es/-/async-es-3.2.3.tgz#79e771b64c4f1a835fdaab8befa450ab05cf9c63"
+  integrity sha512-Wk2Lu2UmwScooActfrWSqcsYtlLt8Kl21d8ly3A5kbbXgRN8pVy4cCotXnoBAiKGjuE2XqSUw+0uj9b7x18aoQ==
+
 async@^3.2.3:
   version "3.2.3"
   resolved "https://registry.npmmirror.com/async/-/async-3.2.3.tgz#ac53dafd3f4720ee9e8a160628f18ea91df196c9"
+  integrity sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -57,23 +73,7 @@ mime-types@^2.1.12:
   dependencies:
     mime-db "1.52.0"
 
-node-fetch@2:
-  version "2.6.7"
-  resolved "https://registry.npmmirror.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
-  dependencies:
-    whatwg-url "^5.0.0"
-
-tr46@~0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmmirror.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
-
-webidl-conversions@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.npmmirror.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
-
-whatwg-url@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmmirror.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
-  dependencies:
-    tr46 "~0.0.3"
-    webidl-conversions "^3.0.0"
+typescript@^4.6.4:
+  version "4.6.4"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.6.4.tgz#caa78bbc3a59e6a5c510d35703f6a09877ce45e9"
+  integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==

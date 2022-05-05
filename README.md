@@ -27,9 +27,9 @@ x-csrftoken: CrSKCu371vP9uXvYhVv4TaI9x9pOp2zQTh2HLWxkgPQ6uYav94bZ49tFdzJ7wTBX
 ```json
 {
   // 用户名称，随便你取什么名字
-  "displayName": "你好啊派大星",
+  "userName": "你好啊派大星",
   // LeetCode 中用户唯一标识
-  "userSlug": "ni-hao-a-pai-da-xing"
+  "userId": "ni-hao-a-pai-da-xing"
 }
 ```
 
