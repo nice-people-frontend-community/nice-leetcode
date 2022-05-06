@@ -1,329 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>务实好青年LeetCode刷题打卡群</title>
 
-    <!-- 引入样式 -->
-    <link
-      rel="stylesheet"
-      href="https://lib.baomitu.com/element-plus/2.1.4/index.min.css"
-    />
-    <style>
-      body {
-        padding: 0;
-        margin: 0;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>务实好青年LeetCode刷题打卡群</title>
 
-      #app {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://lib.baomitu.com/element-plus/2.1.4/index.min.css" />
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
 
-      .el-main {
-        height: 100vh;
-        overflow-y: auto;
-      }
+    #app {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
+    .el-main {
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .el-aside {
+      padding: 10px 0;
+    }
+
+    .search {
+      margin-bottom: 10px;
+    }
+
+    .user-list {
+      overflow-y: auto;
+      height: calc(100vh - 32px - 10px - 20px);
+    }
+
+    .user {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 16px;
+      line-height: 1.5;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      color: #606266;
+      cursor: pointer;
+    }
+
+    .user span {
+      display: inline-block;
+    }
+
+    .user .username {
+      flex: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .user .leetcode {
+      width: 80px;
+      text-align: right;
+    }
+
+    .user.active {
+      background-color: rgba(64, 158, 255, 0.1);
+      color: #409eff;
+    }
+
+    .content {
+      white-space: pre-line;
+    }
+
+    .content h1 {
+      margin: 10px 0;
+    }
+
+    .content .mini-search {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
       .el-aside {
-        padding: 10px 0;
-      }
-
-      .search {
-        margin-bottom: 10px;
-      }
-
-      .user-list {
-        overflow-y: auto;
-        height: calc(100vh - 32px - 10px - 20px);
-      }
-
-      .user {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 16px;
-        line-height: 1.5;
-        font-size: 0.9rem;
-        border-radius: 8px;
-        color: #606266;
-        cursor: pointer;
-      }
-
-      .user span {
-        display: inline-block;
-      }
-
-      .user .username {
-        flex: 1;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      .user .leetcode {
-        width: 80px;
-        text-align: right;
-      }
-
-      .user.active {
-        background-color: rgba(64, 158, 255, 0.1);
-        color: #409eff;
-      }
-
-      .content {
-        white-space: pre-line;
-      }
-
-      .content h1 {
-        margin: 10px 0;
-      }
-
-      .content .mini-search {
         display: none;
       }
 
-      @media (max-width: 768px) {
-        .el-aside {
-          display: none;
-        }
-        .mini-search {
-          display: block !important;
-        }
+      .mini-search {
+        display: block !important;
       }
-    </style>
-    <style>
+    }
+  </style>
+  <style>
+    .github-corner:hover .octo-arm {
+      animation: octocat-wave 560ms ease-in-out;
+    }
+
+    @keyframes octocat-wave {
+
+      0%,
+      100% {
+        transform: rotate(0);
+      }
+
+      20%,
+      60% {
+        transform: rotate(-25deg);
+      }
+
+      40%,
+      80% {
+        transform: rotate(10deg);
+      }
+    }
+
+    @media (max-width: 500px) {
       .github-corner:hover .octo-arm {
+        animation: none;
+      }
+
+      .github-corner .octo-arm {
         animation: octocat-wave 560ms ease-in-out;
       }
+    }
+  </style>
+</head>
 
-      @keyframes octocat-wave {
-        0%,
-        100% {
-          transform: rotate(0);
-        }
-
-        20%,
-        60% {
-          transform: rotate(-25deg);
-        }
-
-        40%,
-        80% {
-          transform: rotate(10deg);
-        }
-      }
-
-      @media (max-width: 500px) {
-        .github-corner:hover .octo-arm {
-          animation: none;
-        }
-
-        .github-corner .octo-arm {
-          animation: octocat-wave 560ms ease-in-out;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="app">
-      <a
-        href="https://github.com/Anonymity94/leetcode-submission"
-        class="github-corner"
-        aria-label="View source on GitHub"
-        ><svg
-          width="80"
-          height="80"
-          viewBox="0 0 250 250"
-          style="
+<body>
+  <div id="app">
+    <a href="https://github.com/Anonymity94/leetcode-submission" class="github-corner"
+      aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="
             fill: #151513;
             color: #fff;
             position: absolute;
             top: 0;
             border: 0;
             right: 0;
-          "
-          aria-hidden="true"
-        >
-          <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-          <path
-            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-            fill="currentColor"
-            style="transform-origin: 130px 106px"
-            class="octo-arm"
-          ></path>
-          <path
-            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-            fill="currentColor"
-            class="octo-body"
-          ></path></svg
-      ></a>
-      <el-container>
-        <el-aside width="400px">
-          <div class="search">
-            <el-input
-              v-model="keyword"
-              placeholder="根据用户名称模糊搜索"
-              clearable
-            />
+          " aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px" class="octo-arm"></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg></a>
+    <el-container>
+      <el-aside width="400px">
+        <div class="search">
+          <el-input v-model="keyword" placeholder="根据用户名称模糊搜索" clearable />
+        </div>
+        <div class="user-list">
+          <div class="user" :class="{active: (selectedUser && selectedUser.userId) === user.userId}"
+            v-for="user in displayUsers" v-on:click="handleChangeUser(user)">
+            <span class="username">{{ user.userName }}({{ user.userId }})</span>
+            <span class="leetcode">
+              <el-link type="success" target="_blank"
+                :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode-cn.com/u/') + user.userId">力扣主页 {{
+                user.lcus ? '🇺🇸' : '🇨🇳' }}
+              </el-link>
+            </span>
           </div>
-          <div class="user-list">
-            <div
-              class="user"
-              :class="{active: (selectedUser && selectedUser.userId) === user.userId}"
-              v-for="user in displayUsers"
-              v-on:click="handleChangeUser(user)"
-            >
-              <span class="username"
-                >{{ user.userName }}({{ user.userId }})</span
-              >
-              <span class="leetcode">
-                <el-link
-                  type="success"
-                  target="_blank"
-                  :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode-cn.com/u/') + user.userId"
-                  >力扣主页 {{ user.lcus ? '🇺🇸' : '🇨🇳' }}
-                </el-link>
-              </span>
-            </div>
-            <div class="empty" v-if="displayUsers.length === 0">
-              没有找到匹配用户
-            </div>
+          <div class="empty" v-if="displayUsers.length === 0">
+            没有找到匹配用户
           </div>
-        </el-aside>
-        <el-main>
-          <div class="content">
-            <el-card shadow="never">
-              <el-select
-                class="mini-search"
-                v-model="selectedUserId"
-                placeholder="选择用户"
-                style="margin-bottom: 10px; width: 100%"
-              >
-                <el-option
-                  v-for="user in displayUsers"
-                  :key="user.userId"
-                  :label="user.userName + '(' + user.userId + ')'"
-                  :value="user.userId"
-                />
-              </el-select>
-              <div
-                v-if="!userArchivesData || typeof userArchivesData === 'string'"
-              >
-                {{ userArchivesData }}
-              </div>
-              <div v-else>
-                <h1>
-                  {{ userArchivesData.userName }}({{ userArchivesData.userId }})
-                  的 AC 记录
-                </h1>
-                <p>
-                  <a target="_blank" :href="userArchivesData.homepage"
-                    >力扣主页</a
-                  >
-                </p>
-                <p>更新于: {{ userArchivesData.updatedAt }}</p>
+        </div>
+      </el-aside>
+      <el-main>
+        <div class="content">
+          <el-card shadow="never">
+            <el-select class="mini-search" v-model="selectedUserId" placeholder="选择用户"
+              style="margin-bottom: 10px; width: 100%">
+              <el-option v-for="user in displayUsers" :key="user.userId"
+                :label="user.userName + '(' + user.userId + ')'" :value="user.userId" />
+            </el-select>
+            <div v-if="!userArchivesData || typeof userArchivesData === 'string'">
+              {{ userArchivesData }}
+            </div>
+            <div v-else>
+              <h1>
+                {{ userArchivesData.userName }}({{ userArchivesData.userId }})
+                的 AC 记录
+              </h1>
+              <p>
+                <a target="_blank" :href="userArchivesData.homepage">力扣主页</a>
+              </p>
+              <p>更新于: {{ userArchivesData.updatedAt }}</p>
 
-                <section
-                  v-for="log in userArchivesData.logs"
-                  style="margin-bottom: 10px"
-                >
-                  <p style="margin: 0">## {{ log.date }}</p>
-                  <p style="margin: 0">
-                    新题: {{ log.questionIds.length > 0 ? log.questionIds.join('') :
-                    '无' }}
-                  </p>
-                  <p style="margin: 0">
-                    复习: {{ log.review && log.review.length > 0 ? log.review.join('') :
-                    '无' }}
-                  </p>
-                </section>
-              </div>
-            </el-card>
-          </div>
-        </el-main>
-      </el-container>
-    </div>
-    <script src="https://lib.baomitu.com/axios/0.26.1/axios.min.js"></script>
-    <!-- 导入 Vue 3 -->
-    <script src="https://lib.baomitu.com/vue/3.2.31/vue.global.prod.min.js"></script>
-    <!-- 导入组件库 -->
-    <script src="https://lib.baomitu.com/element-plus/2.1.4/index.full.min.js"></script>
-    <script type="text/javascript">
-      const context = window.location.hostname.includes('github.io')
-        ? '/leetcode-submission'
-        : '';
-      const App = {
-        data() {
-          return {
-            // 所有用户列表
-            allUsers: [],
-            // 过滤展示的用户列表
-            displayUsers: [],
-            // 当前展示的用户
-            selectedUserId: null,
-            selectedUser: null,
-            // 用户文件内容
-            userArchivesData: null,
-            keyword: null,
-          };
+              <section v-for="log in userArchivesData.logs" style="margin-bottom: 10px">
+                <p style="margin: 0">## {{ log.date }}</p>
+                <p style="margin: 0">
+                  新题: {{ log.questionIds.length > 0 ? log.questionIds.join('') :
+                  '无' }}
+                  <el-button type="primary" size="small" round v-if="log.questionIds.length > 0" class="copy-btn"
+                    :data-clipboard-text="log.questionIds.join('')">Copy</el-button>
+                </p>
+                <p style="margin: 0">
+                  复习: {{ log.review && log.review.length > 0 ? log.review.join('') :
+                  '无' }}
+                </p>
+              </section>
+            </div>
+          </el-card>
+        </div>
+      </el-main>
+    </el-container>
+  </div>
+  <script src="https://lib.baomitu.com/axios/0.26.1/axios.min.js"></script>
+  <!-- 导入 Vue 3 -->
+  <script src="https://lib.baomitu.com/vue/3.2.31/vue.global.prod.min.js"></script>
+  <!-- 导入组件库 -->
+  <script src="https://lib.baomitu.com/element-plus/2.1.4/index.full.min.js"></script>
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js"></script>
+  <script type="text/javascript">
+    new ClipboardJS('.copy-btn');
+    const context = window.location.hostname.includes('github.io')
+      ? '/leetcode-submission'
+      : '';
+    const App = {
+      data () {
+        return {
+          // 所有用户列表
+          allUsers: [],
+          // 过滤展示的用户列表
+          displayUsers: [],
+          // 当前展示的用户
+          selectedUserId: null,
+          selectedUser: null,
+          // 用户文件内容
+          userArchivesData: null,
+          keyword: null,
+        };
+      },
+      created () {
+        axios
+          .get(`${context}/dict/user.json?v=${+new Date()}`)
+          .then(({ data }) => {
+            this.allUsers = data;
+            this.displayUsers = data;
+            if (data.length > 0) {
+              this.selectedUserId = data[0].userId;
+            }
+          });
+      },
+      methods: {
+        handleChangeUser (user) {
+          this.selectedUserId = user.userId;
         },
-        created() {
+        getUserSubmission (user) {
+          this.userArchivesData = '查询中...';
+          const filePath = `${context}/archives/${user.userName}(${user.userId
+            }).json?v=${+new Date()}`;
           axios
-            .get(`${context}/dict/user.json?v=${+new Date()}`)
+            .get(filePath)
             .then(({ data }) => {
-              this.allUsers = data;
-              this.displayUsers = data;
-              if (data.length > 0) {
-                this.selectedUserId = data[0].userId;
-              }
+              this.userArchivesData = data;
+            })
+            .catch((err) => {
+              this.userArchivesData = '没有找到相关记录 ಥ_ಥ';
             });
         },
-        methods: {
-          handleChangeUser(user) {
-            this.selectedUserId = user.userId;
-          },
-          getUserSubmission(user) {
-            this.userArchivesData = '查询中...';
-            const filePath = `${context}/archives/${user.userName}(${
-              user.userId
-            }).json?v=${+new Date()}`;
-            axios
-              .get(filePath)
-              .then(({ data }) => {
-                this.userArchivesData = data;
-              })
-              .catch((err) => {
-                this.userArchivesData = '没有找到相关记录 ಥ_ಥ';
-              });
-          },
+      },
+      watch: {
+        selectedUserId (newUserId) {
+          const userInfo = this.allUsers.find(
+            (el) => el.userId === newUserId
+          );
+          this.selectedUser = userInfo;
+          this.getUserSubmission(userInfo);
         },
-        watch: {
-          selectedUserId(newUserId) {
-            const userInfo = this.allUsers.find(
-              (el) => el.userId === newUserId
-            );
-            this.selectedUser = userInfo;
-            this.getUserSubmission(userInfo);
-          },
-          keyword(newKeyword) {
-            if (!newKeyword) {
-              this.displayUsers = this.allUsers;
-              return;
-            }
-            this.displayUsers = this.allUsers.filter(
-              (user) =>
-                user.userName.indexOf(newKeyword) > -1 ||
-                user.userId.indexOf(newKeyword) > -1
-            );
-          },
+        keyword (newKeyword) {
+          if (!newKeyword) {
+            this.displayUsers = this.allUsers;
+            return;
+          }
+          this.displayUsers = this.allUsers.filter(
+            (user) =>
+              user.userName.indexOf(newKeyword) > -1 ||
+              user.userId.indexOf(newKeyword) > -1
+          );
         },
-      };
-      const app = Vue.createApp(App);
-      app.use(ElementPlus);
-      app.mount('#app');
-    </script>
-  </body>
+      },
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.mount('#app');
+  </script>
+</body>
+
 </html>
