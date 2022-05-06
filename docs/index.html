@@ -63,7 +63,7 @@
       }
 
       .user .leetcode {
-        width: 70px;
+        width: 80px;
         text-align: right;
       }
 
@@ -184,7 +184,7 @@
                   type="success"
                   target="_blank"
                   :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode-cn.com/u/') + user.userId"
-                  >力扣主页
+                  >力扣主页 {{ user.lcus ? '🇺🇸' : '🇨🇳' }}
                 </el-link>
               </span>
             </div>
@@ -232,7 +232,11 @@
                 >
                   <p style="margin: 0">## {{ log.date }}</p>
                   <p style="margin: 0">
-                    {{ log.questionIds.length > 0 ? log.questionIds.join('') :
+                    新题: {{ log.questionIds.length > 0 ? log.questionIds.join('') :
+                    '无' }}
+                  </p>
+                  <p style="margin: 0">
+                    复习: {{ log.review && log.review.length > 0 ? log.review.join('') :
                     '无' }}
                   </p>
                 </section>

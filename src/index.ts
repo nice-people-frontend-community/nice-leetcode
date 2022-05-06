@@ -104,12 +104,13 @@ const lcQuery = async (user: IUser) => {
 };
 
 /**
- * 获取用户昨天的的提交记录
+ * 获取用户某一天的的提交记录
  * @param userInfo 用户信息
+ * @param callback mapLimit 并发队列的回调函数
  * @param date 统计哪一天的提交
  * @description 利用最近 15 道 AC 的题目的接口，过滤后获得结果，最好是统计最近1~2天
  */
-const getUserTodayAcSubmissions = async (
+const getTodayAcSubmissions = async (
   userInfo: IUser,
   callback: asyncLib.AsyncResultArrayCallback<any>,
   date: string = today
@@ -157,20 +158,42 @@ const getUserTodayAcSubmissions = async (
     );
     // 记录更新时间
     archivesData.updatedAt = dayjs().format();
-    // 更新题号
-    const target = archivesData.logs.find((log) => log.date === date);
-    if (target) {
-      // 判断问题是否已经记录
-      uniqeQuestionIds.forEach((questionId) => {
-        if (!target.questionIds.includes(questionId)) {
-          target.questionIds.push(questionId);
-        }
-      });
-    } else {
+    // 查找当天之外的所有的题目
+    const historyLogs = archivesData.logs.find((log) => log.date !== date);
+    // 当天的记录
+    const targetLog = archivesData.logs.find((log) => log.date === date);
+
+    const historyQuestionIds = [
+      ...(historyLogs?.questionIds || []),
+      ...(historyLogs?.review || []),
+    ];
+    // 新问题
+    const questionIds: string[] = [];
+    // 复习的问题
+    const reviewIds: string[] = [];
+    uniqeQuestionIds.forEach((questionId) => {
+      // 判断是否是历史出现过的题目
+      if (historyQuestionIds.includes(questionId)) {
+        reviewIds.push(questionId);
+      } else {
+        questionIds.push(questionId);
+      }
+    });
+
+    if (!targetLog) {
       archivesData.logs.push({
         date,
-        questionIds: uniqeQuestionIds,
+        questionIds,
+        review: reviewIds,
       });
+    } else {
+      // 保存时去重一次
+      targetLog.questionIds = Array.from(
+        new Set([...targetLog.questionIds, ...questionIds])
+      );
+      targetLog.review = Array.from(
+        new Set([...(targetLog.review || []), ...reviewIds])
+      );
     }
 
     // 针对日期排序，最近的日期在上面
@@ -196,7 +219,7 @@ asyncLib.mapLimit<IUser, any, any>(
   users,
   5,
   async function (userInfo, callback) {
-    await getUserTodayAcSubmissions(userInfo, callback);
+    await getTodayAcSubmissions(userInfo, callback);
   },
   (err, results) => {
     if (err) throw err;

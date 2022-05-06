@@ -62,7 +62,9 @@ export interface IArchivesLog extends IUser {
   logs: {
     /** 日期 */
     date: string;
-    /** AC 的问题ID */
+    /** 新题目ID */
     questionIds: string[];
+    /** 复习的题目ID */
+    review: string[]
   }[];
 }
