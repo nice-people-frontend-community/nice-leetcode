@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/tsc src/index.ts && node src/index.js"
+    "start": "node_modules/.bin/tsc src/index.ts && node src/index.js",
+    "rollup": "node_modules/.bin/tsc src/rollup.ts && node src/rollup.js"
   },
   "keywords": [],
   "author": "",
