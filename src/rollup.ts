@@ -14,7 +14,10 @@ const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 // 当前日所在的ISO周数
 const curISOWeekNumber = dayjs().isoWeek();
 
-// 获取当前日所在ISO周的起止日期
+/**
+ * 获取当前日所在ISO周的起止日期
+ * @returns 日期列表
+ */
 const getWeekStartAndEnd = () => {
   // 当前周的星期一
   const startDate = dayjs().startOf('isoWeek').format(DATE_FORMAT_STRING);
@@ -31,11 +34,10 @@ const getWeekStartAndEnd = () => {
   return dateList;
 };
 
-//
 const dateList = getWeekStartAndEnd();
 
 /**
- *
+ * 汇总周报
  */
 const rollup = () => {
   // 生成用户排名信息
@@ -141,8 +143,6 @@ ${summaryList
       encoding: 'utf8',
     }
   );
-
-  // `\n| ${image.date} | ![${image.copyright}](${image.previewUrl}) | [下载](${image.url}) |`
 };
 
 rollup();
