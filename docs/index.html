@@ -191,13 +191,14 @@
               <section v-for="log in userArchivesData.logs" style="margin-bottom: 10px">
                 <p style="margin: 0">## {{ log.date }}</p>
                 <p style="margin: 0">
-                  新题: {{ log.questionIds.length > 0 ? log.questionIds.join('') :
+                  新题({{log.questionIds.length}}): {{ log.questionIds.length > 0 ? log.questionIds.join('') :
                   '无' }}
                   <el-button type="primary" size="small" round v-if="log.questionIds.length > 0" class="copy-btn"
                     :data-clipboard-text="log.questionIds.join('')">Copy</el-button>
                 </p>
                 <p style="margin: 0">
-                  复习: {{ log.review && log.review.length > 0 ? log.review.join('') :
+                  复习({{log.review ? log.review.length : 0}}): {{ log.review && log.review.length > 0 ?
+                  log.review.join('') :
                   '无' }}
                 </p>
               </section>
