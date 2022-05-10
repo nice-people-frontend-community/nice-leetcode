@@ -1,5 +1,5 @@
 # 아이유-意优(clever-vvilsoneye) 的刷题记录
- > 用户主页: https://leetcode-cn.com/u/clever-vvilsoneye/
+ > 用户主页: https://leetcode.cn/u/clever-vvilsoneye/
 
 ## 2022-05-03
 [416]

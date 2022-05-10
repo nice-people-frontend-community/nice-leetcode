@@ -1,5 +1,5 @@
 # P丶A(panxiaoan) 的刷题记录
- > 用户主页: https://leetcode-cn.com/u/panxiaoan/
+ > 用户主页: https://leetcode.cn/u/panxiaoan/
 
 ## 2022-05-03
 用户太懒了，什么也没有提交

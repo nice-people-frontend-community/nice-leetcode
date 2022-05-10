@@ -52,7 +52,7 @@ const isFileExists = async (path: string): Promise<boolean> => {
 const lcQuery = async (user: IUser) => {
   let url = user.lcus
     ? 'https://leetcode.com/graphql/'
-    : 'https://leetcode-cn.com/graphql/noj-go/';
+    : 'https://leetcode.cn/graphql/noj-go/';
   let graphqlQuery = user.lcus
     ? {
         query:
@@ -140,7 +140,7 @@ const getTodayAcSubmissions = async (
         userId,
         homepage: lcus
           ? `https://leetcode.com/u/${userId}/`
-          : `https://leetcode-cn.com/u/${userId}/`,
+          : `https://leetcode.cn/u/${userId}/`,
         logs: [],
       }),
       {
@@ -216,7 +216,7 @@ const getTodayAcSubmissions = async (
     });
   } catch (err: any) {
     console.error(
-      `用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode-cn.com/u/${userId}/`
+      `用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode.cn/u/${userId}/`
     );
   } finally {
     console.log(`用户 [${userId}] --- ok`);
