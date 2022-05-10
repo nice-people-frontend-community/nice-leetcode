@@ -22,7 +22,9 @@ jobs:
           node-version: 14
           cache: 'yarn'
       - run: yarn install
-      - run: yarn run start
+      - run: | 
+          git pull
+          yarn run start
 
       - name: Update GitHub
         run: |
