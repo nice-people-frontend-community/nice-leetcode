@@ -20,7 +20,7 @@ const today = dayjs().format(DATE_FORMAT_STRING);
 const yesterday = dayjs().subtract(1, 'day').format(DATE_FORMAT_STRING);
 
 // 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
-// 定时器不会延迟太久，所以这里仅判断跨天的的即可 
+// 定时器不会延迟太久，所以这里仅判断跨天的的即可
 // 如果启动时间在凌晨 00:30 以内的话，就查询昨天记录
 let queryDate = today;
 if (new Date().getHours() === 0 && new Date().getMinutes() < 30) {
@@ -119,7 +119,7 @@ const lcQuery = async (user: IUser) => {
  * @param date 统计哪一天的提交
  * @description 利用最近 15 道 AC 的题目的接口，过滤后获得结果，最好是统计最近1~2天
  */
-const getTodayAcSubmissions = async (
+const getAcSubmissions = async (
   userInfo: IUser,
   callback: asyncLib.AsyncResultArrayCallback<any>,
   date: string = today
@@ -228,7 +228,7 @@ asyncLib.mapLimit<IUser, any, any>(
   users,
   5,
   async function (userInfo, callback) {
-    await getTodayAcSubmissions(userInfo, callback, queryDate);
+    await getAcSubmissions(userInfo, callback, queryDate);
   },
   (err, results) => {
     if (err) throw err;
