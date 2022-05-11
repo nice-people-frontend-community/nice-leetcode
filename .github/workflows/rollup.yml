@@ -2,7 +2,7 @@ name: week-rollup-schedule
 
 on:
   schedule:
-    - cron: '55 15 * * *'
+    - cron: '55 4,15 * * *'
 
 jobs:
   build:

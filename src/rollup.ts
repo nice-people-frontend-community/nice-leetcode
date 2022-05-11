@@ -4,23 +4,33 @@ import * as path from 'path';
 import { IArchivesLog } from './typings';
 const users = require('../dict/user.json');
 const dayjs = require('dayjs');
-const isoWeek = require('dayjs/plugin/isoWeek');
-const weekOfYear = require('dayjs/plugin/weekOfYear');
-dayjs.extend(isoWeek);
-dayjs.extend(weekOfYear);
+const isoWeekPlugin = require('dayjs/plugin/isoWeek');
+dayjs.extend(isoWeekPlugin);
 // 日期格式化方式
 const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 
+// 当天日期
+const now = dayjs();
+const today = now.format(DATE_FORMAT_STRING);
+const yesterday = now.subtract(1, 'day').format(DATE_FORMAT_STRING);
+// 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
+// 定时器不会延迟太久，所以这里仅判断跨天的的即可
+// 如果启动时间在周一凌晨 1 点以内的话，就汇总上周的记录
+let queryDate = today;
+if (new Date(now).getDay() === 1 && new Date(now).getHours() < 1) {
+  queryDate = yesterday;
+}
 // 当前日所在的ISO周数
-const curISOWeekNumber = dayjs().isoWeek();
+const curISOWeekNumber = dayjs(queryDate).isoWeek();
 
 /**
- * 获取当前日所在ISO周的起止日期
+ * 获取某个日期所在ISO周的起止日期
+ * @param {string} date YYYY-MM-DD
  * @returns 日期列表
  */
-const getWeekStartAndEnd = () => {
+const getWeekStartAndEnd = (date: string) => {
   // 当前周的星期一
-  const startDate = dayjs().startOf('isoWeek').format(DATE_FORMAT_STRING);
+  const startDate = dayjs(date).startOf('isoWeek').format(DATE_FORMAT_STRING);
 
   const dateList: string[] = [];
   let index = 0;
@@ -34,7 +44,13 @@ const getWeekStartAndEnd = () => {
   return dateList;
 };
 
-const dateList = getWeekStartAndEnd();
+const dateList = getWeekStartAndEnd(queryDate);
+// 判断本周属于哪个年度，以当前周四所在的年份为准
+const weekOfYear = new Date(dateList[3]).getFullYear();
+// 周汇总的文件名称
+const weekRollupFileName = `${weekOfYear}年第${curISOWeekNumber}周(${
+  dateList[0]
+}_${dateList[dateList.length - 1]})`;
 
 /**
  * 汇总周报
@@ -96,16 +112,14 @@ const rollup = () => {
 
   const weekFilePath = path.resolve(
     __dirname,
-    `../weeks/第${curISOWeekNumber}周(${dateList[0]}_${
-      dateList[dateList.length - 1]
-    }).md`
+    `../weeks/${weekRollupFileName}.md`
   );
 
   // 创建文件
   fs.writeFileSync(
     weekFilePath,
     `
-# ${dateList[0]} ~ ${dateList[dateList.length - 1]} 打卡记录
+# ${weekRollupFileName} 周报
 
 > 更新于: ${dayjs().format()}
 
