@@ -169,41 +169,39 @@
       </el-aside>
       <el-main>
         <div class="content">
-          <el-card shadow="never">
-            <el-select class="mini-search" v-model="selectedUserId" placeholder="选择用户"
-              style="margin-bottom: 10px; width: 100%">
-              <el-option v-for="user in displayUsers" :key="user.userId"
-                :label="user.userName + '(' + user.userId + ')'" :value="user.userId" />
-            </el-select>
-            <div v-if="!userArchivesData || typeof userArchivesData === 'string'">
-              {{ userArchivesData }}
-            </div>
-            <div v-else>
-              <h1>
-                {{ userArchivesData.userName }}({{ userArchivesData.userId }})
-                的 AC 记录
-              </h1>
-              <p>
-                <a target="_blank" :href="userArchivesData.homepage">力扣主页</a>
-              </p>
-              <p>更新于: {{ userArchivesData.updatedAt }}</p>
+          <el-select class="mini-search" v-model="selectedUserId" placeholder="选择用户"
+            style="margin-bottom: 10px; width: 100%">
+            <el-option v-for="user in displayUsers" :key="user.userId"
+              :label="user.userName + '(' + user.userId + ')'" :value="user.userId" />
+          </el-select>
+          <div v-if="!userArchivesData || typeof userArchivesData === 'string'">
+            {{ userArchivesData }}
+          </div>
+          <div v-else>
+            <h1>
+              {{ userArchivesData.userName }}({{ userArchivesData.userId }})
+              的 AC 记录
+            </h1>
+            <p>
+              <a target="_blank" :href="userArchivesData.homepage">力扣主页</a>
+            </p>
+            <p>更新于: {{ userArchivesData.updatedAt }}</p>
 
-              <section v-for="log in userArchivesData.logs" style="margin-bottom: 10px">
-                <p style="margin: 0">## {{ log.date }}</p>
-                <p style="margin: 0">
-                  新题({{log.questionIds.length}}): {{ log.questionIds.length > 0 ? log.questionIds.join('') :
-                  '无' }}
-                  <el-button type="primary" size="small" round v-if="log.questionIds.length > 0" class="copy-btn"
-                    :data-clipboard-text="log.questionIds.join('')">Copy</el-button>
-                </p>
-                <p style="margin: 0">
-                  复习({{log.review ? log.review.length : 0}}): {{ log.review && log.review.length > 0 ?
-                  log.review.join('') :
-                  '无' }}
-                </p>
-              </section>
-            </div>
-          </el-card>
+            <section v-for="log in userArchivesData.logs" style="margin-bottom: 10px">
+              <p style="margin: 0">## {{ log.date }}</p>
+              <p style="margin: 0">
+                新题({{log.questionIds.length}}): {{ log.questionIds.length > 0 ? log.questionIds.join('') :
+                '无' }}
+                <el-button type="primary" size="small" round v-if="log.questionIds.length > 0" class="copy-btn"
+                  :data-clipboard-text="log.questionIds.join('')">Copy</el-button>
+              </p>
+              <p style="margin: 0">
+                复习({{log.review ? log.review.length : 0}}): {{ log.review && log.review.length > 0 ?
+                log.review.join('') :
+                '无' }}
+              </p>
+            </section>
+          </div>
         </div>
       </el-main>
     </el-container>
