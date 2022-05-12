@@ -12,7 +12,7 @@
 
 ## 线上地址
 
-- [每日 AC 记录](https://anonymity94.github.io/leetcode-submission/docs/)
+- [用户日报](https://anonymity94.github.io/leetcode-submission/docs/)
 - [本周周报](https://anonymity94.github.io/leetcode-submission/docs/week)
 
 ## 使用方法
