@@ -1,8 +1,17 @@
-require('dotenv').config();
-import * as asyncLib from 'async';
 import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as asyncLib from 'async';
+
+const dayjs = require('dayjs');
+const isoWeekPlugin = require('dayjs/plugin/isoWeek');
+const lcusAllQuestionsMap = require('../dict/lcus_all_questions_map.json');
+
+dayjs.extend(isoWeekPlugin);
+
+// 日期格式化方式
+export const DATE_FORMAT_STRING = 'YYYY-MM-DD';
+
 import {
   IArchivesLog,
   IRecentACSubmissions,
@@ -10,29 +19,12 @@ import {
   IUser,
 } from './typings';
 
-const users = require('../dict/user.json');
-const lcusAllQuestionsMap = require('../dict/lcus_all_questions_map.json');
-const dayjs = require('dayjs');
-// 日期格式化方式
-const DATE_FORMAT_STRING = 'YYYY-MM-DD';
-// 当天日期
-const today = dayjs().format(DATE_FORMAT_STRING);
-const yesterday = dayjs().subtract(1, 'day').format(DATE_FORMAT_STRING);
-
-// 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
-// 定时器不会延迟太久，所以这里仅判断跨天的的即可
-// 如果启动时间在凌晨 00:30 以内的话，就查询昨天记录
-let queryDate = today;
-if (new Date().getHours() === 0 && new Date().getMinutes() < 30) {
-  queryDate = yesterday;
-}
-
 /**
  * 判断文件是否存在
  * @param {string} path 文件路径
  * @returns {Promise<boolean>} 是否存在
  */
-const isFileExists = async (path: string): Promise<boolean> => {
+export const isFileExists = async (path: string): Promise<boolean> => {
   return new Promise(function (resolve, reject) {
     fs.stat(path, (err) => {
       if (err) {
@@ -49,7 +41,7 @@ const isFileExists = async (path: string): Promise<boolean> => {
  * @param user 用户信息
  * @returns
  */
-const lcQuery = async (user: IUser) => {
+export const lcQuery = async (user: IUser) => {
   let url = user.lcus
     ? 'https://leetcode.com/graphql/'
     : 'https://leetcode.cn/graphql/noj-go/';
@@ -68,9 +60,7 @@ const lcQuery = async (user: IUser) => {
     //Method is post because we are requesting from graphql
     method: 'POST',
     url,
-    headers: {
-      'x-csrftoken': process.env.CSRFTOKEN as string,
-    },
+    headers: {},
     data: graphqlQuery,
   };
 
@@ -115,14 +105,14 @@ const lcQuery = async (user: IUser) => {
 /**
  * 获取用户某一天的的提交记录
  * @param userInfo 用户信息
- * @param callback mapLimit 并发队列的回调函数
  * @param date 统计哪一天的提交
+ * @param callback mapLimit 并发队列的回调函数
  * @description 利用最近 15 道 AC 的题目的接口，过滤后获得结果，最好是统计最近1~2天
  */
-const getAcSubmissions = async (
+export const getAcSubmissions = async (
   userInfo: IUser,
-  callback: asyncLib.AsyncResultArrayCallback<any>,
-  date: string = today
+  date: string,
+  callback?: asyncLib.AsyncResultArrayCallback<any>
 ) => {
   const { userName, userId, lcus = false } = userInfo;
   const filePath = path.resolve(
@@ -220,18 +210,34 @@ const getAcSubmissions = async (
     );
   } finally {
     console.log(`用户 [${userId}] --- ok`);
-    callback(null);
+    callback && callback(null);
   }
 };
 
-asyncLib.mapLimit<IUser, any, any>(
-  users,
-  5,
-  async function (userInfo, callback) {
-    await getAcSubmissions(userInfo, callback, queryDate);
-  },
-  (err, results) => {
-    if (err) throw err;
-    console.log('全部处理完成^_^');
+/**
+ * 获取某个日期所在ISO周的起止日期
+ * @param {string} date YYYY-MM-DD
+ * @returns 日期列表 [YYYY-MM-DD]
+ */
+export const getWeekStartAndEnd = (date: string) => {
+  // 当前周的星期一
+  const startDate = dayjs(date).startOf('isoWeek').format(DATE_FORMAT_STRING);
+
+  const dateList: string[] = [];
+  let index = 0;
+  while (index < 7) {
+    dateList.push(
+      dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING)
+    );
+    index += 1;
   }
-);
+
+  return dateList;
+};
+
+/**
+ * 获取某个日期所在的ISO周数
+ * @param date 日期 YYYY-MM-DD
+ * @returns
+ */
+export const getISOWeekNumber = (date: string) => dayjs(date).isoWeek();

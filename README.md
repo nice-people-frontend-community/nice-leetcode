@@ -12,14 +12,6 @@
 
 ## 使用方法
 
-### 填写 `CSRFTOKEN`
-
-登录 LeetCode PC 端，F12 查看 `Request Headers`，将 `x-csrftoken` 复制，添加到文件 [.env](./.env) 中。例如
-
-```
-x-csrftoken: CrSKCu371vP9uXvYhVv4TaI9x9pOp2zQTh2HLWxkgPQ6uYav94bZ49tFdzJ7wTBX
-```
-
 ### 添加自己的 LC ID
 
 修改文件 [user.json](./dict/user.json)
@@ -37,7 +29,12 @@ x-csrftoken: CrSKCu371vP9uXvYhVv4TaI9x9pOp2zQTh2HLWxkgPQ6uYav94bZ49tFdzJ7wTBX
 
 ```sh
 yarn
-yarn run start
+# 获取提交记录
+yarn run ac_record
+# 汇总周报
+yarn run week_rollup
+# 新增用户时，扫描用户最近一周的 AC 记录
+yarn run fix_user
 ```
 
 ## 参考

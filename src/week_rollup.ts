@@ -1,13 +1,16 @@
 // 汇总每周的周报
 import * as fs from 'fs';
 import * as path from 'path';
-import { IArchivesLog } from './typings';
-const users = require('../dict/user.json');
 const dayjs = require('dayjs');
 const isoWeekPlugin = require('dayjs/plugin/isoWeek');
-dayjs.extend(isoWeekPlugin);
-// 日期格式化方式
-const DATE_FORMAT_STRING = 'YYYY-MM-DD';
+
+import { IArchivesLog } from './typings';
+import {
+  DATE_FORMAT_STRING,
+  getISOWeekNumber,
+  getWeekStartAndEnd,
+} from './utils';
+const users = require('../dict/user.json');
 
 // 当天日期
 const now = dayjs();
@@ -21,29 +24,7 @@ if (new Date(now).getDay() === 1 && new Date(now).getHours() < 1) {
   queryDate = yesterday;
 }
 // 当前日所在的ISO周数
-const curISOWeekNumber = dayjs(queryDate).isoWeek();
-
-/**
- * 获取某个日期所在ISO周的起止日期
- * @param {string} date YYYY-MM-DD
- * @returns 日期列表
- */
-const getWeekStartAndEnd = (date: string) => {
-  // 当前周的星期一
-  const startDate = dayjs(date).startOf('isoWeek').format(DATE_FORMAT_STRING);
-
-  const dateList: string[] = [];
-  let index = 0;
-  while (index < 7) {
-    dateList.push(
-      dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING)
-    );
-    index += 1;
-  }
-
-  return dateList;
-};
-
+const curISOWeekNumber = getISOWeekNumber(queryDate);
 const dateList = getWeekStartAndEnd(queryDate);
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 const weekOfYear = new Date(dateList[3]).getFullYear();
@@ -55,7 +36,7 @@ const weekRollupFileName = `${weekOfYear}年第${curISOWeekNumber}周(${
 /**
  * 汇总周报
  */
-const rollup = () => {
+const weekRollup = () => {
   // 生成用户排名信息
   const summaryList: (IArchivesLog & {
     curWeekLogs: IArchivesLog['logs'];
@@ -159,4 +140,4 @@ ${summaryList
   );
 };
 
-rollup();
+weekRollup();
