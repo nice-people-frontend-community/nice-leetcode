@@ -210,8 +210,11 @@
             </p>
             <p>更新于: {{ userArchivesData.updatedAt }}</p>
 
-            <section v-for="log in userArchivesData.logs" style="margin-bottom: 10px">
-              <p style="margin: 0">## {{ log.date }}</p>
+            <section v-for="(log, index) in userArchivesData.logs" style="margin-bottom: 10px">
+              <el-divider content-position="left" v-if="new Date(log.date).getDay() === 0 || index === 0">{{
+                getWeekName(log.date) }}
+              </el-divider>
+              <p style="margin: 0">## {{ log.date }}({{ getWeekDay(log.date) }})</p>
               <p style="margin: 0">
                 新题({{log.questionIds.length}}): {{ log.questionIds.length > 0 ? log.questionIds.join('') :
                 '无' }}
@@ -235,8 +238,37 @@
   <!-- 导入组件库 -->
   <script src="https://lib.baomitu.com/element-plus/2.1.4/index.full.min.js"></script>
   <script src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js"></script>
+  <!-- dayjs -->
+  <script src="https://lib.baomitu.com/dayjs/1.11.0/dayjs.min.js"></script>
+  <script src="https://lib.baomitu.com/dayjs/1.11.0/plugin/isoWeek.min.js"></script>
   <script type="text/javascript">
     new ClipboardJS('.copy-btn');
+    dayjs.extend(window.dayjs_plugin_isoWeek);
+
+    const DATE_FORMAT_STRING = 'YYYY-MM-DD';
+    /**
+     * 获取某个日期所在ISO周的起止日期
+     * @param {string} date YYYY-MM-DD
+     * @returns 日期列表
+     */
+    const getWeekStartAndEnd = (date) => {
+      // 当前周的星期一
+      const startDate = dayjs(date)
+        .startOf('isoWeek')
+        .format(DATE_FORMAT_STRING);
+
+      const dateList = [];
+      let index = 0;
+      while (index < 7) {
+        dateList.push(
+          dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING)
+        );
+        index += 1;
+      }
+
+      return dateList;
+    };
+
     const context = window.location.hostname.includes('github.io')
       ? '/leetcode-submission'
       : '';
@@ -270,6 +302,21 @@
       methods: {
         handleChangeUser (user) {
           this.selectedUserId = user.userId;
+        },
+        // 获取周数标题
+        getWeekName (date) {
+          const dateList = getWeekStartAndEnd(date);
+          // 判断本周属于哪个年度，以当前周四所在的年份为准
+          const weekOfYear = new Date(dateList[3]).getFullYear();
+          // 所在周数
+          const weekNumber = dayjs(date).isoWeek()
+
+          return `${weekOfYear}年第${weekNumber}周`
+        },
+        // 获取某个日期是周几
+        getWeekDay (date) {
+          const datelist = ['周日', '周一', '周二', '周三', '周四', '周五', '周六',]
+          return datelist[new Date(date).getDay()];
         },
         getUserSubmission (user) {
           this.userArchivesData = '查询中...';
