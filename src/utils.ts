@@ -156,7 +156,7 @@ export const getAcSubmissions = async (
       fs.readFileSync(filePath, 'utf8')
     );
     // 记录更新时间
-    // archivesData.updatedAt = dayjs().format();
+    archivesData.updatedAt = dayjs().format();
     // 查找这一天所在周的
     const weekDateList = getWeekStartAndEnd(date);
     const currentWeekQuestionIds: string[] = [];
@@ -207,9 +207,6 @@ export const getAcSubmissions = async (
     // 针对日期排序，最近的日期在上面
     archivesData.logs.sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
-    // 如果为空，有2种可能，
-    // 1是确实是没有提交题目
-    // 2是设置了隐保护，需要去 [通知与隐私 - 隐私设置 - 显示我的提交记录] 开启
     fs.writeFileSync(filePath, JSON.stringify(archivesData), {
       encoding: 'utf8',
     });
