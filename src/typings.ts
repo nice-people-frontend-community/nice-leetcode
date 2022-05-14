@@ -65,6 +65,6 @@ export interface IArchivesLog extends IUser {
     /** 新题目ID */
     questionIds: string[];
     /** 复习的题目ID */
-    review: string[]
+    reviewQuestionIds: string[];
   }[];
 }

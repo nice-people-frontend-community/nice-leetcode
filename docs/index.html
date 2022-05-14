@@ -222,8 +222,9 @@
                   :data-clipboard-text="log.questionIds.join('')">Copy</el-button>
               </p>
               <p style="margin: 0">
-                复习({{log.review ? log.review.length : 0}}): {{ log.review && log.review.length > 0 ?
-                log.review.join('') :
+                复习({{log.reviewQuestionIds ? log.reviewQuestionIds.length : 0}}): {{ log.reviewQuestionIds &&
+                log.reviewQuestionIds.length > 0 ?
+                log.reviewQuestionIds.join('') :
                 '无' }}
               </p>
             </section>

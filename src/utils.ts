@@ -156,25 +156,34 @@ export const getAcSubmissions = async (
       fs.readFileSync(filePath, 'utf8')
     );
     // 记录更新时间
-    archivesData.updatedAt = dayjs().format();
-    // 查找当天之外的所有的题目
-    const historyLogs = archivesData.logs.find((log) => log.date !== date);
+    // archivesData.updatedAt = dayjs().format();
+    // 查找这一天所在周的
+    const weekDateList = getWeekStartAndEnd(date);
+    const currentWeekQuestionIds: string[] = [];
+
+    archivesData.logs
+      .filter(
+        (log) =>
+          +new Date(log.date) >= +new Date(weekDateList[0]) &&
+          +new Date(log.date) < +new Date(date)
+      )
+      .forEach((el) => {
+        currentWeekQuestionIds.push(...el.questionIds);
+        currentWeekQuestionIds.push(...el.reviewQuestionIds);
+      });
     // 当天的记录
     const targetLog = archivesData.logs.find((log) => log.date === date);
 
-    const historyQuestionIds = [
-      ...(historyLogs?.questionIds || []),
-      ...(historyLogs?.review || []),
-    ];
     // 新问题
     const questionIds: string[] = [];
     // 复习的问题
     const reviewIds: string[] = [];
     uniqeQuestionIds.forEach((questionId) => {
       // 判断是否是历史出现过的题目
-      if (historyQuestionIds.includes(questionId)) {
+      if (currentWeekQuestionIds.includes(questionId)) {
         reviewIds.push(questionId);
-      } else {
+      } else if (!reviewIds.includes(questionId)) {
+        // 避免已经出现在当天的复习题中的这种情况
         questionIds.push(questionId);
       }
     });
@@ -183,15 +192,15 @@ export const getAcSubmissions = async (
       archivesData.logs.push({
         date,
         questionIds,
-        review: reviewIds,
+        reviewQuestionIds: reviewIds,
       });
     } else {
       // 保存时去重一次
       targetLog.questionIds = Array.from(
         new Set([...targetLog.questionIds, ...questionIds])
       );
-      targetLog.review = Array.from(
-        new Set([...(targetLog.review || []), ...reviewIds])
+      targetLog.reviewQuestionIds = Array.from(
+        new Set([...(targetLog.reviewQuestionIds || []), ...reviewIds])
       );
     }
 
