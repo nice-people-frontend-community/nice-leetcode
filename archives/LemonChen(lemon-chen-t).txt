@@ -1,8 +1,0 @@
-# LemonChen(lemon-chen-t) 的刷题记录
- > 用户主页: https://leetcode.cn/u/lemon-chen-t/
-
-## 2022-05-03
-[20]
-
-## 2022-05-04
-[53]
