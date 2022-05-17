@@ -13,8 +13,8 @@
 
 ## 线上地址
 
-- [用户日报](https://anonymity94.github.io/nice-leetcode/docs/)
-- [本周周报](https://anonymity94.github.io/nice-leetcode/docs/week)
+- [用户日报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/)
+- [本周周报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/week)
 
 ## 使用方法
 
