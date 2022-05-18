@@ -2,7 +2,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 const dayjs = require('dayjs');
-const isoWeekPlugin = require('dayjs/plugin/isoWeek');
 
 import { IArchivesLog } from './typings';
 import {
@@ -36,7 +35,7 @@ const weekRollupFileName = `${weekOfYear}年第${curISOWeekNumber}周(${
 /**
  * 汇总周报
  */
-const weekRollup = () => {
+export const weekRollup = () => {
   // 生成用户排名信息
   const summaryList: (IArchivesLog & {
     curWeekLogs: IArchivesLog['logs'];
@@ -140,4 +139,4 @@ ${summaryList
   );
 };
 
-weekRollup();
+// weekRollup();

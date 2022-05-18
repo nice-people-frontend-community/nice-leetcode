@@ -2,6 +2,7 @@ import * as asyncLib from 'async';
 
 import { IUser } from './typings';
 import { DATE_FORMAT_STRING, getAcSubmissions } from './utils';
+import { weekRollup } from './week_rollup';
 
 const users = require('../dict/user.json');
 const dayjs = require('dayjs');
@@ -25,6 +26,8 @@ asyncLib.mapLimit<IUser, any, any>(
   },
   (err, results) => {
     if (err) throw err;
-    console.log('全部处理完成^_^');
+    console.log('日报处理完成^_^');
+    weekRollup();
+    console.log('周报处理完成^_^');
   }
 );
