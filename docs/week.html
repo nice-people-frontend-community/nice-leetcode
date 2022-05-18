@@ -115,7 +115,13 @@
       <el-alert title="不要忘记在群里截图打卡哦~" description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计"
         type="error" :closable="false" style="margin-bottom: 10px; position: sticky; top: 0; z-index: 999;">
       </el-alert>
-      <div class="markdown-body" v-html="weekFileContent"></div>
+      <div v-if="logged" class="markdown-body" v-html="weekFileContent"></div>
+      <div v-else>
+        <el-card>
+          <el-input v-model="password" size="large" placeholder="请输入口令" style="margin-bottom: 10px"></el-input>
+          <el-button @click="login" type="primary" style="width: 100%">进入</el-button>
+        </el-card>
+      </div>
     </div>
   </div>
   <script src="https://lib.baomitu.com/axios/0.26.1/axios.min.js"></script>
@@ -128,8 +134,13 @@
   <script src="https://lib.baomitu.com/element-plus/2.1.4/index.full.min.js"></script>
   <!-- markdown-it -->
   <script src="https://lib.baomitu.com/markdown-it/12.0.3/markdown-it.min.js"></script>
+  <!-- crypto-js -->
+  <script src="https://lib.baomitu.com/crypto-js/3.3.0/crypto-js.min.js"></script>
 
   <script type="text/javascript">
+
+    const CIPHER_PASSWORD = '3de10a934260a52c646497b73d26132a'
+
     const md = window.markdownit();
     dayjs.extend(window.dayjs_plugin_isoWeek);
 
@@ -173,24 +184,50 @@
     const App = {
       data () {
         return {
+          logged: false,
+          password: '',
+
           context,
           // 周汇总文件内容
           weekFileContent: null,
         };
       },
       created () {
-        this.weekFileContent = '查询中...';
-        axios
-          .get(`${context}/weeks/${weekRollupFileName}.md?v=${+new Date()}`)
-          .then(({ data }) => {
-            this.weekFileContent = md.render(data);
-          })
-          .catch(() => {
-            this.weekFileContent = '没有找到相关记录 ಥ_ಥ';
-          });
+
       },
-      methods: {},
-      watch: {},
+      methods: {
+        login () {
+          if (!this.password) {
+            alert('口令不能为空')
+            return
+          }
+          // 校验口令
+          if (CryptoJS.MD5(this.password).toString() !== CIPHER_PASSWORD) {
+            alert('口令错误')
+            return
+          }
+
+          this.logged = true;
+        },
+        queryWeekRollup () {
+          this.weekFileContent = '查询中...';
+          axios
+            .get(`${context}/weeks/${weekRollupFileName}.md?v=${+new Date()}`)
+            .then(({ data }) => {
+              this.weekFileContent = md.render(data);
+            })
+            .catch(() => {
+              this.weekFileContent = '没有找到相关记录 ಥ_ಥ';
+            });
+        }
+      },
+      watch: {
+        logged (newVal) {
+          if (newVal) {
+            this.queryWeekRollup()
+          }
+        }
+      },
     };
     const app = Vue.createApp(App);
     app.use(ElementPlus);
