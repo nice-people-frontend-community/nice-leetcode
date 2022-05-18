@@ -192,6 +192,9 @@
       </el-aside>
       <el-main>
         <div class="content">
+          <el-alert title="不要忘记在群里截图打卡哦~" description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计"
+            type="error" :closable="false" style="margin-bottom: 10px; position: sticky; top: 0; z-index: 999;">
+          </el-alert>
           <el-select class="mini-search" v-model="selectedUserId" placeholder="选择用户"
             style="margin-bottom: 10px; width: 100%">
             <el-option v-for="user in displayUsers" :key="user.userId" :label="user.userName + '(' + user.userId + ')'"

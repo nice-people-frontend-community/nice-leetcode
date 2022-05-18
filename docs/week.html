@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>周报-务实好青年LeetCode刷题打卡群</title>
   <link href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" rel="stylesheet" />
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://lib.baomitu.com/element-plus/2.1.4/index.min.css" />
   <style>
     body {
       padding: 0;
@@ -110,6 +112,9 @@
           fill="currentColor" class="octo-body"></path>
       </svg></a>
     <div class="content">
+      <el-alert title="不要忘记在群里截图打卡哦~" description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计"
+        type="error" :closable="false" style="margin-bottom: 10px; position: sticky; top: 0; z-index: 999;">
+      </el-alert>
       <div class="markdown-body" v-html="weekFileContent"></div>
     </div>
   </div>
@@ -119,6 +124,8 @@
   <!-- dayjs -->
   <script src="https://lib.baomitu.com/dayjs/1.11.0/dayjs.min.js"></script>
   <script src="https://lib.baomitu.com/dayjs/1.11.0/plugin/isoWeek.min.js"></script>
+  <!-- 导入组件库 -->
+  <script src="https://lib.baomitu.com/element-plus/2.1.4/index.full.min.js"></script>
   <!-- markdown-it -->
   <script src="https://lib.baomitu.com/markdown-it/12.0.3/markdown-it.min.js"></script>
 
@@ -186,6 +193,7 @@
       watch: {},
     };
     const app = Vue.createApp(App);
+    app.use(ElementPlus);
     app.mount('#app');
   </script>
 </body>
