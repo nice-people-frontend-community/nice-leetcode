@@ -215,10 +215,45 @@
             .get(`${context}/weeks/${weekRollupFileName}.md?v=${+new Date()}`)
             .then(({ data }) => {
               this.weekFileContent = md.render(data);
+              this.$nextTick(() => {
+                this.buildSendMessage()
+              })
             })
             .catch(() => {
               this.weekFileContent = '没有找到相关记录 ಥ_ಥ';
             });
+        },
+        buildSendMessage () {
+          const trDomList = document.querySelector('.markdown-body table tbody').querySelectorAll('tr');
+          const persons = [];
+          for (let i = 0; i < trDomList.length; i++) {
+            const $tr = trDomList[i];
+            const userName = $tr.querySelector('td:nth-child(1)').innerHTML
+            const day1 = $tr.querySelector('td:nth-child(3)').innerHTML
+            const day2 = $tr.querySelector('td:nth-child(4)').innerHTML
+            const day3 = $tr.querySelector('td:nth-child(5)').innerHTML
+            const day4 = $tr.querySelector('td:nth-child(6)').innerHTML
+            const day5 = $tr.querySelector('td:nth-child(7)').innerHTML
+            const day6 = $tr.querySelector('td:nth-child(8)').innerHTML
+            const day7 = $tr.querySelector('td:nth-child(9)').innerHTML
+            const questionCount = +$tr.querySelector('td:nth-last-child(2)').innerHTML
+            const ranking = +$tr.querySelector('td:nth-last-child(1)').innerHTML;
+
+            const fullAttendance = !!day1 && !!day2 && !!day3 && !!day4 && !!day5 && !!day6 && !!day7
+            if (questionCount >= 14 || fullAttendance) {
+              persons.push({
+                userName,
+                questionCount,
+                ranking
+              })
+            }
+          }
+          let atMessage = `中国好青年「刷题榜」${dayjs().format(' MM 月 DD 日')}`
+          atMessage += '\n\n';
+          atMessage += persons.map(el => `@${el.userName} `).join('');
+          atMessage += '\n\n';
+          atMessage += `本周全勤或刷题大于等于 14 题的共有上述 ${persons.length} 位同学，获得这些同学获取小星星奖励，大家越来越努力了呀！[庆祝][庆祝][庆祝]`;
+          console.log(atMessage)
         }
       },
       watch: {
