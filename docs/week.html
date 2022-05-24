@@ -226,6 +226,12 @@
         buildSendMessage () {
           const trDomList = document.querySelector('.markdown-body table tbody').querySelectorAll('tr');
           const persons = [];
+          // Top5 的总人数
+          let top5UserTotal = 0;
+          const top5 = new Array(5).fill(0).map(() => ({
+            users: [],
+            questionCount: 0
+          }));
           for (let i = 0; i < trDomList.length; i++) {
             const $tr = trDomList[i];
             const userName = $tr.querySelector('td:nth-child(1)').innerHTML
@@ -247,12 +253,37 @@
                 ranking
               })
             }
+
+            // 记录top5人员
+            if (ranking <= 5) {
+              top5UserTotal += 1;
+              top5[ranking - 1] = {
+                users: [...top5[ranking - 1].users, userName],
+                questionCount
+              }
+            }
           }
           let atMessage = `中国好青年「刷题榜」${dayjs().format(' MM 月 DD 日')}`
           atMessage += '\n\n';
           atMessage += persons.map(el => `@${el.userName} `).join('');
           atMessage += '\n\n';
           atMessage += `本周全勤或刷题大于等于 14 题的共有上述 ${persons.length} 位同学，获得这些同学获取小星星奖励，大家越来越努力了呀！[庆祝][庆祝][庆祝]`;
+
+          atMessage += '\n\n';
+          atMessage += `其中，本周 Top5 的一共有 ${top5UserTotal} 位同学，他们分别是：\n`
+          const rankingString = ['一', '二', '三', '四', '五']
+          for (let i = 0; i < top5.length; i++) {
+            const row = top5[i];
+            const ranking = rankingString[i];
+            if (row.users.length > 1) {
+              atMessage += `第${ranking}名的有 ${row.users.length} 位同学，分别是 ${row.users.map(user => `@${user}`).join("、")}，以 ${row.questionCount} 道题并列第${ranking}名`
+            } else {
+              atMessage += `第${ranking}名的是 @${row.users[0]} 同学，刷题 ${row.questionCount} 道`
+            }
+            atMessage += i === top5.length - 1 ? '。' : ';\n'
+          }
+
+          atMessage += '\n\n努力的人总会被眷顾，祝我们都有美好的未来。[愉快]'
           console.log(atMessage)
         }
       },
