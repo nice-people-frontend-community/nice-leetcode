@@ -61,8 +61,9 @@
           :editable="false" :disabled-date="disabledDate" placeholder="请选择月份" style="margin-bottom: 10px">
         </el-date-picker>
         <el-button type="primary" plain style="margin-left: 10px;" v-on:click="reload">清除缓存</el-button>
-        <span style="margin-left: 10px;color: #999">{{ runStatus }}</span>
+        <div style="color: #999">{{ runStatus }}</div>
       </div>
+      <el-divider></el-divider>
       <div>
         <div v-for="(user) in firstClassStudents">
           <el-link type="info" target="_blank"
