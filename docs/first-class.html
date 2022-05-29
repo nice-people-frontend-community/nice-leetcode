@@ -60,17 +60,20 @@
         <el-date-picker v-model="selectedMonth" type="month" format="YYYY-MM" value-format="YYYY-MM" :clearable="false"
           :editable="false" :disabled-date="disabledDate" placeholder="请选择月份" style="margin-bottom: 10px">
         </el-date-picker>
-        <div>
-          <div v-for="(user) in firstClassStudents">
-            <el-link type="info" target="_blank"
-              :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId">{{
-              user.userName }} {{
-              user.lcus ? '🇺🇸' : '🇨🇳' }}
-            </el-link>
-          </div>
+        <el-button type="primary" plain style="margin-left: 10px;" v-on:click="reload">清除缓存</el-button>
+        <span style="margin-left: 10px;color: #999">{{ runStatus }}</span>
+      </div>
+      <div>
+        <div v-for="(user) in firstClassStudents">
+          <el-link type="info" target="_blank"
+            :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId">{{
+            user.userName }} {{
+            user.lcus ? '🇺🇸' : '🇨🇳' }}
+          </el-link>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <script src="https://lib.baomitu.com/axios/0.26.1/axios.min.js"></script>
   <!-- 导入 Vue 3 -->
@@ -82,6 +85,8 @@
   <script src="https://lib.baomitu.com/element-plus/2.1.4/locale/zh-cn.min.js"></script>
 
   <script type="text/javascript">
+    const LOCAL_CACHE_KEY = "user_summission"
+    const LOCAL_CACHE_TIME_KEY = "user_summission_time"
 
     const DATE_FORMAT_STRING = 'YYYY-MM-DD';
     const today = dayjs().format(DATE_FORMAT_STRING);
@@ -91,6 +96,26 @@
     const context = window.location.hostname.includes('github.io')
       ? '/nice-leetcode'
       : '';
+
+    // 计算本地浏览器缓存
+    let initUserSubmission = {};
+    // 需要进行缓存
+    let needCache = true;
+    // 从浏览器中获取缓存
+    const cacheime = localStorage.getItem(LOCAL_CACHE_TIME_KEY);
+    const localUserSubmission = localStorage.getItem(LOCAL_CACHE_KEY);
+    if (cacheime && localUserSubmission) {
+      if (dayjs(cacheime).isBefore(dayjs().add(-30, 'm'))) {
+        // 超出半个小时的缓存了，直接清空
+        localStorage.removeItem(LOCAL_CACHE_TIME_KEY);
+        localStorage.removeItem(LOCAL_CACHE_KEY);
+        needCache = true;
+      } else {
+        initUserSubmission = JSON.parse(localUserSubmission);
+        needCache = false;
+      }
+    }
+
     const App = {
       data () {
         return {
@@ -101,9 +126,12 @@
           selectedMonth: currentMonth,
           // 用户日报的缓存
           // Record<string, object>
-          userSubmissionCacheMap: {},
+          userSubmissionCacheMap: initUserSubmission,
+          needCache,
           // 头等舱乘客
-          firstClassStudents: []
+          firstClassStudents: [],
+          // 运行状态
+          runStatus: ""
         };
       },
       created () {
@@ -139,6 +167,7 @@
         // 计算头等舱乘客
         async computeFirstClass () {
           this.firstClassStudents = []
+          this.runStatus = `执行中...${this.needCache ? '首次执行时间可能在1分钟左右...' : ""}`
           // 开始计算需要登录头等舱的同学
           for (let index = 0; index < this.allUsers.length; index++) {
             const userInfo = this.allUsers[index];
@@ -154,6 +183,18 @@
               this.firstClassStudents.push(userInfo)
             }
           }
+          // 浏览器缓存
+          if (needCache) {
+            localStorage.setItem(LOCAL_CACHE_TIME_KEY, new Date())
+            localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(this.userSubmissionCacheMap))
+          }
+          this.runStatus = "执行完成"
+        },
+        reload () {
+          localStorage.removeItem(LOCAL_CACHE_TIME_KEY);
+          localStorage.removeItem(LOCAL_CACHE_KEY);
+          this.userSubmissionCacheMap = {}
+          window.location.reload()
         }
       },
       watch: {
