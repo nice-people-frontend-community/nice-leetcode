@@ -29,8 +29,8 @@ jobs:
 
       - name: Update GitHub
         run: |
-          git config --local user.email "1176989591@qq.com"
-          git config --local user.name "Anonymity94"
+          git config --local user.email "879241805@qq.com"
+          git config --local user.name "Anonymity94-Bot"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
           git add .
           git commit -m "update by github action"
