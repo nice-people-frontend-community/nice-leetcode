@@ -33,6 +33,10 @@
       max-width: 90%;
       margin: 0 auto;
     }
+
+    .markdown-body table {
+      display: table;
+    }
   </style>
   <style>
     .fixed-widget {
@@ -136,9 +140,12 @@
   <script src="https://lib.baomitu.com/markdown-it/12.0.3/markdown-it.min.js"></script>
   <!-- crypto-js -->
   <script src="https://lib.baomitu.com/crypto-js/3.3.0/crypto-js.min.js"></script>
+  <!-- 复制 -->
+  <script src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js"></script>
+  <!-- 生成图片 -->
+  <script src="https://lib.baomitu.com/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
   <script type="text/javascript">
-
     const CIPHER_PASSWORD = '3de10a934260a52c646497b73d26132a'
 
     const md = window.markdownit();
@@ -216,8 +223,47 @@
             .then(({ data }) => {
               this.weekFileContent = md.render(data);
               this.$nextTick(() => {
+                // 生成周报信息
                 this.buildSendMessage()
+
+                // 追加操作按钮
+                document.querySelector('.markdown-body h1').insertAdjacentHTML(
+                  'beforeend',
+                  `<div id="customAction" style="display: inline-block;margin-left: 10px">
+                    <button id="copyTableBtn">复制表格</button>
+                    <button id="downloadTableBtn">另存成图片</button>
+                  <div>`
+                );
+                // ===== 复制表格 =====
+                const clipboard = new ClipboardJS('#copyTableBtn', {
+                  target: () => document.querySelector('.markdown-body table')
+                });
+                clipboard.on('success', function (e) {
+                  e.clearSelection();
+                  ElementPlus.ElMessage.success('复制成功')
+                });
+                clipboard.on('error', function (e) {
+                  ElementPlus.ElMessage.success('复制失败')
+                });
               })
+              // ===== dom 生成图片 =====
+              setTimeout(() => {
+                document.querySelector('.markdown-body #downloadTableBtn').addEventListener('click', () => {
+                  domtoimage.toPng(document.querySelector('.markdown-body'), {
+                    style: {
+                      background: '#fff',
+                    },
+                    fiter: (node) => {
+                    }
+                  })
+                    .then(function (dataUrl) {
+                      var link = document.createElement('a');
+                      link.download = `${weekRollupFileName}.png`;
+                      link.href = dataUrl;
+                      link.click();
+                    });
+                })
+              }, 0);
             })
             .catch(() => {
               this.weekFileContent = '没有找到相关记录 ಥ_ಥ';
