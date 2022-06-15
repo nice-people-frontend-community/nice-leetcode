@@ -45,7 +45,11 @@ export const weekRollup = () => {
     ranking?: number;
   })[] = [];
   for (let i = 0; i < users.length; i++) {
-    const { userName, userId } = users[i];
+    const { userName, userId, hideInWeek = false } = users[i];
+    // 跳过周报屏蔽的同学
+    if (hideInWeek) {
+      continue;
+    }
     const archiveFilePath = path.resolve(
       __dirname,
       `../archives/${userName}(${userId}).json`

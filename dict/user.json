@@ -98,7 +98,8 @@
   },
   {
     "userName": "Jeskson",
-    "userId": "jeskson"
+    "userId": "jeskson",
+    "hideInWeek": true
   },
   {
     "userName": "Lin255",

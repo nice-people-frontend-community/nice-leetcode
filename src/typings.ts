@@ -13,6 +13,11 @@ export interface IUser {
    * @default false 默认是国服
    */
   lcus?: boolean;
+  /**
+   * 是否在周报中屏蔽
+   * @default false 默认在周报中显示
+   */
+  hideInWeek?: boolean
 }
 
 export interface IRecentACSubmissionsResponse {
