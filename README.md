@@ -24,7 +24,7 @@
 
 修改文件 [user.json](./dict/user.json)
 
-```json
+```json5
 {
   // 用户名称，随便你取什么名字
   "userName": "你好啊派大星",
