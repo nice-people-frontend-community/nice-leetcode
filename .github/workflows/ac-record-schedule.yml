@@ -24,6 +24,7 @@ jobs:
       - run: yarn install
       - run: |
           git pull
+          yarn run gen_users
           yarn run ac_record
           git pull
 

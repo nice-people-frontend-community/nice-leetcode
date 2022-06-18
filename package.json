@@ -8,7 +8,8 @@
     "ac_record": "node_modules/.bin/tsc src/ac_record.ts && node src/ac_record.js",
     "week_rollup": "node_modules/.bin/tsc src/week_rollup.ts && node src/week_rollup.js",
     "fix_user": "node_modules/.bin/tsc src/fix_user.ts && node src/fix_user.js",
-    "fix_review": "node_modules/.bin/tsc src/fix_review.ts && node src/fix_review.js"
+    "fix_review": "node_modules/.bin/tsc src/fix_review.ts && node src/fix_review.js",
+    "gen_users": "node_modules/.bin/tsc src/gen_users.ts && node src/gen_users.js"
   },
   "keywords": [],
   "author": "",
