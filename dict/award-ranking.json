@@ -2,114 +2,57 @@
   {
     "userName": "LemonChen",
     "userId": "lemon-chen-t",
-    "weeks": []
+    "weeks": [15, 16, 17, 18, 19, 20, 21, 23]
   },
   {
     "userName": "你好啊派大星",
     "userId": "ni-hao-a-pai-da-xing",
-    "weeks": []
+    "weeks": [14, 15, 16, 18, 19, 20, 21]
   },
   {
     "userName": "悠悠茶蘼",
     "userId": "dreamjean720",
-    "weeks": [
-      "第二周",
-      "第三周",
-      "第四周",
-      "第五周",
-      "第六周",
-      "第七周",
-      "第八周",
-      "第九周",
-      "第十周",
-      "第十一周",
-      "第十二周",
-      "第十三周",
-      "第十四周",
-      "第十五周",
-      "第十六周",
-      "第十七周",
-      "第二十周",
-      "第二十一周"
-    ]
+    "weeks": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "杨舟",
     "userId": "sishenhei7",
-    "weeks": []
+    "weeks": [19, 21, 22, 23]
   },
   {
     "userName": "아이유-意优",
     "userId": "clever-vvilsoneye",
-    "weeks": []
+    "weeks": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "吹过的风",
     "userId": "tinyu",
-    "weeks": [
-      "第二周",
-      "第三周",
-      "第五周",
-      "第六周",
-      "第八周",
-      "第十二周",
-      "第十五周",
-      "第二十周",
-      "第二十一周"
-    ]
+    "weeks": [3, 4, 5, 7, 9, 13, 16, 21, 22, 23]
   },
   {
     "userName": "P丶A",
     "userId": "panxiaoan",
-    "weeks": []
+    "weeks": [12, 13, 15, 16, 17, 21, 22]
   },
   {
     "userName": "抱枕",
     "userId": "bao-zhen",
-    "weeks": []
+    "weeks": [13, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "Chen",
     "userId": "lilychen",
-    "weeks": [
-      "第一周",
-      "第二周",
-      "第三周",
-      "第十周",
-      "第十一周",
-      "第十二周",
-      "第十四周",
-      "第十五周",
-      "第十六周",
-      "第十七周",
-      "第二十周",
-      "第二十一周"
-    ]
+    "weeks": [2, 3, 4, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "枫叶",
     "userId": "richard_zhang",
-    "weeks": [
-      "第二周",
-      "第三周",
-      "第四周",
-      "第五周",
-      "第六周",
-      "第八周",
-      "第九周",
-      "第十周",
-      "第十一周",
-      "第十三周",
-      "第十四周",
-      "第十六周",
-      "第二十周",
-      "第二十一周"
-    ]
+    "weeks": [3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 17, 19, 20, 21, 22, 23]
   },
   {
     "userName": "逐晨之梦",
     "userId": "zhu-chen-zhi-meng",
-    "weeks": []
+    "weeks": [23]
   },
   {
     "userName": "〆、海的思念绵延不绝",
@@ -119,17 +62,17 @@
   {
     "userName": "小帅",
     "userId": "wang-xi-fa",
-    "weeks": []
+    "weeks": [17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "Bear",
     "userId": "beareleven",
-    "weeks": []
+    "weeks": [17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "Q.H.Y",
     "userId": "mystifying-perlmanwjh",
-    "weeks": []
+    "weeks": [20]
   },
   {
     "userName": "秃头王路飞",
@@ -144,12 +87,12 @@
   {
     "userName": "哈哈哈嗯",
     "userId": "younglina",
-    "weeks": []
+    "weeks": [17, 19, 20, 21, 22, 23]
   },
   {
     "userName": "默海笑",
     "userId": "objective-7iskovx37",
-    "weeks": []
+    "weeks": [19]
   },
   {
     "userName": "书笙",
@@ -159,7 +102,7 @@
   {
     "userName": "要努🌰",
     "userId": "yu-yi-fan-a",
-    "weeks": []
+    "weeks": [13, 14, 15, 16, 18, 19]
   },
   {
     "userName": "小🐟很想写代码",
@@ -169,17 +112,17 @@
   {
     "userName": "前端关宇",
     "userId": "alexgy1",
-    "weeks": []
+    "weeks": [19, 22, 23]
   },
   {
     "userName": "Mylo🐘",
     "userId": "flyingmylo",
-    "weeks": []
+    "weeks": [16, 17, 18, 19, 20, 21, 23]
   },
   {
     "userName": "Jeskson",
     "userId": "jeskson",
-    "weeks": []
+    "weeks": [15, 16, 17, 18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "Lin255",
@@ -189,17 +132,17 @@
   {
     "userName": "城南花已开",
     "userId": "desirelearner-i",
-    "weeks": []
+    "weeks": [18, 19, 20, 21, 22, 23]
   },
   {
     "userName": "wjm",
     "userId": "guming",
-    "weeks": []
+    "weeks": [2]
   },
   {
     "userName": "橙子",
     "userId": "sloane_h",
-    "weeks": []
+    "weeks": [12, 13, 15, 17, 19, 20, 21, 23]
   },
   {
     "userName": "一笔荒芜",
@@ -209,7 +152,7 @@
   {
     "userName": "天下节度",
     "userId": "tian-xia-jie-du",
-    "weeks": []
+    "weeks": [18]
   },
   {
     "userName": "若川",
@@ -219,12 +162,12 @@
   {
     "userName": "素笺",
     "userId": "sujianqingfeng",
-    "weeks": []
+    "weeks": [20, 21, 22]
   },
   {
     "userName": "凌晨3点半",
     "userId": "sneaken",
-    "weeks": []
+    "weeks": [12, 13, 18]
   },
   {
     "userName": "瘦虎",
@@ -239,7 +182,7 @@
   {
     "userName": "养乐多",
     "userId": "Damon0820",
-    "weeks": []
+    "weeks": [11]
   },
   {
     "userName": "普通上班族",
@@ -254,30 +197,17 @@
   {
     "userName": "∠※ヱ",
     "userId": "loringray",
-    "weeks": []
+    "weeks": [14, 15, 16, 17, 19, 23]
   },
   {
     "userName": "Samba 🇨🇳",
     "userId": "it-smaba",
-    "weeks": []
+    "weeks": [23]
   },
   {
     "userName": "😄😄",
     "userId": "vj97Nwwekr",
-    "weeks": [
-      "第一周",
-      "第二周",
-      "第三周",
-      "第四周",
-      "第五周",
-      "第六周",
-      "第七周",
-      "第八周",
-      "第九周",
-      "第十周",
-      "第二十周"
-    ],
-    "level": 10
+    "weeks": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21]
   },
   {
     "userName": "DragonPeng",
@@ -292,12 +222,12 @@
   {
     "userName": "Pancake",
     "userId": "pancake-q",
-    "weeks": []
+    "weeks": [22]
   },
   {
     "userName": "dc",
     "userId": "L99xlm9WfZ",
-    "weeks": []
+    "weeks": [20]
   },
   {
     "userName": "Haven",
@@ -307,7 +237,7 @@
   {
     "userName": "阿源 Hecate",
     "userId": "hecate-d",
-    "weeks": []
+    "weeks": [7, 10, 12, 16, 19, 20]
   },
   {
     "userName": "promise",
@@ -332,17 +262,17 @@
   {
     "userName": "二不贰",
     "userId": "jbwang-to-zju",
-    "weeks": []
+    "weeks": [19, 20, 21, 22, 23]
   },
   {
     "userName": "晴空",
     "userId": "qingkong-agtonu4Kdi",
-    "weeks": []
+    "weeks": [20]
   },
   {
     "userName": "007",
     "userId": "zhangzhichao",
-    "weeks": []
+    "weeks": [20]
   },
   {
     "userName": "nice",
@@ -362,7 +292,7 @@
   {
     "userName": "七夜²⁰²²",
     "userId": "heuristic-i3oumanbz2",
-    "weeks": []
+    "weeks": [22]
   },
   {
     "userName": "边同学",
@@ -372,17 +302,17 @@
   {
     "userName": "lynne",
     "userId": "lynne304",
-    "weeks": []
+    "weeks": [20]
   },
   {
     "userName": "Felix",
     "userId": "ditang-hsp",
-    "weeks": []
+    "weeks": [21, 22]
   },
   {
     "userName": "ysky-",
     "userId": "puresky-",
-    "weeks": []
+    "weeks": [21]
   },
   {
     "userName": "千帆",
@@ -392,7 +322,7 @@
   {
     "userName": "Lyx",
     "userId": "lyx-12",
-    "weeks": []
+    "weeks": [23]
   },
   {
     "userName": "You",
@@ -407,7 +337,7 @@
   {
     "userName": "zyz💤",
     "userId": "zyz-s",
-    "weeks": []
+    "weeks": [22]
   },
   {
     "userName": "FAN",
@@ -422,7 +352,7 @@
   {
     "userName": "颅内蹦迪",
     "userId": "wei-yang-sx",
-    "weeks": []
+    "weeks": [15]
   },
   {
     "userName": "hero",
@@ -437,12 +367,12 @@
   {
     "userName": "大海",
     "userId": "1lo22ghai",
-    "weeks": []
+    "weeks": [23]
   },
   {
     "userName": "us",
     "userId": "zhu-201",
-    "weeks": []
+    "weeks": [22, 23]
   },
   {
     "userName": "sunshinerxin",
@@ -478,5 +408,41 @@
     "userName": "limitless",
     "userId": "hei-vk",
     "weeks": []
+  },
+
+  {
+    "userName": "亮亮",
+    "userId": "",
+    "weeks": [12]
+  },
+  {
+    "userName": "慕瞳",
+    "userId": "",
+    "weeks": [14]
+  },
+  {
+    "userName": "chuck",
+    "userId": "",
+    "weeks": [3, 4, 11, 13, 15]
+  },
+  {
+    "userName": "崔崔",
+    "userId": "",
+    "weeks": [7, 9]
+  },
+  {
+    "userName": "asd",
+    "userId": "",
+    "weeks": [6]
+  },
+  {
+    "userName": "莫寻",
+    "userId": "",
+    "weeks": [6]
+  },
+  {
+    "userName": "干饭第一流",
+    "userId": "",
+    "weeks": [12]
   }
 ]
