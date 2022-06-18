@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./script/preNodeVerCheck.js && echo \" start ok \"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ac_record": "node_modules/.bin/tsc src/ac_record.ts && node src/ac_record.js",
     "week_rollup": "node_modules/.bin/tsc src/week_rollup.ts && node src/week_rollup.js",
