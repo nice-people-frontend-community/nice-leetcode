@@ -13,8 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "ac_record": "node_modules/.bin/tsc scripts/ac_record.ts && node scripts/ac_record.js",
     "week_rollup": "node_modules/.bin/tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
-    "fix_user": "node_modules/.bin/tsc scripts/fix_user.ts && node scripts/fix_user.js",
-    "fix_review": "node_modules/.bin/tsc scripts/fix_review.ts && node scripts/fix_review.js"
+    "fix_user": "node_modules/.bin/tsc scripts/fix_user.ts && node scripts/fix_user.js"
   },
   "keywords": [],
   "author": "",
