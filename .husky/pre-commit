@@ -3,5 +3,5 @@
 
 yarn lint-staged "$1"
 
-yarn build:docs
+yarn docs:build
 git add docs

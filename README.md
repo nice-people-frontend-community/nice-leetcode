@@ -67,11 +67,11 @@ yarn run fix_user
 
 ```sh
 # 本地开发
-yarn run dev:docs
+yarn run docs:dev
 # 生产打包
-yarn run build:docs
+yarn run docs:build
 # 打包后预览
-yarn run preview:docs
+yarn run docs:preview
 ```
 
 ## 参考

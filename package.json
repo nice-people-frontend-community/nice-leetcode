@@ -6,9 +6,9 @@
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "prepare": "husky install",
-    "dev:docs": "vite",
-    "build:docs": "vue-tsc --noEmit && vite build",
-    "preview:docs": "vite preview",
+    "docs:dev": "vite",
+    "docs:build": "vue-tsc --noEmit && vite build",
+    "docs:preview": "vite preview",
     "style:prettier": "prettier --write .",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "ac_record": "node_modules/.bin/tsc scripts/ac_record.ts && node scripts/ac_record.js",
