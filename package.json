@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./script/preNodeVerCheck.js && echo \" start ok \"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ac_record": "node_modules/.bin/tsc src/ac_record.ts && node src/ac_record.js",
-    "week_rollup": "node_modules/.bin/tsc src/week_rollup.ts && node src/week_rollup.js",
-    "fix_user": "node_modules/.bin/tsc src/fix_user.ts && node src/fix_user.js",
-    "fix_review": "node_modules/.bin/tsc src/fix_review.ts && node src/fix_review.js"
+    "ac_record": "node_modules/.bin/tsc scripts/ac_record.ts && node scripts/ac_record.js",
+    "week_rollup": "node_modules/.bin/tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
+    "fix_user": "node_modules/.bin/tsc scripts/fix_user.ts && node scripts/fix_user.js",
+    "fix_review": "node_modules/.bin/tsc scripts/fix_review.ts && node scripts/fix_review.js"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +23,8 @@
   "devDependencies": {
     "@types/async": "^3.2.13",
     "@types/node": "^17.0.31"
+  },
+  "engines": {
+    "node": ">=16.x"
   }
 }
