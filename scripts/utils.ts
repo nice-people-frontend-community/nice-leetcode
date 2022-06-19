@@ -130,7 +130,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
       .map((row) => `[${row.questionFrontendId}]`);
 
     // 去重
-    const uniqeQuestionIds = Array.from(new Set(todayACQuestionIds));
+    const uniqueQuestionIds = Array.from(new Set(todayACQuestionIds));
 
     // 读取 json 文件
     const archivesData: IArchivesLog = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -153,7 +153,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
     const questionIds: string[] = [];
     // 复习的问题
     const reviewIds: string[] = [];
-    uniqeQuestionIds.forEach((questionId) => {
+    uniqueQuestionIds.forEach((questionId) => {
       // 判断是否是历史出现过的题目
       if (currentWeekQuestionIds.includes(questionId)) {
         reviewIds.push(questionId);
