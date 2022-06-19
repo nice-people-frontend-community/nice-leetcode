@@ -13,7 +13,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "ac_record": "tsc scripts/ac_record.ts && node scripts/ac_record.js",
     "week_rollup": "tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
-    "fix_user": "tsc scripts/fix_user.ts && node scripts/fix_user.js"
+    "fix_user": "tsc scripts/fix_user.ts && node scripts/fix_user.js",
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +41,7 @@
     "eslint": "^8.18.0",
     "eslint-define-config": "^1.5.1",
     "eslint-plugin-vue": "^9.1.1",
+    "git-cz": "^4.9.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.2",
     "prettier": "^2.7.1",
@@ -62,6 +64,11 @@
       "eslint",
       "prettier --parser=typescript --write"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
   },
   "engines": {
     "node": ">=16.x",
