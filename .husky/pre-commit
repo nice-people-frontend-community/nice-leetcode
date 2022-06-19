@@ -2,3 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 yarn lint-staged "$1"
+
+yarn build:docs
+git add docs
