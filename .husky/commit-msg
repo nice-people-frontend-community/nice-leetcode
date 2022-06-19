@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn commitlint --edit "$1"
+if ! yarn commitlint --edit "$1" &>/dev/null; then
+  rm -rf docs
+  return
+fi
+
