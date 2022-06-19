@@ -17,7 +17,7 @@ export interface IUser {
    * 是否在周报中屏蔽
    * @default false 默认在周报中显示
    */
-  hideInWeek?: boolean
+  hideInWeek?: boolean;
 }
 
 export interface IRecentACSubmissionsResponse {

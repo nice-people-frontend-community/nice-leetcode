@@ -12,12 +12,7 @@ dayjs.extend(isoWeekPlugin);
 // 日期格式化方式
 export const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 
-import {
-  IArchivesLog,
-  IRecentACSubmissions,
-  IRecentACSubmissionsResponse,
-  IUser,
-} from './typings';
+import { IArchivesLog, IRecentACSubmissions, IRecentACSubmissionsResponse, IUser } from './typings';
 
 /**
  * 判断文件是否存在
@@ -42,9 +37,7 @@ export const isFileExists = async (path: string): Promise<boolean> => {
  * @returns
  */
 export const lcQuery = async (user: IUser) => {
-  let url = user.lcus
-    ? 'https://leetcode.com/graphql/'
-    : 'https://leetcode.cn/graphql/noj-go/';
+  let url = user.lcus ? 'https://leetcode.com/graphql/' : 'https://leetcode.cn/graphql/noj-go/';
   let graphqlQuery = user.lcus
     ? {
         query:
@@ -79,8 +72,7 @@ export const lcQuery = async (user: IUser) => {
       recentAcSubmissionList.forEach((el) => {
         result.push({
           // 从映射中获取美服问题的ID
-          questionFrontendId:
-            lcusAllQuestionsMap[el.titleSlug]?.questionId || el.titleSlug,
+          questionFrontendId: lcusAllQuestionsMap[el.titleSlug]?.questionId || el.titleSlug,
           titleSlug: el.titleSlug,
           submitTime: +el.timestamp * 1000,
         });
@@ -112,13 +104,10 @@ export const lcQuery = async (user: IUser) => {
 export const getAcSubmissions = async (
   userInfo: IUser,
   date: string,
-  callback?: asyncLib.AsyncResultArrayCallback<any>
+  callback?: asyncLib.AsyncResultArrayCallback<any>,
 ) => {
   const { userName, userId, lcus = false } = userInfo;
-  const filePath = path.resolve(
-    __dirname,
-    `../archives/${userName}(${userId}).json`
-  );
+  const filePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
   // 检查是是否有用户的文件
   const exists = await isFileExists(filePath);
   if (!exists) {
@@ -128,14 +117,12 @@ export const getAcSubmissions = async (
       JSON.stringify({
         userName,
         userId,
-        homepage: lcus
-          ? `https://leetcode.com/u/${userId}/`
-          : `https://leetcode.cn/u/${userId}/`,
+        homepage: lcus ? `https://leetcode.com/u/${userId}/` : `https://leetcode.cn/u/${userId}/`,
         logs: [],
       }),
       {
         encoding: 'utf8',
-      }
+      },
     );
   }
 
@@ -143,18 +130,14 @@ export const getAcSubmissions = async (
     const recentACSubmissions = await lcQuery(userInfo);
 
     const todayACQuestionIds = recentACSubmissions
-      .filter(
-        (row) => dayjs(row.submitTime).format(DATE_FORMAT_STRING) === date
-      )
+      .filter((row) => dayjs(row.submitTime).format(DATE_FORMAT_STRING) === date)
       .map((row) => `[${row.questionFrontendId}]`);
 
     // 去重
     const uniqeQuestionIds = Array.from(new Set(todayACQuestionIds));
 
     // 读取 json 文件
-    const archivesData: IArchivesLog = JSON.parse(
-      fs.readFileSync(filePath, 'utf8')
-    );
+    const archivesData: IArchivesLog = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     // 记录更新时间
     archivesData.updatedAt = dayjs().format();
     // 查找这一天所在周的
@@ -162,11 +145,7 @@ export const getAcSubmissions = async (
     const currentWeekQuestionIds: string[] = [];
 
     archivesData.logs
-      .filter(
-        (log) =>
-          +new Date(log.date) >= +new Date(weekDateList[0]) &&
-          +new Date(log.date) < +new Date(date)
-      )
+      .filter((log) => +new Date(log.date) >= +new Date(weekDateList[0]) && +new Date(log.date) < +new Date(date))
       .forEach((el) => {
         currentWeekQuestionIds.push(...el.questionIds);
         currentWeekQuestionIds.push(...el.reviewQuestionIds);
@@ -196,12 +175,8 @@ export const getAcSubmissions = async (
       });
     } else {
       // 保存时去重一次
-      targetLog.questionIds = Array.from(
-        new Set([...targetLog.questionIds, ...questionIds])
-      );
-      targetLog.reviewQuestionIds = Array.from(
-        new Set([...(targetLog.reviewQuestionIds || []), ...reviewIds])
-      );
+      targetLog.questionIds = Array.from(new Set([...targetLog.questionIds, ...questionIds]));
+      targetLog.reviewQuestionIds = Array.from(new Set([...(targetLog.reviewQuestionIds || []), ...reviewIds]));
     }
 
     // 针对日期排序，最近的日期在上面
@@ -211,9 +186,7 @@ export const getAcSubmissions = async (
       encoding: 'utf8',
     });
   } catch (err: any) {
-    console.error(
-      `用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode.cn/u/${userId}/`
-    );
+    console.error(`用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode.cn/u/${userId}/`);
   } finally {
     console.log(`用户 [${userId}] --- ok`);
     callback && callback(null);
@@ -232,9 +205,7 @@ export const getWeekStartAndEnd = (date: string) => {
   const dateList: string[] = [];
   let index = 0;
   while (index < 7) {
-    dateList.push(
-      dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING)
-    );
+    dateList.push(dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING));
     index += 1;
   }
 

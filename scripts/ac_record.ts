@@ -29,5 +29,5 @@ asyncLib.mapLimit<IUser, any, any>(
     console.log('日报处理完成^_^');
     weekRollup();
     console.log('周报处理完成^_^');
-  }
+  },
 );

@@ -16,17 +16,9 @@ if (!fs.statSync(dir)) {
 (async () => {
   for (let i = 0; i < users.length; i++) {
     const { userName, userId } = users[i];
-    const archiveFilePath = path.resolve(
-      __dirname,
-      `../archives/${userName}(${userId}).json`
-    );
-    const fixArchiveFilePath = path.resolve(
-      __dirname,
-      `../fix_review/${userName}(${userId}).json`
-    );
-    const userArchivesData: IArchivesLog = JSON.parse(
-      fs.readFileSync(archiveFilePath, 'utf8')
-    );
+    const archiveFilePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
+    const fixArchiveFilePath = path.resolve(__dirname, `../fix_review/${userName}(${userId}).json`);
+    const userArchivesData: IArchivesLog = JSON.parse(fs.readFileSync(archiveFilePath, 'utf8'));
 
     const acData = userArchivesData?.logs || [];
     // 从最后一个日期开始重新整理
@@ -37,9 +29,7 @@ if (!fs.statSync(dir)) {
       const currentWeekQuestionIds: string[] = [];
       acData
         .filter(
-          (log) =>
-            +new Date(log.date) >= +new Date(weekDateList[0]) &&
-            +new Date(log.date) < +new Date(dateLog.date)
+          (log) => +new Date(log.date) >= +new Date(weekDateList[0]) && +new Date(log.date) < +new Date(dateLog.date),
         )
         .forEach((el) => {
           currentWeekQuestionIds.push(...el.questionIds);
@@ -50,16 +40,14 @@ if (!fs.statSync(dir)) {
       const questionIds: string[] = [];
       // 复习的问题
       const reviewIds: string[] = [];
-      [...dateLog.questionIds, ...(dateLog.reviewQuestionIds || [])].forEach(
-        (questionId) => {
-          if (currentWeekQuestionIds.includes(questionId)) {
-            reviewIds.push(questionId);
-          } else if (!reviewIds.includes(questionId)) {
-            // 避免已经出现在当天的复习题中的这种情况
-            questionIds.push(questionId);
-          }
+      [...dateLog.questionIds, ...(dateLog.reviewQuestionIds || [])].forEach((questionId) => {
+        if (currentWeekQuestionIds.includes(questionId)) {
+          reviewIds.push(questionId);
+        } else if (!reviewIds.includes(questionId)) {
+          // 避免已经出现在当天的复习题中的这种情况
+          questionIds.push(questionId);
         }
-      );
+      });
 
       // 更新
       dateLog.questionIds = questionIds;

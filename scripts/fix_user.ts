@@ -1,9 +1,5 @@
 import { IUser } from './typings';
-import {
-  DATE_FORMAT_STRING,
-  getAcSubmissions,
-  getWeekStartAndEnd,
-} from './utils';
+import { DATE_FORMAT_STRING, getAcSubmissions, getWeekStartAndEnd } from './utils';
 
 const dayjs = require('dayjs');
 

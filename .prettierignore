@@ -1,0 +1,11 @@
+# IDE
+.vscode/
+.idea/
+yarn.lock
+
+node_modules
+docs/
+
+archives/
+dict/
+weeks/

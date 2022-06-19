@@ -4,11 +4,7 @@ import * as path from 'path';
 const dayjs = require('dayjs');
 
 import { IArchivesLog } from './typings';
-import {
-  DATE_FORMAT_STRING,
-  getISOWeekNumber,
-  getWeekStartAndEnd,
-} from './utils';
+import { DATE_FORMAT_STRING, getISOWeekNumber, getWeekStartAndEnd } from './utils';
 const users = require('../dict/user.json');
 
 // 当天日期
@@ -28,9 +24,7 @@ const dateList = getWeekStartAndEnd(queryDate);
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 const weekOfYear = new Date(dateList[3]).getFullYear();
 // 周汇总的文件名称
-const weekRollupFileName = `${weekOfYear}年第${curISOWeekNumber}周(${
-  dateList[0]
-}_${dateList[dateList.length - 1]})`;
+const weekRollupFileName = `${weekOfYear}年第${curISOWeekNumber}周(${dateList[0]}_${dateList[dateList.length - 1]})`;
 
 /**
  * 汇总周报
@@ -50,10 +44,7 @@ export const weekRollup = () => {
     if (hideInWeek) {
       continue;
     }
-    const archiveFilePath = path.resolve(
-      __dirname,
-      `../archives/${userName}(${userId}).json`
-    );
+    const archiveFilePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
 
     const userArchivesData: IArchivesLog = fs.existsSync(archiveFilePath)
       ? JSON.parse(fs.readFileSync(archiveFilePath, 'utf8'))
@@ -64,18 +55,13 @@ export const weekRollup = () => {
           userName,
         };
     // 读取本周的数据
-    const curWeekLogs = (userArchivesData.logs ?? []).filter((el) =>
-      dateList.includes(el.date)
-    );
+    const curWeekLogs = (userArchivesData.logs ?? []).filter((el) => dateList.includes(el.date));
 
     // 只统计新题目的数量
     summaryList.push({
       ...userArchivesData,
       curWeekLogs,
-      newQuestionsTotal: curWeekLogs.reduce(
-        (sum, item) => (sum += item.questionIds.length),
-        0
-      ),
+      newQuestionsTotal: curWeekLogs.reduce((sum, item) => (sum += item.questionIds.length), 0),
     });
   }
 
@@ -85,19 +71,13 @@ export const weekRollup = () => {
   let rankNumber = 1;
   for (let index = 0; index < summaryList.length; index++) {
     const summary = summaryList[index];
-    if (
-      index > 0 &&
-      summary.newQuestionsTotal !== summaryList[index - 1].newQuestionsTotal
-    ) {
+    if (index > 0 && summary.newQuestionsTotal !== summaryList[index - 1].newQuestionsTotal) {
       rankNumber += 1;
     }
     summary.ranking = rankNumber;
   }
 
-  const weekFilePath = path.resolve(
-    __dirname,
-    `../weeks/${weekRollupFileName}.md`
-  );
+  const weekFilePath = path.resolve(__dirname, `../weeks/${weekRollupFileName}.md`);
 
   // 创建文件
   fs.writeFileSync(
@@ -108,9 +88,7 @@ export const weekRollup = () => {
 > 更新于: ${dayjs().format()}
 
 | 用户名 | 力扣 |  ${dateList.join('|')}  | 总计 | 排名 |
-| ---- | ---- |   ${new Array(dateList.length)
-      .fill(' ---- ')
-      .join('|')}  | ---- | ---- |
+| ---- | ---- |   ${new Array(dateList.length).fill(' ---- ').join('|')}  | ---- | ---- |
 ${summaryList
   .map((user) =>
     [
@@ -124,22 +102,19 @@ ${summaryList
         if (!dateLog) {
           return '';
         }
-        return dateLog.questionIds
-          .join('')
-          .replace(/\[/g, '\\[')
-          .replace(/\]/g, ']');
+        return dateLog.questionIds.join('').replace(/\[/g, '\\[').replace(/\]/g, ']');
       }),
       // 总计
       user.newQuestionsTotal,
       user.ranking,
       '',
-    ].join('|')
+    ].join('|'),
   )
   .join('\n')}
     `,
     {
       encoding: 'utf8',
-    }
+    },
   );
 };
 
