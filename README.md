@@ -41,14 +41,37 @@
 
 ### 运行
 
+本项目对一些版本进行了必要的约束
+
+- `Node.js` 版本为 `16.x`
+- `Yarn` 版本为 `1.22.18`
+
+### 安装依赖
+
 ```sh
 yarn
+```
+
+### 统计 LeetCode 提交
+
+```sh
 # 获取提交记录
 yarn run ac_record
 # 汇总周报
 yarn run week_rollup
 # 新增用户时，扫描用户最近一周的 AC 记录
 yarn run fix_user
+```
+
+### 运行前端可视化页面
+
+```sh
+# 本地开发
+yarn run dev:docs
+# 生产打包
+yarn run build:docs
+# 打包后预览
+yarn run preview:docs
 ```
 
 ## 参考
