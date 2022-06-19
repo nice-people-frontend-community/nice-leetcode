@@ -125,7 +125,7 @@
         axios
           .get(`${context}/dict/award-ranking.json?v=${+new Date()}`)
           .then(({ data }) => {
-            this.userRankingList = data.map((el) => ({
+            this.userRankingList = data.sort((a, b) => b.weeks.length - a.weeks.length).map((el) => ({
               ...el,
               level: el.weeks.length,
               levelText: formatAwardLevel(el.weeks.length)
