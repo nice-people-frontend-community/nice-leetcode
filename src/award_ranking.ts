@@ -29,7 +29,9 @@ const awardRankingFilePath = path.resolve(
   `../dict/award-ranking.json`
 );
 
-// TODO: 自动计算总排名，刷新 dict/award-ranking.json
+/**
+ * 自动计算总排名，刷新 dict/award-ranking.json
+ */
 export const awardRanking = () => {
   const awardRankingData: IAwardRanking[] = JSON.parse(
     fs.readFileSync(awardRankingFilePath, 'utf8')
@@ -107,12 +109,10 @@ export const awardRanking = () => {
     }
   }
 
-  console.log(checkUsers)
+  console.log(checkUsers);
 
   // 覆盖奖励数据
   fs.writeFileSync(awardRankingFilePath, JSON.stringify(awardRankingData), {
     encoding: 'utf8',
   });
 };
-
-awardRanking();

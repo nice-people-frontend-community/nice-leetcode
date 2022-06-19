@@ -1,4 +1,5 @@
 import * as asyncLib from 'async';
+import { awardRanking } from './award_ranking';
 
 import { IUser } from './typings';
 import { DATE_FORMAT_STRING, getAcSubmissions } from './utils';
@@ -29,5 +30,7 @@ asyncLib.mapLimit<IUser, any, any>(
     console.log('日报处理完成^_^');
     weekRollup();
     console.log('周报处理完成^_^');
+    awardRanking();
+    console.log('总榜处理完成^_^');
   }
 );
