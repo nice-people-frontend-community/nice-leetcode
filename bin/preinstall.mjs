@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-undef
 const npmExecPath = process.env.npm_execpath || '';
 if (!/yarn/.test(npmExecPath)) {
   console.warn(
     `\u001b[33mThis repository requires using yarn as the package manager ` +
-    `for scripts to work properly.\u001b[39m\n`,
+      `for scripts to work properly.\u001b[39m\n`,
   );
 
   console.warn(`\u001b[33mYou should run the following script to reinstall dependencies.\u001b[39m\n`);
@@ -13,6 +14,6 @@ if (!/yarn/.test(npmExecPath)) {
     console.warn(`\u001b[33mrm -rf ./package-lock.json\u001b[39m`);
   }
   console.warn(`\u001b[33myarn install\u001b[39m\n`);
-
+  // eslint-disable-next-line no-undef
   process.exit(1);
 }

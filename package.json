@@ -50,6 +50,10 @@
     "!(docs/**/*).js": [
       "prettier --write"
     ],
+    "bin/*.(c|m)?js": [
+      "eslint",
+      "prettier --write"
+    ],
     "*.ts?(x)": [
       "eslint",
       "prettier --parser=typescript --write"
