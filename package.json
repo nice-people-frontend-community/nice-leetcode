@@ -8,6 +8,7 @@
     "dev:docs": "vite",
     "build:docs": "vue-tsc --noEmit && vite build",
     "preview:docs": "vite preview",
+    "style:prettier": "prettier --write .",
     "ac_record": "node_modules/.bin/tsc scripts/ac_record.ts && node scripts/ac_record.js",
     "week_rollup": "node_modules/.bin/tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
     "fix_user": "node_modules/.bin/tsc scripts/fix_user.ts && node scripts/fix_user.js",
