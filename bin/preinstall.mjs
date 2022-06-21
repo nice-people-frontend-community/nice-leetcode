@@ -1,3 +1,6 @@
+// 有时候 preinstall 并不会如预期一般运行
+// https://github.com/npm/cli/issues/2660
+
 // eslint-disable-next-line no-undef
 const packageManagerUA = process.env.npm_config_user_agent || '';
 if (!/yarn/.test(packageManagerUA)) {
