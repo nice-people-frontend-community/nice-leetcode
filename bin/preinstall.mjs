@@ -1,7 +1,6 @@
 // 有时候 preinstall 并不会如预期一般运行
 // https://github.com/npm/cli/issues/2660
 
-// eslint-disable-next-line no-undef
 const packageManagerUA = process.env.npm_config_user_agent || '';
 if (!/yarn/.test(packageManagerUA)) {
   console.warn(
@@ -17,6 +16,5 @@ if (!/yarn/.test(packageManagerUA)) {
     console.warn(`\u001b[33mrm -rf ./package-lock.json\u001b[39m`);
   }
   console.warn(`\u001b[33myarn install\u001b[39m\n`);
-  // eslint-disable-next-line no-undef
   process.exit(1);
 }
