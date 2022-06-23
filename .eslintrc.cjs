@@ -18,6 +18,7 @@ module.exports = defineConfig({
     '@vue/eslint-config-typescript/recommended',
     // node_modules/@vue/eslint-config-prettier/index.js => node_modules/eslint-plugin-prettier/eslint-plugin-prettier.js
     '@vue/eslint-config-prettier',
+    './.eslintrc-auto-import.json',
   ],
   rules: {
     // 下面的配置能够覆盖之前的配置
