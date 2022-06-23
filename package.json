@@ -11,6 +11,7 @@
     "docs:preview": "vite preview",
     "style:prettier": "prettier --write .",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "lint:style": "stylelint src/**/*.{css,scss,sass,vue} --fix",
     "ac_record": "tsc scripts/ac_record.ts && node scripts/ac_record.js",
     "week_rollup": "tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
     "fix_user": "tsc scripts/fix_user.ts && node scripts/fix_user.js",
@@ -63,15 +64,16 @@
       "prettier --write"
     ],
     "bin/*.(c|m)?js": [
-      "eslint",
+      "eslint --fix",
       "prettier --write"
     ],
     "*.vue": [
-      "eslint",
+      "eslint --fix",
+      "stylelint --fix",
       "prettier --write"
     ],
     "*.ts?(x)": [
-      "eslint",
+      "eslint --fix",
       "prettier --parser=typescript --write"
     ]
   },

@@ -42,9 +42,9 @@ label {
 }
 
 code {
-  background-color: #eee;
   padding: 2px 4px;
   border-radius: 4px;
+  background-color: #eee;
   color: #304455;
 }
 </style>
