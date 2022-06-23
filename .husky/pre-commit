@@ -3,5 +3,6 @@
 
 yarn lint-staged "$1"
 
+# TODO: 应该只在修改 src 目录下的文件的时候才需要打包文档
 yarn docs:build
 git add docs
