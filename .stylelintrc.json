@@ -1,0 +1,9 @@
+{
+  "customSyntax": "postcss-html",
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-config-prettier-scss",
+    "stylelint-config-standard-vue/scss"
+  ]
+}
