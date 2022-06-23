@@ -6,3 +6,8 @@ yarn lint-staged "$1"
 # TODO: 应该只在修改 src 目录下的文件的时候才需要打包文档
 yarn docs:build
 git add docs
+
+yarn eslint auto-imports.d.ts --fix
+git add auto-imports.d.ts
+yarn eslint components.d.ts --fix
+git add components.d.ts
