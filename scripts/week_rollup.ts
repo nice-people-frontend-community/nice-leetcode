@@ -1,12 +1,10 @@
 // 汇总每周的周报
 import * as fs from 'fs';
 import * as path from 'path';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dayjs = require('dayjs');
 
 import type { IArchivesLog } from './typings';
 import { DATE_FORMAT_STRING, getISOWeekNumber, getWeekStartAndEnd } from './utils';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const users = require('../dict/user.json');
 
 // 当天日期

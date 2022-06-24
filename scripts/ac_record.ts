@@ -4,9 +4,7 @@ import type { IUser } from './typings';
 import { DATE_FORMAT_STRING, getAcSubmissions } from './utils';
 import { weekRollup } from './week_rollup';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const users = require('../dict/user.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dayjs = require('dayjs');
 // 当天日期
 const today = dayjs().format(DATE_FORMAT_STRING);

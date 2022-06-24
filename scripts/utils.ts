@@ -4,11 +4,8 @@ import * as path from 'path';
 
 import type { AsyncResultArrayCallback } from 'async';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dayjs = require('dayjs');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const isoWeekPlugin = require('dayjs/plugin/isoWeek');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const lcusAllQuestionsMap = require('../dict/lcus_all_questions_map.json');
 
 dayjs.extend(isoWeekPlugin);

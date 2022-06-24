@@ -1,7 +1,6 @@
 import type { IUser } from './typings';
 import { DATE_FORMAT_STRING, getAcSubmissions, getWeekStartAndEnd } from './utils';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const dayjs = require('dayjs');
 
 const today = dayjs().format(DATE_FORMAT_STRING);
