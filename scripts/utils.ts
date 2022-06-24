@@ -6,14 +6,29 @@ import type { AsyncResultArrayCallback } from 'async';
 
 const dayjs = require('dayjs');
 const isoWeekPlugin = require('dayjs/plugin/isoWeek');
+const isBetween = require('dayjs/plugin/isBetween');
 const lcusAllQuestionsMap = require('../dict/lcus_all_questions_map.json');
 
-dayjs.extend(isoWeekPlugin);
+dayjs.extend(isoWeekPlugin).extend(isBetween);
 
 // 日期格式化方式
-export const DATE_FORMAT_STRING = 'YYYY-MM-DD';
+export const DATE_FORMAT_TEMPLATE = 'YYYY-MM-DD';
 
 import type { IArchivesLog, IRecentACSubmissions, IRecentACSubmissionsResponse, IUser } from './typings';
+
+/**
+ * 获取今天的日期（已格式化）
+ */
+export const getToday: () => string = () => {
+  return dayjs().format(DATE_FORMAT_TEMPLATE);
+};
+
+/**
+ * 获取昨天的日期（已格式化）
+ */
+export const getYesterday: () => string = () => {
+  return dayjs().subtract(1, 'day').format(DATE_FORMAT_TEMPLATE);
+};
 
 /**
  * 判断文件是否存在
@@ -33,7 +48,7 @@ export const isFileExists = async (path: string): Promise<boolean> => {
 };
 
 /**
- * Axios请求
+ * 查询近期的AC记录
  * @param user 用户信息
  * @returns
  */
@@ -123,7 +138,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
     const recentACSubmissions = await lcQuery(userInfo);
 
     const todayACQuestionIds = recentACSubmissions
-      .filter((row) => dayjs(row.submitTime).format(DATE_FORMAT_STRING) === date)
+      .filter((row) => dayjs(row.submitTime).format(DATE_FORMAT_TEMPLATE) === date)
       .map((row) => `[${row.questionFrontendId}]`);
 
     // 去重
@@ -138,7 +153,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
     const currentWeekQuestionIds: string[] = [];
 
     archivesData.logs
-      .filter((log) => +new Date(log.date) >= +new Date(weekDateList[0]) && +new Date(log.date) < +new Date(date))
+      .filter((log) => dayjs(log.date).isBetween(weekDateList[0], date, '[)'))
       .forEach((el) => {
         currentWeekQuestionIds.push(...el.questionIds);
         currentWeekQuestionIds.push(...el.reviewQuestionIds);
@@ -193,12 +208,12 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
  */
 export const getWeekStartAndEnd = (date: string) => {
   // 当前周的星期一
-  const startDate = dayjs(date).startOf('isoWeek').format(DATE_FORMAT_STRING);
+  const startDate = dayjs(date).startOf('isoWeek').format(DATE_FORMAT_TEMPLATE);
 
   const dateList: string[] = [];
   let index = 0;
   while (index < 7) {
-    dateList.push(dayjs(startDate).add(index, 'day').format(DATE_FORMAT_STRING));
+    dateList.push(dayjs(startDate).add(index, 'day').format(DATE_FORMAT_TEMPLATE));
     index += 1;
   }
 

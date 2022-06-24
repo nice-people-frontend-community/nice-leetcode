@@ -1,21 +1,20 @@
+// 获取所有用户的AC记录
 import { mapLimit } from 'async';
-
-import type { IUser } from './typings';
-import { DATE_FORMAT_STRING, getAcSubmissions } from './utils';
+import { getAcSubmissions, getToday, getYesterday } from './utils';
 import { weekRollup } from './week_rollup';
+import type { IUser } from './typings';
 
-const users = require('../dict/user.json');
 const dayjs = require('dayjs');
-// 当天日期
-const today = dayjs().format(DATE_FORMAT_STRING);
-const yesterday = dayjs().subtract(1, 'day').format(DATE_FORMAT_STRING);
+const users = require('../dict/user.json');
+
+const day = dayjs();
 
 // 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
 // 定时器不会延迟太久，所以这里仅判断跨天的的即可
 // 如果启动时间在凌晨 00:30 以内的话，就查询昨天记录
-let queryDate = today;
-if (new Date().getHours() === 0 && new Date().getMinutes() < 30) {
-  queryDate = yesterday;
+let queryDate = getToday();
+if (day.hour() === 0 && day.minute() < 30) {
+  queryDate = getYesterday();
 }
 
 mapLimit<IUser, unknown, unknown>(

@@ -1,9 +1,7 @@
+import { getAcSubmissions, getToday, getWeekStartAndEnd } from './utils';
 import type { IUser } from './typings';
-import { DATE_FORMAT_STRING, getAcSubmissions, getWeekStartAndEnd } from './utils';
 
-const dayjs = require('dayjs');
-
-const today = dayjs().format(DATE_FORMAT_STRING);
+const today = getToday();
 const weekDateList = getWeekStartAndEnd(today);
 
 const newUsers: IUser[] = [];

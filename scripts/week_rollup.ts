@@ -1,26 +1,25 @@
 // 汇总每周的周报
 import * as fs from 'fs';
 import * as path from 'path';
-const dayjs = require('dayjs');
-
+import { getISOWeekNumber, getToday, getWeekStartAndEnd, getYesterday } from './utils';
 import type { IArchivesLog } from './typings';
-import { DATE_FORMAT_STRING, getISOWeekNumber, getWeekStartAndEnd } from './utils';
+
+const dayjs = require('dayjs');
 const users = require('../dict/user.json');
 
 // 当天日期
 const now = dayjs();
-const today = now.format(DATE_FORMAT_STRING);
-const yesterday = now.subtract(1, 'day').format(DATE_FORMAT_STRING);
 // 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
 // 定时器不会延迟太久，所以这里仅判断跨天的的即可
 // 如果启动时间在周一凌晨 1 点以内的话，就汇总上周的记录
-let queryDate = today;
-if (new Date(now).getDay() === 1 && new Date(now).getHours() < 1) {
-  queryDate = yesterday;
+let queryDate = getToday();
+if (now.day() === 1 && now.hour() < 1) {
+  queryDate = getYesterday();
 }
 // 当前日所在的ISO周数
 const curISOWeekNumber = getISOWeekNumber(queryDate);
 const dateList = getWeekStartAndEnd(queryDate);
+
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 const weekOfYear = new Date(dateList[3]).getFullYear();
 // 周汇总的文件名称
@@ -41,9 +40,7 @@ export const weekRollup = () => {
   for (let i = 0; i < users.length; i++) {
     const { userName, userId, hideInWeek = false } = users[i];
     // 跳过周报屏蔽的同学
-    if (hideInWeek) {
-      continue;
-    }
+    if (hideInWeek) continue;
     const archiveFilePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
 
     const userArchivesData: IArchivesLog = fs.existsSync(archiveFilePath)
