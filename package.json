@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "docs:dev": "vite",
     "docs:build": "vue-tsc --noEmit && vite build",
+    "postdocs:build": "eslint components.d.ts auto-imports.d.ts --fix && git add components.d.ts auto-imports.d.ts",
     "docs:preview": "vite preview",
     "style:prettier": "prettier --write .",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
