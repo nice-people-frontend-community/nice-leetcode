@@ -1,3 +1,6 @@
 {
-  "recommendations": ["Vue.volar"]
+  // 这个文件干嘛用的？
+  // 告诉 vscode 项目推荐安装的插件有哪些。
+  // 点插件图标，点筛选，下拉菜单点推荐，就可以看到插件列表。
+  "recommendations": ["Vue.volar", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "rvest.vs-code-prettier-eslint","stylelint.vscode-stylelint"]
 }
