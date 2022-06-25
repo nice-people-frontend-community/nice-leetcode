@@ -2,7 +2,3 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 yarn lint-staged --no-stash
-
-# TODO: 应该只在修改 src 目录下的文件的时候才需要打包文档
-yarn docs:build
-git add docs
