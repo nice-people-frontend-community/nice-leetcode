@@ -23,6 +23,6 @@ module.exports = defineConfig({
   rules: {
     // 下面的配置能够覆盖之前的配置
     'vue/multi-word-component-names': 'off',
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
   },
 });

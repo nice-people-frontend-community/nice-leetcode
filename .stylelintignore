@@ -1,6 +1,0 @@
-**/*
-
-!src/**/*.vue
-!src/**/*.css
-!src/**/*.scss
-!src/**/*.sass
