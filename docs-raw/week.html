@@ -219,7 +219,7 @@
         queryWeekRollup () {
           this.weekFileContent = '查询中...';
           axios
-            .get(`${context}/weeks/${weekRollupFileName}.md?v=${+new Date()}`)
+            .get(`${context}/data/weeks/${weekRollupFileName}.md?v=${+new Date()}`)
             .then(({ data }) => {
               this.weekFileContent = md.render(data);
               this.$nextTick(() => {

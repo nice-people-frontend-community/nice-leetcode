@@ -5,7 +5,7 @@ import { getISOWeekNumber, getToday, getWeekStartAndEnd, getYesterday } from './
 import type { IArchivesLog } from './typings';
 
 const dayjs = require('dayjs');
-const users = require('../dict/user.json');
+const users = require('../data/common/user.json');
 
 // 当天日期
 const now = dayjs();
@@ -74,7 +74,7 @@ export const weekRollup = () => {
     summary.ranking = rankNumber;
   }
 
-  const weekFilePath = path.resolve(__dirname, `../weeks/${weekRollupFileName}.md`);
+  const weekFilePath = path.resolve(__dirname, `../data/weeks/${weekRollupFileName}.md`);
 
   // 创建文件
   fs.writeFileSync(

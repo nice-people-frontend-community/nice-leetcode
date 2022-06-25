@@ -137,7 +137,7 @@
       },
       created () {
         axios
-          .get(`${context}/dict/user.json?v=${+new Date()}`)
+          .get(`${context}/data/common/user.json?v=${+new Date()}`)
           .then(({ data }) => {
             this.allUsers = data;
             this.computeFirstClass()

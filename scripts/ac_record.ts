@@ -5,7 +5,7 @@ import { weekRollup } from './week_rollup';
 import type { IUser } from './typings';
 
 const dayjs = require('dayjs');
-const users = require('../dict/user.json');
+const users = require('../data/common/user.json');
 
 const day = dayjs();
 

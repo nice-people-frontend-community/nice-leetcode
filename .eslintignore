@@ -6,6 +6,4 @@ yarn.lock
 /node_modules
 docs/
 
-archives/
-dict/
-weeks/
+data/
