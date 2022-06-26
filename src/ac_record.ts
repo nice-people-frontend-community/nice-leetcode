@@ -28,8 +28,12 @@ asyncLib.mapLimit<IUser, any, any>(
   (err, results) => {
     if (err) throw err;
     console.log('日报处理完成^_^');
-    weekRollup();
-    console.log('周报处理完成^_^');
+    const date = dayjs();
+    // 周日 23点前不统计周榜
+    if (date.day() !== 0 || date.hour() >= 21) {
+      weekRollup();
+      console.log('周报处理完成^_^');
+    }
     awardRanking();
     console.log('总榜处理完成^_^');
   }
