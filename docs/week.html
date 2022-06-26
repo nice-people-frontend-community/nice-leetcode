@@ -224,7 +224,7 @@
               this.weekFileContent = md.render(data);
               this.$nextTick(() => {
                 // 生成周报信息
-                if (dayjs().day() === 0 && dayjs().hour() === 21 ? dayjs().minute() >= 49 : dayjs().hour() > 21){
+                if (dayjs().day() === 0 && dayjs().hour() === 22 ? dayjs().minute() >= 50 : dayjs().hour() > 22){
                   this.buildSendMessage()
                 }
 
