@@ -8,6 +8,7 @@
     "scripts/typings.ts"
   ],
   "compilerOptions": {
+    "jsx": "preserve",
     "baseUrl": ".",
     "types": [
       "element-plus/global"
