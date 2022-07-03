@@ -137,8 +137,6 @@ const getUserSubmission = async (user: IUser) => {
       .then(({ data }) => {
         /** 设置用户提交信息到缓存map */
         userSubmissionCacheMap[user.userId] = data;
-        console.log('---获取的数据是---');
-        console.log(data);
         resolve(data);
       })
       .catch((err) => {
