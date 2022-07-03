@@ -35,10 +35,17 @@
         <el-button type="primary" plain style="margin-left: 10px" @click="reload">清除缓存</el-button>
       </el-row>
       <!-- 运行状态提示文案 -->
-      <!-- TODO: -->
-      <!-- <div style="color: #999">{{ runStatus }}</div> -->
+      <div style="color: #999">{{ runStatus }}</div>
 
       <el-divider></el-divider>
+      <el-row v-for="user in firstClassStudents.data" :key="user.userId">
+        <el-link
+          type="info"
+          target="_blank"
+          :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId"
+          >{{ user.userName }} {{ user.lcus ? '🇺🇸' : '🇨🇳' }}
+        </el-link>
+      </el-row>
     </el-card>
   </div>
 </template>
@@ -46,20 +53,13 @@
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import axios from 'axios';
 import dayjs from 'dayjs';
 import { useLocalStorage } from '@vueuse/core';
+import useFirstClass from './useFirstClass';
+import type { IArchivesLog, IUser, IUserList } from '@@/scripts/typings';
 
-/** 用户提交数据 */
-interface userSubmitRecord {
-  homepage: string;
-  logs: any[];
-  updatedAt: string;
-  userId: string;
-  userName: string;
-}
-
-type TUserSubmit = Record<string, userSubmitRecord>;
+type TUserSubmit = Record<string, IArchivesLog>;
 
 // constant 区域
 /** 用户提交 */
@@ -74,7 +74,7 @@ const currentMonth = dayjs().format('YYYY-MM');
 /** 用户选择的月份 */
 const selectedMonth = ref(currentMonth);
 
-const context = window.location.hostname.includes('github.io') ? '/nice-leetcode' : '';
+const context = `${window.location.hostname.includes('github.io') ? '/nice-leetcode' : ''}/data`;
 
 /** 禁用时间段 */
 const disabledDate = (time: string) => {
@@ -86,19 +86,14 @@ let initUserSubmission: TUserSubmit = {};
 /** 需要进行缓存 */
 const needCache = ref(true);
 
-// const cacheime = localStorage.getItem(LOCAL_CACHE_TIME_KEY);
-// const localUserSubmission = localStorage.getItem(LOCAL_CACHE_KEY);
 /** 从浏览器中获取缓存 */
-const cacheime = useLocalStorage(LOCAL_CACHE_TIME_KEY, '');
 const localUserSubmission = useLocalStorage(LOCAL_CACHE_KEY, '{}');
+const cacheime = useLocalStorage(LOCAL_CACHE_TIME_KEY, '');
 
 if (cacheime && localUserSubmission) {
-  if (dayjs(cacheime.value).isBefore(dayjs().add(-30, 'm'))) {
+  if (useFirstClass().checkCacheTimeExpired(cacheime.value)) {
     // 超出半个小时的缓存了，直接清空
-    // localStorage.removeItem(LOCAL_CACHE_TIME_KEY);
-    // localStorage.removeItem(LOCAL_CACHE_KEY);
     cacheime.value = '';
-    // localUserSubmission.value = JSON.stringify({});
     localUserSubmission.value = '';
     needCache.value = true;
   } else {
@@ -108,13 +103,84 @@ if (cacheime && localUserSubmission) {
 }
 
 /** 用户日报的缓存 */
+// 使用未过期的localstorage来初始化
 const userSubmissionCacheMap = reactive<TUserSubmit>(initUserSubmission);
+/** 所有用户列表 */
+const allUsers: IUserList = reactive({ data: [] });
 
+/** 初始化用户数据请求json */
+const initUserData = async () => {
+  const res = await axios.request<IUser[]>({
+    url: `${context}/common/user.json?v=${+new Date()}`,
+    method: 'get',
+  });
+
+  allUsers.data = res.data;
+  computeFirstClass();
+};
+initUserData();
+
+/** 头等舱用户列表 */
+const firstClassStudents: IUserList = { data: [] };
+/** 运行状态 */
+const runStatus = ref('');
+
+/** 获取用户的提交记录 */
+const getUserSubmission = async (user: IUser) => {
+  const filePath = `${context}/records/${user.userName}(${user.userId}).json?v=${+new Date()}`;
+  return new Promise((resolve, reject) => {
+    axios
+      .request<IArchivesLog>({
+        url: filePath,
+        method: 'get',
+      })
+      .then(({ data }) => {
+        /** 设置用户提交信息到缓存map */
+        userSubmissionCacheMap[user.userId] = data;
+        console.log('---获取的数据是---');
+        console.log(data);
+        resolve(data);
+      })
+      .catch((err) => {
+        console.log(`获取 【${user.userName}】 记录失败`, err);
+        resolve({});
+      });
+  });
+};
+
+/** 计算头等舱用户 */
+const computeFirstClass = async () => {
+  firstClassStudents.data = [];
+  runStatus.value = `执行中...${needCache ? '首次执行时间可能在1分钟左右...' : ''}`;
+  // 开始计算需要登录头等舱的同学
+  for (let index = 0; index < allUsers.data?.length; index++) {
+    const userInfo = allUsers.data[index];
+    const { userName, userId } = userInfo;
+    // 先从cache里获取；如果取不到就去请求
+    const userSubmission = userSubmissionCacheMap[userId] || (await getUserSubmission(userInfo));
+    // 获取选中月份的
+    if (!userSubmission) {
+      continue;
+    }
+    const monthLogs = userSubmission.logs.filter((row) => row.date.includes(selectedMonth.value));
+    // 满足条件，添加
+    if (monthLogs.every((row) => (row.questionIds || []).length === 0 && (row.reviewQuestionIds || 0).length === 0)) {
+      firstClassStudents.data.push(userInfo);
+    }
+  }
+  // 浏览器缓存
+  if (needCache.value) {
+    localUserSubmission.value = JSON.stringify(userSubmissionCacheMap);
+    cacheime.value = new Date().toString();
+  }
+  runStatus.value = '执行完成';
+};
+
+/** 清除缓存 */
 const reload = () => {
-  // localStorage.removeItem(LOCAL_CACHE_TIME_KEY);
-  // localStorage.removeItem(LOCAL_CACHE_KEY);
-  // userSubmissionCacheMap = {};
-  // window.location.reload();
+  localUserSubmission.value = '{}';
+  cacheime.value = '';
+  window.location.reload();
 };
 </script>
 
@@ -127,6 +193,7 @@ const reload = () => {
   .fixed-widget {
     display: flex;
     position: fixed;
+    z-index: 1000;
     right: 20px;
     bottom: 50px;
     align-items: center;

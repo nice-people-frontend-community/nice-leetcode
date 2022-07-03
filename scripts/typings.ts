@@ -73,3 +73,8 @@ export interface IArchivesLog extends IUser {
     reviewQuestionIds: string[];
   }[];
 }
+
+/** 用户列表 */
+export interface IUserList {
+  data: IUser[];
+}
