@@ -37,8 +37,6 @@ export const awardRanking = () => {
     fs.readFileSync(awardRankingFilePath, 'utf8')
   );
 
-  const checkUsers = [];
-
   for (let i = 0; i < users.length; i++) {
     const { userName, userId, hideInWeek = false } = users[i];
     // 跳过周报屏蔽的同学
@@ -94,7 +92,6 @@ export const awardRanking = () => {
     const userAward = awardRankingData.find((u) => u.userId === userId);
     // 给予奖励，更改数据
     if (award) {
-      checkUsers.push(userName);
       if (userAward) {
         userAward.weeks = Array.from(
           new Set([...(userAward.weeks || []), curISOWeekNumber])
@@ -108,8 +105,6 @@ export const awardRanking = () => {
       }
     }
   }
-
-  console.log(checkUsers);
 
   // 覆盖奖励数据
   fs.writeFileSync(awardRankingFilePath, JSON.stringify(awardRankingData), {
