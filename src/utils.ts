@@ -128,9 +128,7 @@ export const getAcSubmissions = async (
       JSON.stringify({
         userName,
         userId,
-        homepage: lcus
-          ? `https://leetcode.com/u/${userId}/`
-          : `https://leetcode.cn/u/${userId}/`,
+        homepage: getUserHomepage(userInfo),
         logs: [],
       }),
       {
@@ -210,12 +208,22 @@ export const getAcSubmissions = async (
     fs.writeFileSync(filePath, JSON.stringify(archivesData), {
       encoding: 'utf8',
     });
+    console.log(`用户 [${userId}] --- ok`);
   } catch (err: any) {
     console.error(
-      `用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode.cn/u/${userId}/`
+      `用户 [${userId}] --- error。可以手动前往用户主页查看 ${getUserHomepage(
+        userInfo
+      )}`
+    );
+    // 写入错误日志
+
+    fs.appendFileSync(
+      path.resolve(__dirname, '../logs/error.log'),
+      `${dayjs().format('YYYY-MM-DD HH:mm:ss')}, [${userId}][${getUserHomepage(
+        userInfo
+      )}] ${err}\n`
     );
   } finally {
-    console.log(`用户 [${userId}] --- ok`);
     callback && callback(null);
   }
 };
@@ -247,3 +255,8 @@ export const getWeekStartAndEnd = (date: string) => {
  * @returns
  */
 export const getISOWeekNumber = (date: string) => dayjs(date).isoWeek();
+
+export const getUserHomepage = (user: IUser) =>
+  user.lcus
+    ? `https://leetcode.com/u/${user.userId}/`
+    : `https://leetcode.cn/u/${user.userId}/`;
