@@ -115,7 +115,7 @@ export const lcQuery = async (user: IUser) => {
  */
 export const getAcSubmissions = async (userInfo: IUser, date: string, callback?: AsyncResultArrayCallback<unknown>) => {
   const { userName, userId, lcus = false } = userInfo;
-  const filePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
+  const filePath = path.resolve(__dirname, `../data/records/${userName}(${userId}).json`);
   // 检查是是否有用户的文件
   const exists = await isFileExists(filePath);
   if (!exists) {
