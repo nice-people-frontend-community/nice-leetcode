@@ -60,7 +60,7 @@ yarn run ac_record
 # 汇总周报
 yarn run week_rollup
 # 新增用户时，扫描用户最近一周的 AC 记录
-yarn run fix_user
+yarn run add_user
 ```
 
 ### 运行前端可视化页面
