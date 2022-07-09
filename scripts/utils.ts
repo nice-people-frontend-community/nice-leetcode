@@ -7,14 +7,14 @@ import type { AsyncResultArrayCallback } from 'async';
 const dayjs = require('dayjs');
 const isoWeekPlugin = require('dayjs/plugin/isoWeek');
 const isBetween = require('dayjs/plugin/isBetween');
-const lcusAllQuestionsMap = require('../data/common/lcus_all_questions_map.json');
+const allQuestionsMap = require('../data/common/all_questions_map.json');
 
 dayjs.extend(isoWeekPlugin).extend(isBetween);
 
 // 日期格式化方式
 export const DATE_FORMAT_TEMPLATE = 'YYYY-MM-DD';
 
-import type { IArchivesLog, IRecentACSubmissions, IRecentACSubmissionsResponse, IUser } from './typings';
+import type { IArchivesLog, IRecentACSubmissions, IRecentACSubmissionsResponse, IUser, QuestionMap } from './typings';
 
 /**
  * 获取今天的日期（已格式化）
@@ -87,7 +87,7 @@ export const lcQuery = async (user: IUser) => {
     recentAcSubmissionList.forEach((el) => {
       result.push({
         // 从映射中获取美服问题的ID
-        questionFrontendId: lcusAllQuestionsMap[el.titleSlug]?.questionId || el.titleSlug,
+        questionFrontendId: (allQuestionsMap as QuestionMap)[el.titleSlug]?.frontend_question_id || el.titleSlug,
         titleSlug: el.titleSlug,
         submitTime: +el.timestamp * 1000,
       });

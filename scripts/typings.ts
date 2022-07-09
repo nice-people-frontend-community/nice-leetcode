@@ -78,3 +78,39 @@ export interface IArchivesLog extends IUser {
 export interface IUserList {
   data: IUser[];
 }
+
+/**
+ * @name 国服题目的类型定义
+ * @see https://leetcode.cn/api/problems/all/
+ */
+export interface IQuestion {
+  /** 难度等级 */
+  level: number;
+  /**
+   * @name web 展示的问题ID
+   * @example 1
+   */
+  frontend_question_id: string;
+  is_new_question: boolean;
+  question__hide: boolean;
+  /**
+   * @name 问题名称
+   * @example Two Sum
+   */
+  question__title: string;
+  /**
+   * @name 问题在 uri 中的名字
+   * @example two-sum
+   */
+  question__title_slug: string;
+  /** 问题UUID */
+  question_id: number;
+  /** 总AC数 */
+  total_acs: number;
+  /** 总题解数 */
+  total_column_articles: number;
+  /** 总提交数 */
+  total_submitted: number;
+}
+
+export type QuestionMap = Record<string, IQuestion>;
