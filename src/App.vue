@@ -9,8 +9,10 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
 </template>
 
 <style>
-body {
+body,
+html {
   margin: 0;
+  padding: 0;
 }
 
 #app {
