@@ -25,6 +25,20 @@ export const getPageContext = () => {
  */
 export const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 
+/***
+ * 年月日格式化字符串
+ */
+export function getToday(format = DATE_FORMAT_STRING) {
+  return dayjs().format(format);
+}
+
+/**
+ * 获取某个日期所在的ISO周数
+ * @param date 日期 YYYY-MM-DD
+ * @returns
+ */
+export const getISOWeekNumber = (date: string) => dayjs(date).isoWeek();
+
 /**
  * 获取某个日期所在ISO周的起止日期
  * @param {string} date YYYY-MM-DD
