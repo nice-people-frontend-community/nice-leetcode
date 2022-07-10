@@ -4,5 +4,8 @@
     "stylelint-config-property-sort-order-smacss",
     "stylelint-config-prettier-scss",
     "stylelint-config-standard-vue/scss"
-  ]
+  ],
+  "rules": {
+    "declaration-block-trailing-semicolon": null
+  }
 }
