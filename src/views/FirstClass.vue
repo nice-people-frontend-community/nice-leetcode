@@ -51,11 +51,8 @@
 </template>
 
 <script setup lang="ts">
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { useLocalStorage } from '@vueuse/core';
 import useFirstClass from './useFirstClass';
 import type { IArchivesLog, IUser, IUserList } from '@@/scripts/typings';
 type TUserSubmit = Record<string, IArchivesLog>;
