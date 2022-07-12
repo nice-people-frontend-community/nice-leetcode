@@ -6,6 +6,7 @@
     "stylelint-config-standard-vue/scss"
   ],
   "rules": {
-    "declaration-block-trailing-semicolon": null
+    "declaration-block-trailing-semicolon": null,
+    "string-quotes": "single"
   }
 }
