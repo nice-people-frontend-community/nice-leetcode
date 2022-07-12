@@ -22,7 +22,6 @@ import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils/index';
 import { markdownRender } from '@/utils/markdown';
 import http from '@/utils/http';
 
-const context = `${window.location.hostname.includes('github.io') ? '/nice-leetcode' : ''}`;
 
 // 获取当前日期
 const queryDate = getToday();
@@ -38,7 +37,7 @@ const weekRollupFileName = `${new Date(dateList[3]).getFullYear()}年第${getISO
 const weekFileContent = ref('');
 const queryWeekRollup = () => {
   weekFileContent.value = '查询中...';
-  http.get(`${context}/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
+  http.get(`/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
     weekFileContent.value = markdownRender(data);
     nextTick(() => {
       // 控制台打印前5
