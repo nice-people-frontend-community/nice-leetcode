@@ -46,14 +46,14 @@
       </el-scrollbar>
     </div>
 
-    <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length == 0" />
+    <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length === 0" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import $http from '@/utils/http';
-import { getWeekStartAndEnd } from '@/utils/index';
+import { getWeekStartAndEnd } from '@/utils';
 import throttle from 'lodash/throttle';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
 

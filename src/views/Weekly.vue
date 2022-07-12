@@ -17,11 +17,9 @@
 <script lang="ts" setup>
 import clipboardJs from 'clipboard';
 import domToImage from 'dom-to-image';
-import { ElMessage } from 'element-plus';
-import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils/index';
+import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';
 import http from '@/utils/http';
-
 
 // 获取当前日期
 const queryDate = getToday();
