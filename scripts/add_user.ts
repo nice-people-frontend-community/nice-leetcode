@@ -14,7 +14,6 @@ const newUsers: IUser[] = [];
 
     for (let j = 0; j < weekDateList.length; j++) {
       const date = weekDateList[j];
-      console.log(date);
       await getAcSubmissions(user, date);
       if (date === today) {
         break;
