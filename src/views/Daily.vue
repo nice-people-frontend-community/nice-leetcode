@@ -53,8 +53,9 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import $http from '@/utils/http';
+import { ElMessage } from 'element-plus';
 import { getWeekStartAndEnd } from '@/utils/index';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
 
 /** 所有用户列表 */
@@ -79,22 +80,30 @@ const loading = ref(false);
 
 /** 获取所有的用户列表 */
 const getUserList = async () => {
-  const data: IUser[] = await (await $http.get(`/dict/user.json?v=${Date.now()}`)).data;
-  showUsers.value = data;
-  allUsers = data;
-  if (data.length > 0) {
-    selectUserId.value = data[0].userId;
-    selectUserName.value = data[0].userName;
+  try {
+    const data: IUser[] = await (await $http.get(`/dict/user.json?v=${Date.now()}`)).data;
+    showUsers.value = data;
+    allUsers = data;
+    if (data.length > 0) {
+      selectUserId.value = data[0].userId;
+      selectUserName.value = data[0].userName;
+    }
+  } catch (err) {
+    ElMessage.error('获取记录失败');
   }
 };
 
 /**获取某个人的打卡记录 */
 const getUserSubmission = async () => {
-  const data: IArchivesLog = await (
-    await $http.get(`/archives/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`)
-  ).data;
-  loading.value = false;
-  userArchivesData.value = data;
+  try {
+    const data: IArchivesLog = await (
+      await $http.get(`/archives/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`)
+    ).data;
+    loading.value = false;
+    userArchivesData.value = data;
+  } catch (err) {
+    ElMessage.error('获取记录失败');
+  }
 };
 
 /**初始化用户列表 */
@@ -108,7 +117,7 @@ const changeUser = (item: IUser) => {
 };
 
 /**模糊搜索 */
-const search = throttle(() => {
+const search = debounce(() => {
   showUsers.value = allUsers.filter(
     (user: IUser) => user.userName.indexOf(userName.value) > -1 || user.userId.indexOf(userName.value) > -1,
   );
