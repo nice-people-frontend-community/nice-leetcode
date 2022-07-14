@@ -21,7 +21,6 @@ import domToImage from 'dom-to-image';
 import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';
 import http from '@/utils/http';
-import { ElMessage } from 'element-plus';
 
 // 获取当前日期
 const queryDate = getToday();

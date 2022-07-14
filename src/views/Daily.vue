@@ -53,7 +53,6 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import $http from '@/utils/http';
-import { ElMessage } from 'element-plus';
 import debounce from 'lodash/debounce';
 import { getWeekStartAndEnd } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
