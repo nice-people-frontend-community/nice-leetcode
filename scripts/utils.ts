@@ -1,3 +1,11 @@
+/**
+ * 获取用户主页链接地址
+ * @param user 用户信息
+ */
+export const getUserHomepage = (user: IUser): string => {
+  return (user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId;
+};
+
 import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -193,10 +201,16 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
     fs.writeFileSync(filePath, JSON.stringify(archivesData), {
       encoding: 'utf8',
     });
-  } catch (err: unknown) {
-    console.error(`用户 [${userId}] 统计失败。可以手动前往用户主页查看 https://leetcode.cn/u/${userId}/`);
-  } finally {
     console.log(`用户 [${userId}] --- ok`);
+  } catch (err: unknown) {
+    console.error(`用户 [${userId}] --- error。可以手动前往用户主页查看 ${getUserHomepage(userInfo)}`);
+
+    // 写入错误日志
+    fs.appendFileSync(
+      path.resolve(__dirname, '../data/logs/error.log'),
+      `${dayjs().format('YYYY-MM-DD HH:mm:ss')}, [${userId}][${getUserHomepage(userInfo)}] ${err}\n`,
+    );
+  } finally {
     callback && callback(null);
   }
 };
