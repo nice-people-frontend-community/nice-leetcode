@@ -46,7 +46,7 @@
       </el-scrollbar>
     </div>
 
-    <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length == 0" />
+    <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length === 0" />
   </div>
 </template>
 
@@ -54,8 +54,8 @@
 import dayjs from 'dayjs';
 import $http from '@/utils/http';
 import { ElMessage } from 'element-plus';
-import { getWeekStartAndEnd } from '@/utils/index';
 import debounce from 'lodash/debounce';
+import { getWeekStartAndEnd } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
 
 /** 所有用户列表 */

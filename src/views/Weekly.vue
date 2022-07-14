@@ -16,12 +16,12 @@
 
 <script lang="ts" setup>
 import clipboardJs from 'clipboard';
+import dayjs from 'dayjs';
 import domToImage from 'dom-to-image';
-import { ElMessage } from 'element-plus';
-import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils/index';
+import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';
 import http from '@/utils/http';
-
+import { ElMessage } from 'element-plus';
 
 // 获取当前日期
 const queryDate = getToday();
@@ -41,7 +41,10 @@ const queryWeekRollup = () => {
     weekFileContent.value = markdownRender(data);
     nextTick(() => {
       // 控制台打印前5
-      buildSendMessage();
+      if (dayjs().day() === 0 && dayjs().hour() === 22 ? dayjs().minute() >= 50 : dayjs().hour() > 22) {
+        // TODO: 需要保证数据一致性
+        buildSendMessage();
+      }
 
       // 追加操作按钮
       document.querySelector('.markdown-body h1')?.insertAdjacentHTML(

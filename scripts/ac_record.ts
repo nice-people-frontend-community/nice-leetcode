@@ -26,7 +26,9 @@ mapLimit<IUser, unknown, unknown>(
   (err) => {
     if (err) throw err;
     console.log('日报处理完成^_^');
-    weekRollup();
-    console.log('周报处理完成^_^');
+    if (day.day() !== 0 || (day.hour() === 22 ? day.minute() >= 40 : day.hour() > 22)) {
+      weekRollup();
+      console.log('周报处理完成^_^');
+    }
   },
 );
