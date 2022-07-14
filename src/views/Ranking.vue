@@ -92,6 +92,7 @@ getUsers();
 <style scoped lang="scss">
 .page {
   margin: 0 20px;
+  cursor: pointer;
 
   .row {
     border: 1px solid #fff;
