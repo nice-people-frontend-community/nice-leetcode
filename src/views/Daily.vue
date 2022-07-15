@@ -51,7 +51,6 @@
 </template>
 
 <script lang="ts" setup>
-import dayjs from 'dayjs';
 import debounce from 'lodash/debounce';
 import { getWeekStartAndEnd } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';

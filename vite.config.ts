@@ -17,6 +17,7 @@ export default defineConfig({
         '@vueuse/core',
         {
           axios: [['default', 'axios']],
+          dayjs: [['default', 'dayjs']],
         },
       ],
       resolvers: [ElementPlusResolver()],

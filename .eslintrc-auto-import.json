@@ -20,6 +20,7 @@
     "createSharedComposable": true,
     "createUnrefFn": true,
     "customRef": true,
+    "dayjs": true,
     "debouncedRef": true,
     "debouncedWatch": true,
     "defineAsyncComponent": true,

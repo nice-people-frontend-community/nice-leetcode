@@ -14,7 +14,6 @@
 
 <script lang="ts" setup>
 import clipboardJs from 'clipboard';
-import dayjs from 'dayjs';
 import domToImage from 'dom-to-image';
 import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';

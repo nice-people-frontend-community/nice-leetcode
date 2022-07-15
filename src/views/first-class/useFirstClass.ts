@@ -1,7 +1,6 @@
 /**
  * 针对头等舱页面的处理逻辑
  */
-import dayjs from 'dayjs';
 
 export interface IUseFirstClass {
   checkCacheTimeExpired: (time: string) => boolean;

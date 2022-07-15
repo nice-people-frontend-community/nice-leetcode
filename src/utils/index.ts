@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import type { IUser } from 'scripts/typings';
 
 import isoWeek from 'dayjs/plugin/isoWeek';

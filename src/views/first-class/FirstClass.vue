@@ -51,7 +51,6 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs';
 import useFirstClass from './useFirstClass';
 import type { IArchivesLog, IUser, IUserList } from '@@/scripts/typings';
 
