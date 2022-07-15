@@ -1,15 +1,14 @@
 <template>
   <div class="weekly">
-    <a class="weekly__fixed-widget fixed-widget" :href="`${context}/docs`" target="_blank"> 日报 </a>
+    <a class="weekly__fixed-widget fixed-widget" :href="dailyPage" target="_blank"> 日报 </a>
     <el-alert
       title="不要忘记在群里截图打卡哦~"
       description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计!"
       type="error"
       :closable="false"
       style="position: sticky; z-index: 999; top: 0; margin-bottom: 10px"
-    >
-    </el-alert>
-    <div class="markdown-body" v-html="weekFileContent" ref="mdBody"></div>
+    />
+    <div class="markdown-body" v-html="weekFileContent" ref="mdBody" />
   </div>
 </template>
 
@@ -19,16 +18,13 @@ import dayjs from 'dayjs';
 import domToImage from 'dom-to-image';
 import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';
-import { ElMessage } from 'element-plus';
-import http from '@/utils/http';
-import 'element-plus/theme-chalk/el-message.css';
 
 // 获取当前日期
 const queryDate = getToday();
 // 当前日所在的ISO周数
 const dateList = getWeekStartAndEnd(queryDate);
-// 判断当前开发环境还是生产环境
-const context = `${window.location.hostname.includes('github.io') ? '/nice-leetcode' : ''}/data`;
+// 日报地址
+const dailyPage = import.meta.env.PROD ? '/nice-leetcode/docs/daily' : '/daily';
 
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 // 周汇总的文件名称
@@ -39,7 +35,7 @@ const weekRollupFileName = `${new Date(dateList[3]).getFullYear()}年第${getISO
 const weekFileContent = ref('');
 const queryWeekRollup = () => {
   weekFileContent.value = '查询中...';
-  http.get(`/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
+  axios.get(`/data/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
     weekFileContent.value = markdownRender(data);
     nextTick(() => {
       // 控制台打印前5
@@ -51,9 +47,9 @@ const queryWeekRollup = () => {
       // 追加操作按钮
       document.querySelector('.markdown-body h1')?.insertAdjacentHTML(
         'beforeend',
-        `<div id="customAction" style="display: inline-block;margin-left: 10px">
-                    <button id="copyTableBtn">复制表格</button>
-                    <button id="downloadTableBtn">另存成图片</button>
+        `<div id='customAction' style='display: inline-block;margin-left: 10px'>
+                    <button id='copyTableBtn'>复制表格</button>
+                    <button id='downloadTableBtn'>另存成图片</button>
                   <div>`,
       );
       // ===== 复制表格 =====
@@ -98,10 +94,12 @@ function buildSendMessage() {
   const persons = [];
   // Top5 的总人数
   let top5UserTotal = 0;
+
   interface top {
     users: (string | null | undefined)[];
     questionCount: number;
   }
+
   const top5: top[] = new Array(5).fill(0).map(() => ({
     users: [],
     questionCount: 0,

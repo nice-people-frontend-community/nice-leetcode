@@ -47,7 +47,6 @@
 </template>
 
 <script lang="ts" setup>
-import $http from '@/utils/http';
 import { formatAwardLevel } from '@/utils';
 import type { IUser } from '@@/scripts/typings';
 
@@ -58,7 +57,7 @@ interface User extends IUser {
 const users = ref<User[]>([]);
 
 const getUsers = async () => {
-  const res = await $http.get(`/dict/award-ranking.json?v=${+new Date()}`);
+  const res = await axios.get(`/data/common/award-ranking.json?v=${+new Date()}`);
 
   users.value = res.data
     .sort((a: User, b: User) => b.weeks.length - a.weeks.length)

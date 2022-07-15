@@ -16,8 +16,8 @@
             type="primary"
             target="_blank"
             :href="(item.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + item.userId"
-            >力扣主页 {{ item.lcus ? '🇺🇸' : '🇨🇳' }}</el-link
-          >
+            >力扣主页 {{ item.lcus ? '🇺🇸' : '🇨🇳' }}
+          </el-link>
         </div>
       </el-scrollbar>
     </div>
@@ -52,7 +52,6 @@
 
 <script lang="ts" setup>
 import dayjs from 'dayjs';
-import $http from '@/utils/http';
 import debounce from 'lodash/debounce';
 import { getWeekStartAndEnd } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
@@ -80,7 +79,7 @@ const loading = ref(false);
 /** 获取所有的用户列表 */
 const getUserList = async () => {
   try {
-    const data: IUser[] = await (await $http.get(`/dict/user.json?v=${Date.now()}`)).data;
+    const data: IUser[] = (await axios.get(`/data/common/user.json?v=${Date.now()}`)).data;
     showUsers.value = data;
     allUsers = data;
     if (data.length > 0) {
@@ -95,8 +94,8 @@ const getUserList = async () => {
 /**获取某个人的打卡记录 */
 const getUserSubmission = async () => {
   try {
-    const data: IArchivesLog = await (
-      await $http.get(`/archives/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`)
+    const data: IArchivesLog = (
+      await axios.get(`/data/records/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`)
     ).data;
     loading.value = false;
     userArchivesData.value = data;

@@ -1,6 +1,6 @@
 <template>
   <div class="first-class-container">
-    <a class="fixed-widget" :href="context + '/docs'" target="_blank"> 日报 </a>
+    <a class="fixed-widget" :href="dailyPage" target="_blank"> 日报 </a>
 
     <el-alert
       class="first-class-alert"
@@ -51,23 +51,23 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
 import dayjs from 'dayjs';
 import useFirstClass from './useFirstClass';
 import type { IArchivesLog, IUser, IUserList } from '@@/scripts/typings';
+
 type TUserSubmit = Record<string, IArchivesLog>;
 // constant 区域
 /** 用户提交 */
 const LOCAL_CACHE_KEY = 'user_summission';
 /** 用户提交时间 */
 const LOCAL_CACHE_TIME_KEY = 'user_summission_time';
-/** 时间格式 */
-const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 /** 当前月份 */
 const currentMonth = dayjs().format('YYYY-MM');
 /** 用户选择的月份 */
 const selectedMonth = ref(currentMonth);
-const context = `${window.location.hostname.includes('github.io') ? '/nice-leetcode' : ''}/data`;
+const context = import.meta.env.PROD ? '/nice-leetcode/data' : '/data';
+// 日报地址
+const dailyPage = import.meta.env.PROD ? '/nice-leetcode/docs/daily' : '/daily';
 /** 禁用时间段 */
 const disabledDate = (time: string) => {
   return dayjs(time).isBefore(dayjs('2022-05-01')) || dayjs(time).isAfter(dayjs(currentMonth));
@@ -97,10 +97,7 @@ const userSubmissionCacheMap = reactive<TUserSubmit>(initUserSubmission);
 const allUsers: IUserList = reactive({ data: [] });
 /** 初始化用户数据请求json */
 const initUserData = async () => {
-  const res = await axios.request<IUser[]>({
-    url: `${context}/common/user.json?v=${+new Date()}`,
-    method: 'get',
-  });
+  const res = await axios.get<IUser[]>(`/data/common/user.json?v=${+new Date()}`);
   allUsers.data = res.data;
   computeFirstClass();
 };
@@ -112,22 +109,15 @@ const runStatus = ref('');
 /** 获取用户的提交记录 */
 const getUserSubmission = async (user: IUser) => {
   const filePath = `${context}/records/${user.userName}(${user.userId}).json?v=${+new Date()}`;
-  return new Promise((resolve, reject) => {
-    axios
-      .request<IArchivesLog>({
-        url: filePath,
-        method: 'get',
-      })
-      .then(({ data }) => {
-        /** 设置用户提交信息到缓存map */
-        userSubmissionCacheMap[user.userId] = data;
-        resolve(data);
-      })
-      .catch((err) => {
-        console.log(`获取 【${user.userName}】 记录失败`, err);
-        resolve({});
-      });
-  });
+  try {
+    const { data } = await axios.get<IArchivesLog>(filePath);
+    /** 设置用户提交信息到缓存map */
+    userSubmissionCacheMap[user.userId] = data;
+    return data;
+  } catch (err) {
+    console.log(`获取 【${user.userName}】 记录失败`, err);
+    return {};
+  }
 };
 /** 计算头等舱用户 */
 const computeFirstClass = async () => {
@@ -136,7 +126,7 @@ const computeFirstClass = async () => {
   // 开始计算需要登录头等舱的同学
   for (let index = 0; index < allUsers.data?.length; index++) {
     const userInfo = allUsers.data[index];
-    const { userName, userId } = userInfo;
+    const { userId } = userInfo;
     // 先从cache里获取；如果取不到就去请求
     const userSubmission = userSubmissionCacheMap[userId] || (await getUserSubmission(userInfo));
     // 获取选中月份的
@@ -180,7 +170,6 @@ const reload = () => {
     justify-content: center;
     width: 50px;
     height: 50px;
-    transition: color 0.3s;
     transition: transform ease 500ms;
     border: 1px solid #00bcd4;
     border-radius: 50%;
