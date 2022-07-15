@@ -26,5 +26,6 @@
     {
       "path": "./tsconfig.config.json"
     }
-  ]
+  ],
+  "esModuleInterop": true
 }
