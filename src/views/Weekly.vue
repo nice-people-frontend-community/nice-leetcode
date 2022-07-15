@@ -1,8 +1,7 @@
 <template>
-  <div class="weekly-container">
-    <a class="fixed-widget" :href="context + '/docs'" target="_blank"> 日报 </a>
+  <div class="weekly">
+    <a class="weekly__fixed-widget fixed-widget" :href="`${context}/docs`" target="_blank"> 日报 </a>
     <el-alert
-      class="weekly-alert"
       title="不要忘记在群里截图打卡哦~"
       description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计!"
       type="error"
@@ -20,12 +19,16 @@ import dayjs from 'dayjs';
 import domToImage from 'dom-to-image';
 import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
 import { markdownRender } from '@/utils/markdown';
+import { ElMessage } from 'element-plus';
 import http from '@/utils/http';
+import 'element-plus/theme-chalk/el-message.css';
 
 // 获取当前日期
 const queryDate = getToday();
 // 当前日所在的ISO周数
 const dateList = getWeekStartAndEnd(queryDate);
+// 判断当前开发环境还是生产环境
+const context = `${window.location.hostname.includes('github.io') ? '/nice-leetcode' : ''}/data`;
 
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 // 周汇总的文件名称
@@ -166,29 +169,20 @@ function buildSendMessage() {
 <style lang="scss" scoped>
 @import url('https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css');
 
-.weekly-container {
+.weekly {
   width: 90%;
   margin: 20px auto;
   text-align: left;
 
-  .fixed-widget {
-    display: flex;
+  &__fixed-widget {
     position: fixed;
     right: 20px;
     bottom: 50px;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    transition: color 0.3s;
-    border: 1px solid #00bcd4;
-    border-radius: 50%;
-    background-color: #00bcd4;
-    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
   }
+}
+
+.markdown-body table {
+  display: table;
 
   thead th {
     width: 200px;
@@ -198,9 +192,21 @@ function buildSendMessage() {
       width: 80px;
     }
   }
+}
 
-  .markdown-body table {
-    display: table;
-  }
+.fixed-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  transition: color 0.3s;
+  border: 1px solid #00bcd4;
+  border-radius: 50%;
+  background-color: #00bcd4;
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
 }
 </style>
