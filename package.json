@@ -76,6 +76,9 @@
       "eslint --fix",
       "prettier --write"
     ],
+    ".eslintrc-auto-import.json": [
+      "prettier --write"
+    ],
     "*.vue": [
       "eslint --fix",
       "stylelint --fix",

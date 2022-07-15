@@ -32,8 +32,3 @@ dist-ssr
 *.sln
 *.sw?
 *.code-workspace
-
-# auto-imports.d.ts components.d.ts .eslintrc-auto-import.json 开发的时候会自动生成, 所以忽略提交避免冲突
-auto-imports.d.ts
-components.d.ts
-.eslintrc-auto-import.json

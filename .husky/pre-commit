@@ -2,3 +2,12 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 yarn lint-staged --no-stash
+
+yarn eslint auto-imports.d.ts --fix
+yarn prettier auto-imports.d.ts
+git add auto-imports.d.ts
+yarn eslint components.d.ts --fix
+yarn prettier components.d.ts
+git add components.d.ts
+yarn prettier .eslintrc-auto-import.json
+git add .eslintrc-auto-import.json
