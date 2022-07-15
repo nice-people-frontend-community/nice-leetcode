@@ -11,14 +11,6 @@ export const getUserHomepage = (user: IUser): string => {
   return (user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId;
 };
 
-/**
- * 获取不同环境下预览页面的上下文
- * @returns 不同环境下预览页面时的上下文
- */
-export const getPageContext = () => {
-  return window.location.hostname.includes('github.io') ? '/nice-leetcode' : '';
-};
-
 /***
  * 年月日格式化字符串
  */
