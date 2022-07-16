@@ -11,7 +11,7 @@
             {{ index + 1 }}
           </el-col>
 
-          <el-col :span="2" :title="user.userName" class="text-hidden">
+          <el-col :span="2" :title="user.userName" class="text-ellipsis">
             {{ user.userName }}
           </el-col>
 
@@ -26,14 +26,14 @@
           <el-col :span="17">
             <template v-if="!user.weeks.length" />
             <template v-else>
-              <div class="text-hidden">
+              <div class="text-ellipsis">
                 <span
-                  v-for="week in user.weeks"
+                  v-for="week in (user.weeks || []).sort((a, b) => b - a)"
                   class="weeks"
                   :style="{ backgroundColor: backgroundColor(week) }"
                   :key="week"
                 >
-                  {{ week }} 周
+                  第{{ week }}周
                 </span>
               </div>
             </template>
@@ -50,25 +50,27 @@
 import { formatAwardLevel } from '@/utils';
 import type { IUser } from '@@/scripts/typings';
 
-interface User extends IUser {
+interface IUserRanking extends IUser {
   weeks: number[];
+  level: number;
+  levelText: string;
 }
 
-const users = ref<User[]>([]);
+const users = ref<IUserRanking[]>([]);
 
 const getUsers = async () => {
-  const res = await axios.get(`/data/common/award-ranking.json?v=${+new Date()}`);
+  const res = await axios.get<IUserRanking[]>(`/data/common/award-ranking.json?v=${+new Date()}`);
 
   users.value = res.data
-    .sort((a: User, b: User) => b.weeks.length - a.weeks.length)
-    .map((el: User) => ({
+    .sort((a, b) => b.weeks.length - a.weeks.length)
+    .map((el) => ({
       ...el,
       level: el.weeks.length,
       levelText: formatAwardLevel(el.weeks.length),
     }));
 };
 
-enum colorMap {
+enum ColorMap {
   '#c2cdf0', // 0
   '#fbd3d0', // 1
   '#e4f7d2', // ...
@@ -81,7 +83,7 @@ enum colorMap {
   '#e5edca',
 }
 function backgroundColor(week: number) {
-  return colorMap[week % 10];
+  return ColorMap[week % 10];
 }
 
 /**初始化用户列表 */
@@ -111,7 +113,7 @@ getUsers();
       text-align: center;
     }
 
-    .text-hidden {
+    .text-ellipsis {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
