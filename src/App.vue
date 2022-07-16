@@ -30,6 +30,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn';
         ></path>
       </svg>
     </a>
+    <fixed-widget />
     <router-view />
   </el-config-provider>
 </template>
