@@ -1,16 +1,9 @@
 <template>
   <div class="first-class-container">
-    <a class="fixed-widget" :href="dailyPage" target="_blank"> 日报 </a>
-
-    <el-alert
-      class="first-class-alert"
+    <rule-alert
       title="头等舱乘客名单~"
       description="离群航班会在每月一号启航，登机客户为上个月不曾打卡的同学，离群后可再次申请入群。由于日报存在一小时的更新延迟，所以航班名单也存在误差。"
-      type="error"
-      :closable="false"
-      style="position: sticky; z-index: 999; top: 0; margin-bottom: 10px"
-    >
-    </el-alert>
+    ></rule-alert>
 
     <el-card class="first-class-card">
       <template #header>
@@ -39,10 +32,7 @@
 
       <el-divider></el-divider>
       <el-row v-for="user in firstClassStudents.data" :key="user.userId">
-        <el-link
-          type="info"
-          target="_blank"
-          :href="(user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId"
+        <el-link type="info" target="_blank" :href="getUserHomepage(user)"
           >{{ user.userName }} {{ user.lcus ? '🇺🇸' : '🇨🇳' }}
         </el-link>
       </el-row>
@@ -53,6 +43,7 @@
 <script setup lang="ts">
 import useFirstClass from './useFirstClass';
 import type { IArchivesLog, IUser, IUserList } from '@@/scripts/typings';
+import { getUserHomepage } from '@/utils';
 
 type TUserSubmit = Record<string, IArchivesLog>;
 // constant 区域
@@ -64,9 +55,6 @@ const LOCAL_CACHE_TIME_KEY = 'user_summission_time';
 const currentMonth = dayjs().format('YYYY-MM');
 /** 用户选择的月份 */
 const selectedMonth = ref(currentMonth);
-const context = import.meta.env.PROD ? '/nice-leetcode/data' : '/data';
-// 日报地址
-const dailyPage = import.meta.env.PROD ? '/nice-leetcode/docs/daily' : '/daily';
 /** 禁用时间段 */
 const disabledDate = (time: string) => {
   return dayjs(time).isBefore(dayjs('2022-05-01')) || dayjs(time).isAfter(dayjs(currentMonth));
@@ -107,7 +95,7 @@ const firstClassStudents: IUserList = { data: [] };
 const runStatus = ref('');
 /** 获取用户的提交记录 */
 const getUserSubmission = async (user: IUser) => {
-  const filePath = `${context}/records/${user.userName}(${user.userId}).json?v=${+new Date()}`;
+  const filePath = `/data/records/${user.userName}(${user.userId}).json?v=${+new Date()}`;
   try {
     const { data } = await axios.get<IArchivesLog>(filePath);
     /** 设置用户提交信息到缓存map */
@@ -154,42 +142,17 @@ const reload = () => {
 </script>
 
 <style scoped lang="scss">
-.first-class-container {
-  * {
-    margin: 0;
-  }
-
-  .fixed-widget {
-    display: flex;
-    position: fixed;
-    z-index: 1000;
-    right: 20px;
-    bottom: 50px;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    transition: transform ease 500ms;
-    border: 1px solid #00bcd4;
-    border-radius: 50%;
-    background-color: #00bcd4;
-    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-
-    &:hover {
-      transform: scale(1.3);
+.first-class {
+  &-container {
+    * {
+      margin: 0;
     }
+
+    margin: 10px;
   }
 
-  .first-class-alert {
-    position: sticky;
-    z-index: 999;
-    top: 0;
-    margin-bottom: 10px;
+  &-card {
+    margin-top: 10px;
   }
-
-  margin: 10px;
 }
 </style>

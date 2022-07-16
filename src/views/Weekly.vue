@@ -1,13 +1,6 @@
 <template>
   <div class="weekly">
-    <a class="weekly__fixed-widget fixed-widget" :href="dailyPage" target="_blank"> 日报 </a>
-    <el-alert
-      title="不要忘记在群里截图打卡哦~"
-      description="本周内做题超过 14 题并且没有在微信群截图打卡的同学将会获得『偷学大师』的称号；连续两周获取此称号的同学将不再参与排名统计!"
-      type="error"
-      :closable="false"
-      style="position: sticky; z-index: 999; top: 0; margin-bottom: 10px"
-    />
+    <rule-alert></rule-alert>
     <div class="markdown-body" v-html="weekFileContent" ref="mdBody" />
   </div>
 </template>
@@ -22,8 +15,6 @@ import { markdownRender } from '@/utils/markdown';
 const queryDate = getToday();
 // 当前日所在的ISO周数
 const dateList = getWeekStartAndEnd(queryDate);
-// 日报地址
-const dailyPage = import.meta.env.PROD ? '/nice-leetcode/docs/daily' : '/daily';
 
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 // 周汇总的文件名称
@@ -170,12 +161,6 @@ function buildSendMessage() {
   width: 90%;
   margin: 20px auto;
   text-align: left;
-
-  &__fixed-widget {
-    position: fixed;
-    right: 20px;
-    bottom: 50px;
-  }
 }
 
 .markdown-body table {
@@ -189,21 +174,5 @@ function buildSendMessage() {
       width: 80px;
     }
   }
-}
-
-.fixed-widget {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  transition: color 0.3s;
-  border: 1px solid #00bcd4;
-  border-radius: 50%;
-  background-color: #00bcd4;
-  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
 }
 </style>

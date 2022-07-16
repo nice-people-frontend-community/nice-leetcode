@@ -20,6 +20,8 @@ declare module '@vue/runtime-core' {
     ElMain: typeof import('element-plus/es')['ElMain'];
     ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
+    FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
+    FixWidget: typeof import('./src/components/FixWidget.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
     RouterLink: typeof import('vue-router')['RouterLink'];

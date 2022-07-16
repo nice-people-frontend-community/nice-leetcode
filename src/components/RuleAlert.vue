@@ -22,9 +22,9 @@ export default {
 
 <style scoped>
 .alert {
-  margin-bottom: 10px;
   position: sticky;
-  top: 0;
   z-index: 999;
+  top: 0;
+  margin-bottom: 10px;
 }
 </style>
