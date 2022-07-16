@@ -24,7 +24,7 @@ jobs:
       - run: yarn install
 
       - name: Run LeetCode
-      - run: |
+        run: |
           git pull
           yarn run ac_record
           git pull
