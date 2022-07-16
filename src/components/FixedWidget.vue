@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const router = useRouter();
 const allRoutes = router.getRoutes().filter((page) => page.meta?.title);
-const context = import.meta.env.PROD ? '/nice-leetcode/docs' : '';
+const context = import.meta.env.PROD ? '/nice-leetcode/docs/#' : '#';
 </script>
 
 <template>

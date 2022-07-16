@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
   { path: '/', redirect: '/daily' },
@@ -11,7 +11,7 @@ const routes = [
 
 const router = createRouter({
   // 不太清楚以后会不会有锚点跳转的需求，所以先用了 history 模式
-  history: createWebHistory(import.meta.env.PROD ? '/nice-leetcode/docs' : ''),
+  history: createWebHashHistory(import.meta.env.PROD ? '/nice-leetcode/docs' : ''),
   routes,
 });
 
