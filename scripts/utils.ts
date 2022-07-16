@@ -15,7 +15,7 @@ import type { AsyncResultArrayCallback } from 'async';
 const dayjs = require('dayjs');
 const isoWeekPlugin = require('dayjs/plugin/isoWeek');
 const isBetween = require('dayjs/plugin/isBetween');
-const allQuestionsMap = require('../data/common/all_questions_map.json');
+const allQuestionsMap = require('../data/common/lcus_all_questions_map.json');
 
 dayjs.extend(isoWeekPlugin).extend(isBetween);
 
