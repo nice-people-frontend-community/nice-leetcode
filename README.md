@@ -14,9 +14,10 @@
 
 ## 线上地址
 
-- [用户日报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/)
-- [本周周报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/week)
-- [头等舱航班](https://nice-people-frontend-community.github.io/nice-leetcode/docs/first-class)
+- [用户日报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/#/daily)
+- [本周周报](https://nice-people-frontend-community.github.io/nice-leetcode/docs/#/weekly)
+- [头等舱航班](https://nice-people-frontend-community.github.io/nice-leetcode/docs/#/first-class)
+- [总榜](https://nice-people-frontend-community.github.io/nice-leetcode/docs/#/ranking)
 
 ## 使用方法
 
