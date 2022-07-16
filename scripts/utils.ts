@@ -143,8 +143,16 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
   }
 
   try {
-    const recentACSubmissions = await lcQuery(userInfo);
-
+    let retryLimit = 3;
+    let recentACSubmissions: IRecentACSubmissions[] = [];
+    while (retryLimit--) {
+      try {
+        recentACSubmissions = await lcQuery(userInfo);
+        break;
+      } catch (e) {
+        if (retryLimit === 0) throw e;
+      }
+    }
     const todayACQuestionIds = recentACSubmissions
       .filter((row) => dayjs(row.submitTime).format(DATE_FORMAT_TEMPLATE) === date)
       .map((row) => `[${row.questionFrontendId}]`);
