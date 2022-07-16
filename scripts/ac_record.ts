@@ -11,9 +11,10 @@ const day = dayjs();
 
 // 由于 GitHub Actions 定时器启动不准，这里做下兼容处理
 // 定时器不会延迟太久，所以这里仅判断跨天的的即可
-// 如果启动时间在凌晨 00:30 以内的话，就查询昨天记录
+// 如果启动时间在凌晨 02:00 以内的话，就查询昨天记录
+// 防止前一天丢数据
 let queryDate = getToday();
-if (day.hour() === 0 && day.minute() < 30) {
+if (day.hour() < 2) {
   queryDate = getYesterday();
 }
 
