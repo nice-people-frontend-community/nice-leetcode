@@ -11,7 +11,7 @@ const routes = [
 
 const router = createRouter({
   // 不太清楚以后会不会有锚点跳转的需求，所以先用了 history 模式
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.PROD ? '/nice-leetcode/docs' : ''),
   routes,
 });
 
