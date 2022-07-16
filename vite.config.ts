@@ -38,6 +38,7 @@ export default defineConfig({
       '@@': fileURLToPath(new URL('./', import.meta.url)),
     },
   },
+  base: process.env.NODE_ENV === 'production' ? '/nice-leetcode/' : '/',
   build: {
     outDir: 'docs',
     reportCompressedSize: false,
