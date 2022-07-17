@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+    paths:
+      - src/**
+      - public/**
+      - index.html
+      - vite.config.ts
 
 jobs:
   build:
