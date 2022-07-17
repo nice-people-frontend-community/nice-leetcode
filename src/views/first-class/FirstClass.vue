@@ -103,7 +103,7 @@ const getUserSubmission = async (user: IUser) => {
     return data;
   } catch (err) {
     console.log(`获取 【${user.userName}】 记录失败`, err);
-    return {};
+    return false;
   }
 };
 /** 计算头等舱用户 */
