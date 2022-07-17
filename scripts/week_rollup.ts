@@ -41,7 +41,7 @@ export const weekRollup = () => {
     const { userName, userId, hideInWeek = false } = users[i];
     // 跳过周报屏蔽的同学
     if (hideInWeek) continue;
-    const archiveFilePath = path.resolve(__dirname, `../archives/${userName}(${userId}).json`);
+    const archiveFilePath = path.resolve(__dirname, `../data/records/${userName}(${userId}).json`);
 
     const userArchivesData: IArchivesLog = fs.existsSync(archiveFilePath)
       ? JSON.parse(fs.readFileSync(archiveFilePath, 'utf8'))
