@@ -80,26 +80,26 @@ export interface IUserList {
 }
 
 /**
- * @name 国服题目的类型定义
+ * 国服题目的类型定义
  * @see https://leetcode.cn/api/problems/all/
  */
 export interface IQuestion {
   /** 难度等级 */
   level: number;
   /**
-   * @name web 展示的问题ID
+   * web 展示的问题ID
    * @example 1
    */
   frontend_question_id: string;
   is_new_question: boolean;
   question__hide: boolean;
   /**
-   * @name 问题名称
+   * 问题名称
    * @example Two Sum
    */
   question__title: string;
   /**
-   * @name 问题在 uri 中的名字
+   * 问题在 uri 中的名字
    * @example two-sum
    */
   question__title_slug: string;
@@ -114,3 +114,7 @@ export interface IQuestion {
 }
 
 export type QuestionMap = Record<string, IQuestion>;
+
+export interface IAwardRanking extends IUser {
+  weeks: number[];
+}

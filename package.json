@@ -17,6 +17,7 @@
     "week_rollup": "tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
     "add_user": "tsc scripts/add_user.ts && node scripts/add_user.js",
     "get_all_questions": "tsc scripts/get_all_questions.ts && node scripts/get_all_questions.js",
+    "award_ranking": "tsc scripts/award_ranking.ts && node scripts/award_ranking.js",
     "commit": "git-cz"
   },
   "keywords": [],
