@@ -3,6 +3,7 @@ import { mapLimit } from 'async';
 import { getAcSubmissions, getToday, getYesterday } from './utils';
 import { weekRollup } from './week_rollup';
 import type { IUser } from './typings';
+import { awardRanking } from './award_ranking';
 
 const dayjs = require('dayjs');
 const users = require('../data/common/user.json');
@@ -31,5 +32,7 @@ mapLimit<IUser, unknown, unknown>(
       weekRollup();
       console.log('周报处理完成^_^');
     }
+    awardRanking();
+    console.log('总榜处理完成^_^');
   },
 );
