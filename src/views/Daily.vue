@@ -93,9 +93,7 @@ const getUserList = async () => {
 /**获取某个人的打卡记录 */
 const getUserSubmission = async () => {
   try {
-    const data: IArchivesLog = (
-      await axios.get(`/data/records/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`)
-    ).data;
+    const data: IArchivesLog = (await axios.get(`/data/records/${selectUserId.value}.json?v=${Date.now()}`)).data;
     loading.value = false;
     userArchivesData.value = data;
   } catch (err) {

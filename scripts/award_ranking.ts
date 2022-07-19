@@ -37,7 +37,7 @@ export const awardRanking = () => {
     if (hideInWeek) {
       continue;
     }
-    const archiveFilePath = path.resolve(__dirname, `../data/records/${userName}(${userId}).json`);
+    const archiveFilePath = path.resolve(__dirname, `../data/records/${userId}.json`);
 
     const userArchivesData: IArchivesLog = fs.existsSync(archiveFilePath)
       ? JSON.parse(fs.readFileSync(archiveFilePath, 'utf8'))

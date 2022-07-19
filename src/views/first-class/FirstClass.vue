@@ -95,7 +95,7 @@ const firstClassStudents: IUserList = { data: [] };
 const runStatus = ref('');
 /** 获取用户的提交记录 */
 const getUserSubmission = async (user: IUser) => {
-  const filePath = `/data/records/${user.userName}(${user.userId}).json?v=${+new Date()}`;
+  const filePath = `/data/records/${user.userId}.json?v=${+new Date()}`;
   try {
     const { data } = await axios.get<IArchivesLog>(filePath);
     /** 设置用户提交信息到缓存map */
