@@ -97,7 +97,7 @@ let cancel: any = null;
 const getUserSubmission = async () => {
   try {
     const data: IArchivesLog = (
-      await axios.get(`/data/records/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`, {
+      await axios.get(`/data/records/${selectUserId.value}.json?v=${Date.now()}`, {
         cancelToken: new CancelToken(function executor(c: any) {
           cancel = c;
         }),
