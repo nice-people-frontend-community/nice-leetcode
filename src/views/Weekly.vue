@@ -1,6 +1,6 @@
 <template>
   <div class="weekly">
-    <rule-alert></rule-alert>
+    <rule-alert />
     <div class="markdown-body" v-html="weekFileContent" ref="mdBody" />
   </div>
 </template>
@@ -34,14 +34,23 @@ const queryWeekRollup = () => {
         buildSendMessage();
       }
 
+      // 调整 h1 标签居中
+      const h1 = document.querySelector('.markdown-body h1');
+      if (h1) {
+        const divNode = document.createElement('div');
+        divNode.style.cssText = 'display:flex;justify-content:center;';
+        divNode.appendChild(h1.cloneNode(true));
+        document.querySelector('.markdown-body')?.insertBefore(divNode, h1);
+        document.querySelector('.markdown-body')?.removeChild(h1);
+      }
+
       // 追加操作按钮
-      document.querySelector('.markdown-body h1')?.insertAdjacentHTML(
-        'beforeend',
-        `<div id='customAction' style='display: inline-block;margin-left: 10px'>
-                    <button id='copyTableBtn'>复制表格</button>
-                    <button id='downloadTableBtn'>另存成图片</button>
-                  <div>`,
-      );
+      const buttonGroupNode = document.createElement('div');
+      buttonGroupNode.innerHTML = `<button id='copyTableBtn'>复制表格</button><button id='downloadTableBtn' style='margin-left:8px'>另存成图片</button>`;
+      const blockquoteNode = document.querySelector('.markdown-body blockquote');
+      blockquoteNode?.setAttribute('style', 'display:flex;align-content:center;justify-content:space-between;');
+      blockquoteNode?.append(buttonGroupNode);
+
       // ===== 复制表格 =====
       const table = document.querySelector('.markdown-body table');
       if (table) {
@@ -163,7 +172,11 @@ function buildSendMessage() {
   text-align: left;
 }
 
-.markdown-body table {
+.markdown-body :deep(blockquote p) {
+  margin-bottom: 0;
+}
+
+.markdown-body :deep(table) {
   display: table;
 
   thead th {
