@@ -169,7 +169,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
     const currentWeekQuestionIds: string[] = [];
 
     archivesData.logs
-      .filter((log) => dayjs(log.date).isBetween(weekDateList[0], date, '[)'))
+      .filter((log) => dayjs(log.date).isBetween(weekDateList[0], date, 'day', '[)'))
       .forEach((el) => {
         currentWeekQuestionIds.push(...el.questionIds);
         currentWeekQuestionIds.push(...el.reviewQuestionIds);
