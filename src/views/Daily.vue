@@ -106,6 +106,7 @@ const getUserSubmission = async () => {
     loading.value = false;
     userArchivesData.value = data;
   } catch (err) {
+    if (err instanceof AxiosError && err.code === 'ERR_CANCELED') return;
     ElMessage.error('获取记录失败');
   }
 };

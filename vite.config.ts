@@ -18,7 +18,7 @@ export default defineConfig({
         'vue-router',
         '@vueuse/core',
         {
-          axios: [['default', 'axios']],
+          axios: [['default', 'axios'], 'AxiosError'],
           dayjs: [['default', 'dayjs']],
         },
       ],
