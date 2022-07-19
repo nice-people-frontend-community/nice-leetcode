@@ -1,7 +1,7 @@
 <template>
   <div class="daily-box">
     <div class="l-box">
-      <el-input class="c-input" placeholder="请输入用户昵称" v-model="userName" clearable></el-input>
+      <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable></el-input>
       <el-scrollbar class="user-list" v-if="showUsers.length > 0">
         <div
           class="user"
@@ -15,6 +15,7 @@
             class="c-link"
             type="primary"
             target="_blank"
+            :underline="false"
             :href="(item.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + item.userId"
             >力扣主页 {{ item.lcus ? '🇺🇸' : '🇨🇳' }}
           </el-link>
@@ -89,11 +90,19 @@ const getUserList = async () => {
     ElMessage.error('获取记录失败');
   }
 };
+const CancelToken = axios.CancelToken;
+let cancel: any = null;
 
 /**获取某个人的打卡记录 */
 const getUserSubmission = async () => {
   try {
-    const data: IArchivesLog = (await axios.get(`/data/records/${selectUserId.value}.json?v=${Date.now()}`)).data;
+    const data: IArchivesLog = (
+      await axios.get(`/data/records/${selectUserName.value}(${selectUserId.value}).json?v=${Date.now()}`, {
+        cancelToken: new CancelToken(function executor(c: any) {
+          cancel = c;
+        }),
+      })
+    ).data;
     loading.value = false;
     userArchivesData.value = data;
   } catch (err) {
@@ -106,17 +115,26 @@ getUserList();
 
 /** 切换用户 */
 const changeUser = (item: IUser) => {
-  loading.value = true;
-  selectUserId.value = item.userId;
-  selectUserName.value = item.userName;
+  if (item.userId != selectUserId.value) {
+    loading.value = true;
+    cancel();
+    selectUserId.value = item.userId;
+    selectUserName.value = item.userName;
+  }
 };
 
 /**模糊搜索 */
-const search = debounce(() => {
-  showUsers.value = allUsers.filter(
-    (user: IUser) => user.userName.indexOf(userName.value) > -1 || user.userId.indexOf(userName.value) > -1,
-  );
-}, 1000);
+const search = debounce(
+  () => {
+    showUsers.value = allUsers.filter(
+      (user: IUser) => user.userName.indexOf(userName.value) > -1 || user.userId.indexOf(userName.value) > -1,
+    );
+  },
+  400,
+  {
+    leading: true,
+  },
+);
 
 /**监听userName输入变化 */
 watch(userName, (userName) => {
@@ -194,7 +212,7 @@ const getWeekDay = (date: string) => {
 
         .c-link {
           display: inline-flex;
-          width: 80px;
+          width: 85px;
         }
       }
     }
