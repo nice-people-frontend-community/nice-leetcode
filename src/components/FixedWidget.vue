@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const router = useRouter();
-const allRoutes = router.getRoutes().filter((page) => page.meta?.title);
+const allRoutes = router
+  .getRoutes()
+  .filter((page) => page.meta?.title)
+  .map((page) => {
+    return { ...page, path: page.path.replace(/\/:.*?\??$/, '') };
+  });
 const context = import.meta.env.PROD ? '/nice-leetcode/docs/#' : '#';
 </script>
 
