@@ -1,8 +1,8 @@
 <template>
   <div class="daily-box">
     <div class="l-box">
-      <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable></el-input>
-      <el-scrollbar class="user-list" v-if="showUsers.length > 0">
+      <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
+      <el-scrollbar class="user-list" v-if="showUsers.length > 0" ref="scrollbarRef">
         <div
           class="user"
           :class="{ active: selectUserId === item.userId }"
@@ -55,6 +55,7 @@
 import debounce from 'lodash/debounce';
 import { getWeekStartAndEnd } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
+import type { ElScrollbar } from 'element-plus';
 
 /** 所有用户列表 */
 const showUsers = ref<IUser[]>([]);
@@ -85,14 +86,24 @@ watch(
   },
 );
 
+const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
+
 /** 获取所有的用户列表 */
 const getUserList = async () => {
   try {
     const data: IUser[] = (await axios.get(`/data/common/user.json?v=${Date.now()}`)).data;
     showUsers.value = data;
     allUsers = data;
-    if (data.length > 0) {
-      selectUserId.value = route.params.userId ? (route.params.userId as string) : data[0].userId;
+    if (data.length === 0) return;
+    if (route.params.userId) {
+      selectUserId.value = route.params.userId as string;
+      const index = data.findIndex((user) => user.userId === selectUserId.value);
+      if (index > -1) {
+        await nextTick();
+        scrollbarRef.value?.setScrollTop(40 * index);
+      }
+    } else {
+      selectUserId.value = data[0].userId;
     }
   } catch (err) {
     ElMessage.error('获取记录失败');
