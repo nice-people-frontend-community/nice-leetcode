@@ -178,7 +178,9 @@ const getWeekDay = (date: string) => {
 <style scoped lang="scss">
 .daily-box {
   display: flex;
+  box-sizing: border-box;
   height: 100vh;
+  padding: 0 0 16px;
   font-size: 14px;
 
   .l-box {
@@ -230,7 +232,7 @@ const getWeekDay = (date: string) => {
     display: flex;
     flex: 1;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     padding: 0 20px;
 
     .d-time {
