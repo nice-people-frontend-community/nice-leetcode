@@ -19,6 +19,7 @@ addUser(newUsers).catch((e) => console.log(e));
 // 其实可以 getAcSubmissions() 修改成直接扫描当前可以获取到的全部记录，重新记录
 // 懒得改了...
 async function addUser(newUsers: IUser[]) {
+  if (!newUsers.length) return;
   const userFilePath = path.resolve(__dirname, `../data/common/user.json`);
   const userJSON = fs.readFileSync(userFilePath, { encoding: 'utf-8' });
   const users = JSON.parse(userJSON);
