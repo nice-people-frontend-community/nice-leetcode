@@ -28,8 +28,14 @@ const queryWeekRollup = () => {
   axios.get(`/data/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
     weekFileContent.value = markdownRender(data);
     nextTick(() => {
+      let blockquote: HTMLQuoteElement | null = document.getElementsByTagName('blockquote')[0];
+      const text = blockquote.innerText;
+      const time = dayjs(text.slice(5, 30));
+      blockquote.innerText = `更新于: ${time.format('YYYY-MM-DD HH:mm:ss')}`;
+
+      blockquote = null;
       // 控制台打印前5
-      if (dayjs().day() === 0 && dayjs().hour() === 22 ? dayjs().minute() >= 50 : dayjs().hour() > 22) {
+      if (time.day() === 0 && time.hour() === 22 ? time.minute() >= 50 : time.hour() > 22) {
         // TODO: 需要保证数据一致性
         buildSendMessage();
       }
