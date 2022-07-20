@@ -65,8 +65,6 @@ let allUsers: IUser[] = [];
 /**当前选中的userId */
 const selectUserId = ref('');
 
-const selectUserName = ref('');
-
 /**当前某人的打卡记录 */
 const userArchivesData = ref<IArchivesLog>();
 
@@ -76,6 +74,17 @@ const userName = ref('');
 /** 是否在加载中 */
 const loading = ref(false);
 
+const route = useRoute();
+const router = useRouter();
+watch(
+  () => route.params.userId as string,
+  (userId: string) => {
+    if (userId) {
+      selectUserId.value = userId;
+    }
+  },
+);
+
 /** 获取所有的用户列表 */
 const getUserList = async () => {
   try {
@@ -83,8 +92,7 @@ const getUserList = async () => {
     showUsers.value = data;
     allUsers = data;
     if (data.length > 0) {
-      selectUserId.value = data[0].userId;
-      selectUserName.value = data[0].userName;
+      selectUserId.value = route.params.userId ? (route.params.userId as string) : data[0].userId;
     }
   } catch (err) {
     ElMessage.error('获取记录失败');
@@ -118,9 +126,8 @@ getUserList();
 const changeUser = (item: IUser) => {
   if (item.userId != selectUserId.value) {
     loading.value = true;
-    cancel();
-    selectUserId.value = item.userId;
-    selectUserName.value = item.userName;
+    cancel?.();
+    router.push(`/daily/${item.userId}`);
   }
 };
 

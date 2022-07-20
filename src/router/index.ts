@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
   { path: '/', redirect: '/daily' },
-  { path: '/daily', meta: { title: '日报' }, component: () => import('../views/Daily.vue') },
+  { path: '/daily/:userId?', meta: { title: '日报' }, component: () => import('../views/Daily.vue') },
   { path: '/weekly', meta: { title: '周报' }, component: () => import('../views/Weekly.vue') },
   { path: '/first-class', meta: { title: '头等舱' }, component: () => import('../views/first-class/FirstClass.vue') },
   { path: '/ranking', meta: { title: '总榜' }, component: () => import('../views/Ranking.vue') },
