@@ -28,5 +28,6 @@ const context = import.meta.env.PROD ? '/nice-leetcode/docs/#' : '#';
   transform: translate(0, -50%);
   background: #fff;
   box-shadow: 1px 0 8px 0 #e6e6e6;
+  text-align: center;
 }
 </style>
