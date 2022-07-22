@@ -4,7 +4,6 @@ import { getAcSubmissions, getToday, getYesterday } from './utils';
 import { weekRollup } from './week_rollup';
 import type { IUser } from './typings';
 import { awardRanking } from './award_ranking';
-import { cpus } from 'os';
 
 const dayjs = require('dayjs');
 const users = require('../data/common/user.json');
@@ -21,7 +20,7 @@ if (day.hour() < 2) {
 }
 
 // 最大上限
-const limit = cpus().length > 8 ? cpus().length : 8;
+const limit = 50;
 
 mapLimit<IUser, unknown, unknown>(
   users,
