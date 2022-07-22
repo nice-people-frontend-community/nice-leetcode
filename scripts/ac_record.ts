@@ -21,9 +21,7 @@ if (day.hour() < 2) {
 }
 
 // 最大上限
-const limit = cpus().length;
-
-console.log('limit =>', limit);
+const limit = cpus().length > 8 ? cpus().length : 8;
 
 mapLimit<IUser, unknown, unknown>(
   users,
