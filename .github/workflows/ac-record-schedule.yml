@@ -6,7 +6,7 @@ on:
     - cron: '50 * * * *'
 
 jobs:
-  build:
+  ac_record:
     runs-on: ubuntu-latest
 
     env:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
-      - run: yarn install
+      - run: yarn install --immutable
 
       - name: Run LeetCode
         run: |
