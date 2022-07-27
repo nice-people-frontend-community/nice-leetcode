@@ -74,45 +74,30 @@ export const weekRollup = () => {
     summary.ranking = rankNumber;
   }
 
-  const weekFilePath = path.resolve(__dirname, `../data/weeks/${weekRollupFileName}.md`);
-
+  const weekFilePath = path.resolve(__dirname, `../data/weeks/${weekRollupFileName}.json`);
+  const json = {
+    title: `${weekRollupFileName} 周报`,
+    weekly: dateList,
+    updatedAt: dayjs().format(),
+    records: summaryList.map((user) => {
+      return {
+        userId: user.userId,
+        userName: user.userName,
+        homepage: user.homepage,
+        weekly: [
+          ...dateList.map((date) => {
+            const dateLog = user.curWeekLogs.find((row) => date === row.date);
+            if (!dateLog) return '';
+            return dateLog.questionIds.join('');
+          }),
+        ],
+        newQuestionsTotal: user.newQuestionsTotal,
+        ranking: user.ranking,
+      };
+    }),
+  };
   // 创建文件
-  fs.writeFileSync(
-    weekFilePath,
-    `
-# ${weekRollupFileName} 周报
-
-> 更新于: ${dayjs().format()}
-
-| 用户名 | 力扣 |  ${dateList.join('|')}  | 总计 | 排名 |
-| ---- | ---- |   ${new Array(dateList.length).fill(' ---- ').join('|')}  | ---- | ---- |
-${summaryList
-  .map((user) =>
-    [
-      '',
-      user.userName,
-      // 主页
-      `[${user.userId}](${user.homepage})`,
-      // 本周的做题
-      ...dateList.map((date) => {
-        const dateLog = user.curWeekLogs.find((row) => date === row.date);
-        if (!dateLog) {
-          return '';
-        }
-        return dateLog.questionIds.join('').replace(/\[/g, '\\[').replace(/\]/g, ']');
-      }),
-      // 总计
-      user.newQuestionsTotal,
-      user.ranking,
-      '',
-    ].join('|'),
-  )
-  .join('\n')}
-    `,
-    {
-      encoding: 'utf8',
-    },
-  );
+  fs.writeFileSync(weekFilePath, JSON.stringify(json), { encoding: 'utf8' });
 };
 
-// weekRollup();
+weekRollup();
