@@ -13,6 +13,14 @@ const newUsers: IUser[] = [
   // },
 ];
 
+const [userName, userId, lcus] = process.argv.slice(2, 5);
+if (userId) {
+  const user: IUser = { userName, userId };
+  if (lcus === '1') {
+    user.lcus = true;
+  }
+  newUsers.push(user);
+}
 addUser(newUsers).catch((e) => console.log(e));
 
 // 获取新增人员，当前周的刷题记录
