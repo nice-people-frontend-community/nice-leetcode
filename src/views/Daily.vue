@@ -214,14 +214,22 @@ const getWeekDay = (date: string) => {
 
       .user {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding: 10px;
+        transition: all 0.3s;
         border-radius: 4px;
         cursor: pointer;
 
         &.active {
           background-color: rgb(64 158 255 / 10%);
           color: #409eff;
+        }
+
+        &:hover {
+          height: 40px;
+          background: rgb(46 50 56 / 5%);
+          font-size: 16px;
         }
 
         .user-name {
