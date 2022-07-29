@@ -3,11 +3,23 @@
 
 yarn lint-staged --no-stash
 
-yarn eslint auto-imports.d.ts --fix
-yarn prettier auto-imports.d.ts
-git add auto-imports.d.ts
-yarn eslint components.d.ts --fix
-yarn prettier components.d.ts
-git add components.d.ts
-yarn prettier .eslintrc-auto-import.json
-git add .eslintrc-auto-import.json
+
+git_diff_auto_imports=$(git diff auto-imports.d.ts)
+if [ $git_diff_auto_imports ]; then
+  yarn eslint auto-imports.d.ts --fix
+  yarn prettier auto-imports.d.ts
+  git add auto-imports.d.ts
+fi
+
+git_diff_components=$(git diff components.d.ts)
+if [ $git_diff_components ]; then
+  yarn eslint components.d.ts --fix
+  yarn prettier components.d.ts
+  git add components.d.ts
+fi
+
+git_diff_eslintrc_auto_import=$(git diff .eslintrc-auto-import.json)
+if [ $git_diff_eslintrc_auto_import ]; then
+  yarn prettier .eslintrc-auto-import.json
+  git add .eslintrc-auto-import.json
+fi
