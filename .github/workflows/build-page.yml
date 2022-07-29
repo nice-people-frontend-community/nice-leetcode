@@ -40,5 +40,5 @@ jobs:
           git config --local user.name "Anonymity94-Bot"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
           git add .
-          git commit -m "build page"
+          git commit -m "ci: build page"
           git push

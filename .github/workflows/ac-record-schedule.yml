@@ -35,5 +35,5 @@ jobs:
           git config --local user.name "Anonymity94-Bot"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }}
           git add .
-          git commit -m "update by github action"
+          git commit -m "ci: update by github action"
           git push
