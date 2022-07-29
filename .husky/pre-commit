@@ -3,19 +3,21 @@
 
 yarn lint-staged --no-stash
 
-if git status --porcelai auto-imports.d.ts &>/dev/null; then
+echo $0 $1, 2
+
+if git status --porcelai ../auto-imports.d.ts &>/dev/null; then
   yarn eslint auto-imports.d.ts --fix
   yarn prettier --write auto-imports.d.ts
   git add auto-imports.d.ts
 fi
 
-if git status --porcelai components.d.ts &>/dev/null; then
+if git status --porcelai ../components.d.ts &>/dev/null; then
   yarn eslint components.d.ts --fix
   yarn prettier --write components.d.ts
   git add components.d.ts
 fi
 
-if git status --porcelai .eslintrc-auto-import.json &>/dev/null; then
+if git status --porcelai ../.eslintrc-auto-import.json &>/dev/null; then
   yarn prettier --write .eslintrc-auto-import.json
   git add .eslintrc-auto-import.json
 fi
