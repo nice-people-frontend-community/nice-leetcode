@@ -5,14 +5,24 @@ import '@vue/runtime-core';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider'];
+    ElAlert: typeof import('element-plus/es')['ElAlert'];
+    ElButton: typeof import('element-plus/es')['ElButton'];
+    ElCard: typeof import('element-plus/es')['ElCard'];
+    ElCol: typeof import('element-plus/es')['ElCol'];
+    ElContainer: typeof import('element-plus/es')['ElContainer'];
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker'];
     ElDivider: typeof import('element-plus/es')['ElDivider'];
     ElEmpty: typeof import('element-plus/es')['ElEmpty'];
+    ElHeader: typeof import('element-plus/es')['ElHeader'];
     ElInput: typeof import('element-plus/es')['ElInput'];
     ElLink: typeof import('element-plus/es')['ElLink'];
+    ElMain: typeof import('element-plus/es')['ElMain'];
+    ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
+    Github: typeof import('./src/components/Svg/Github.vue')['default'];
     Header: typeof import('./src/components/Header.vue')['default'];
+    HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
     RouterLink: typeof import('vue-router')['RouterLink'];
