@@ -30,6 +30,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+      include: [/\.vue/],
+      dirs: 'src/components',
+      dts: 'components.d.ts',
     }),
   ],
   resolve: {
