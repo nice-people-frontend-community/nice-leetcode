@@ -2,6 +2,11 @@
   <div class="daily-box">
     <div class="l-box">
       <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
+      <div class="sort">
+        <ElSelect v-model="sortFlag" @change="changeSort">
+          <ElOption v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value"></ElOption>
+        </ElSelect>
+      </div>
       <el-scrollbar class="user-list" v-if="showUsers.length > 0" ref="scrollbarRef">
         <div
           class="user"
@@ -75,6 +80,35 @@ const userName = ref('');
 /** 是否在加载中 */
 const loading = ref(false);
 
+// region 排序逻辑
+const sortOptions = [
+  {
+    label: '力扣ID顺序',
+    value: 'lcId',
+  },
+  {
+    label: '力扣ID倒序',
+    value: 'lcIdDesc',
+  },
+];
+const sortFlag = ref('lcId');
+const changeSort = (value: string) => {
+  // TODO: 别的排序方法
+  showUsers.value.sort((a, b) => {
+    const userIdA: string = a.userId;
+    const userIdB: string = b.userId;
+    const minLen: number = Math.min(userIdA.length, userIdB.length);
+    for (let i = 0; i < minLen; i++) {
+      const charA = userIdA.toLowerCase().charCodeAt(i);
+      const charB = userIdB.toLowerCase().charCodeAt(i);
+      if (charA === charB) continue;
+      return value === 'lcId' ? charA - charB : charB - charA;
+    }
+    return 1;
+  });
+};
+// endregion
+
 const route = useRoute();
 const router = useRouter();
 watch(
@@ -92,6 +126,19 @@ const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
 const getUserList = async () => {
   try {
     const data: IUser[] = (await axios.get(`/data/common/user.json?v=${Date.now()}`)).data;
+    // 初始根据力扣ID排序
+    data.sort((a, b) => {
+      const userIdA: string = a.userId;
+      const userIdB: string = b.userId;
+      const minLen: number = Math.min(userIdA.length, userIdB.length);
+      for (let i = 0; i < minLen; i++) {
+        const charA = userIdA.toLowerCase().charCodeAt(i);
+        const charB = userIdB.toLowerCase().charCodeAt(i);
+        if (charA === charB) continue;
+        return charA - charB;
+      }
+      return 1;
+    });
     showUsers.value = data;
     allUsers = data;
     if (data.length === 0) return;
@@ -203,6 +250,13 @@ const getWeekDay = (date: string) => {
     .c-input {
       width: 80%;
       margin: 10px 0;
+    }
+
+    .sort {
+      width: 80%;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dcdfe6;
     }
 
     .user-list {
