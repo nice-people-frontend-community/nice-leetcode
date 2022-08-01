@@ -1,11 +1,13 @@
 <template>
   <div class="daily-box">
     <div class="l-box">
-      <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
-      <div class="sort">
-        <ElSelect v-model="sortFlag" @change="changeSort">
-          <ElOption v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value"></ElOption>
-        </ElSelect>
+      <div class="search-sort">
+        <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
+        <div class="sort">
+          <ElSelect v-model="sortFlag" @change="changeSort">
+            <ElOption v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value"></ElOption>
+          </ElSelect>
+        </div>
       </div>
       <el-scrollbar class="user-list" v-if="showUsers.length > 0" ref="scrollbarRef">
         <div
@@ -36,18 +38,29 @@
           </el-link>
         </h2>
       </div>
-      <span class="d-time">更新于: {{ userArchivesData?.updatedAt }}</span>
+      <span class="d-time">更新于: {{ formatUpdateAt }}</span>
       <el-scrollbar class="r-scroll">
         <div v-for="(log, index) in userArchivesData?.logs" :key="index">
-          <el-divider content-position="left" v-if="new Date(log.date).getDay() === 0 || index === 0"
-            ><span class="c-bold">{{ getWeekName(log.date) }}</span>
-          </el-divider>
-          <p>## {{ log.date }}({{ getWeekDay(log.date) }})</p>
-          <p>新题({{ log.questionIds.length }}): {{ log.questionIds.length > 0 ? log.questionIds.join('') : '无' }}</p>
-          <p>
-            复习({{ log.reviewQuestionIds ? log.reviewQuestionIds.length : 0 }}):
-            {{ log.reviewQuestionIds && log.reviewQuestionIds.length > 0 ? log.reviewQuestionIds.join('') : '无' }}
-          </p>
+          <template v-if="new Date(log.date).getDay() === 0 || index === 0">
+            <el-divider content-position="left">
+              <span class="c-bold">{{ getWeekName(log.date) }}</span>
+            </el-divider>
+            <div class="table-head">
+              <div class="row-item col-date">日期</div>
+              <div class="row-item col-no">新题</div>
+              <div class="row-item col-no">复习</div>
+            </div>
+          </template>
+          <div class="table-row">
+            <div class="row-item col-date">{{ log.date }}({{ getWeekDay(log.date) }})</div>
+            <div class="row-item col-no">
+              ({{ log.questionIds.length }}): {{ log.questionIds.length > 0 ? log.questionIds.join('') : '无' }}
+            </div>
+            <div class="row-item col-no">
+              ({{ log.reviewQuestionIds ? log.reviewQuestionIds.length : 0 }}):
+              {{ log.reviewQuestionIds && log.reviewQuestionIds.length > 0 ? log.reviewQuestionIds.join('') : '无' }}
+            </div>
+          </div>
         </div>
       </el-scrollbar>
     </div>
@@ -73,6 +86,11 @@ const selectUserId = ref('');
 
 /**当前某人的打卡记录 */
 const userArchivesData = ref<IArchivesLog>();
+
+// 格式化更新时间
+const formatUpdateAt = computed(() => {
+  return dayjs(userArchivesData.value?.updatedAt).format('YYYY-MM-DD hh:mm:ss');
+});
 
 /**根据用户昵称模糊搜索 */
 const userName = ref('');
@@ -228,8 +246,8 @@ const getWeekName = (date: string) => {
 };
 // 获取某个日期是周几
 const getWeekDay = (date: string) => {
-  const datelist = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  return datelist[new Date(date).getDay()];
+  const dateList = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  return dateList[new Date(date).getDay()];
 };
 </script>
 
@@ -247,16 +265,21 @@ const getWeekDay = (date: string) => {
     align-items: flex-end;
     width: 40%;
 
-    .c-input {
+    .search-sort {
+      display: flex;
+      justify-content: center;
       width: 80%;
       margin: 10px 0;
-    }
-
-    .sort {
-      width: 80%;
-      margin-bottom: 10px;
       padding-bottom: 10px;
       border-bottom: 1px solid #dcdfe6;
+
+      .c-input {
+        flex: 70%;
+      }
+
+      .sort {
+        flex: 30%;
+      }
     }
 
     .user-list {
@@ -320,6 +343,40 @@ const getWeekDay = (date: string) => {
     .c-bold {
       font-size: 16px;
       font-weight: bold;
+    }
+
+    .table-head {
+      display: flex;
+      width: 98%;
+      height: 50px;
+      background-color: #f5f7fa;
+    }
+
+    .table-row {
+      display: flex;
+      width: 98%;
+      min-height: 50px;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: rgb(46 50 56 / 5%);
+      }
+    }
+
+    .row-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #dcdfe6;
+      text-align: center;
+    }
+
+    .col-date {
+      flex: 20%;
+    }
+
+    .col-no {
+      flex: 40%;
     }
   }
 }
