@@ -2,12 +2,18 @@
   <div class="daily-box">
     <div class="l-box">
       <div class="search-sort">
-        <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
-        <div class="sort">
-          <ElSelect v-model="sortFlag" @change="changeSort">
-            <ElOption v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value"></ElOption>
-          </ElSelect>
-        </div>
+        <el-input placeholder="请输入用户昵称或用户id" v-model="userName" clearable>
+          <template #append>
+            <ElSelect style="width: 120px" v-model="sortFlag" @change="changeSort">
+              <ElOption
+                v-for="item in sortOptions"
+                :key="item.label"
+                :label="item.label"
+                :value="item.value"
+              ></ElOption>
+            </ElSelect>
+          </template>
+        </el-input>
       </div>
       <el-scrollbar class="user-list" v-if="showUsers.length > 0" ref="scrollbarRef">
         <div
@@ -271,15 +277,6 @@ const getWeekDay = (date: string) => {
       width: 80%;
       margin: 10px 0;
       padding-bottom: 10px;
-      border-bottom: 1px solid #dcdfe6;
-
-      .c-input {
-        flex: 70%;
-      }
-
-      .sort {
-        flex: 30%;
-      }
     }
 
     .user-list {
