@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "node bin/preinstall.mjs",
     "prepare": "husky install",
-    "docs:dev": "vite",
+    "docs:dev": "vite --open",
     "docs:build": "vue-tsc --noEmit && vite build",
     "postdocs:build": "eslint components.d.ts auto-imports.d.ts --fix && git add components.d.ts auto-imports.d.ts",
     "docs:preview": "vite preview",

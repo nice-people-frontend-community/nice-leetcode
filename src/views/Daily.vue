@@ -1,7 +1,15 @@
 <template>
   <div class="daily-box">
     <div class="l-box">
-      <el-input class="c-input" placeholder="请输入用户昵称或用户id" v-model="userName" clearable />
+      <div class="search-sort">
+        <el-input placeholder="请输入用户昵称或用户id" v-model="userName" clearable>
+          <template #append>
+            <el-select style="width: 120px" v-model="sortFlag" @change="changeSort">
+              <el-option v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value" />
+            </el-select>
+          </template>
+        </el-input>
+      </div>
       <el-scrollbar class="user-list" v-if="showUsers.length > 0" ref="scrollbarRef">
         <div
           class="user"
@@ -31,22 +39,32 @@
           </el-link>
         </h2>
       </div>
-      <span class="d-time">更新于: {{ userArchivesData?.updatedAt }}</span>
+      <span class="d-time">更新于: {{ formatUpdateAt }}</span>
       <el-scrollbar class="r-scroll">
         <div v-for="(log, index) in userArchivesData?.logs" :key="index">
-          <el-divider content-position="left" v-if="new Date(log.date).getDay() === 0 || index === 0"
-            ><span class="c-bold">{{ getWeekName(log.date) }}</span>
-          </el-divider>
-          <p>## {{ log.date }}({{ getWeekDay(log.date) }})</p>
-          <p>新题({{ log.questionIds.length }}): {{ log.questionIds.length > 0 ? log.questionIds.join('') : '无' }}</p>
-          <p>
-            复习({{ log.reviewQuestionIds ? log.reviewQuestionIds.length : 0 }}):
-            {{ log.reviewQuestionIds && log.reviewQuestionIds.length > 0 ? log.reviewQuestionIds.join('') : '无' }}
-          </p>
+          <template v-if="new Date(log.date).getDay() === 0 || index === 0">
+            <el-divider content-position="left">
+              <span class="c-bold">{{ getWeekName(log.date) }}</span>
+            </el-divider>
+            <div class="table-head">
+              <div class="row-item col-date">日期</div>
+              <div class="row-item col-no">新题</div>
+              <div class="row-item col-no">复习</div>
+            </div>
+          </template>
+          <div class="table-row">
+            <div class="row-item col-date">{{ log.date }}({{ getWeekDay(log.date) }})</div>
+            <div class="row-item col-no">
+              ({{ log.questionIds.length }}): {{ log.questionIds.length > 0 ? log.questionIds.join('') : '无' }}
+            </div>
+            <div class="row-item col-no">
+              ({{ log.reviewQuestionIds ? log.reviewQuestionIds.length : 0 }}):
+              {{ log.reviewQuestionIds && log.reviewQuestionIds.length > 0 ? log.reviewQuestionIds.join('') : '无' }}
+            </div>
+          </div>
         </div>
       </el-scrollbar>
     </div>
-
     <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length === 0" />
   </div>
 </template>
@@ -69,11 +87,45 @@ const selectUserId = ref('');
 /**当前某人的打卡记录 */
 const userArchivesData = ref<IArchivesLog>();
 
+// 格式化更新时间
+const formatUpdateAt = computed(() => {
+  return dayjs(userArchivesData.value?.updatedAt).format('YYYY-MM-DD hh:mm:ss');
+});
+
 /**根据用户昵称模糊搜索 */
 const userName = ref('');
 
 /** 是否在加载中 */
 const loading = ref(false);
+
+// region 排序逻辑
+const sortOptions = [
+  {
+    label: '力扣ID顺序',
+    value: 'lcId',
+  },
+  {
+    label: '力扣ID倒序',
+    value: 'lcIdDesc',
+  },
+];
+const sortFlag = ref('lcId');
+const changeSort = (value: string) => {
+  // TODO: 别的排序方法
+  showUsers.value.sort((a, b) => {
+    const userIdA: string = a.userId;
+    const userIdB: string = b.userId;
+    const minLen: number = Math.min(userIdA.length, userIdB.length);
+    for (let i = 0; i < minLen; i++) {
+      const charA = userIdA.toLowerCase().charCodeAt(i);
+      const charB = userIdB.toLowerCase().charCodeAt(i);
+      if (charA === charB) continue;
+      return value === 'lcId' ? charA - charB : charB - charA;
+    }
+    return 1;
+  });
+};
+// endregion
 
 const route = useRoute();
 const router = useRouter();
@@ -92,6 +144,19 @@ const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>();
 const getUserList = async () => {
   try {
     const data: IUser[] = (await axios.get(`/data/common/user.json?v=${Date.now()}`)).data;
+    // 初始根据力扣ID排序
+    data.sort((a, b) => {
+      const userIdA: string = a.userId;
+      const userIdB: string = b.userId;
+      const minLen: number = Math.min(userIdA.length, userIdB.length);
+      for (let i = 0; i < minLen; i++) {
+        const charA = userIdA.toLowerCase().charCodeAt(i);
+        const charB = userIdB.toLowerCase().charCodeAt(i);
+        if (charA === charB) continue;
+        return charA - charB;
+      }
+      return 1;
+    });
     showUsers.value = data;
     allUsers = data;
     if (data.length === 0) return;
@@ -181,8 +246,8 @@ const getWeekName = (date: string) => {
 };
 // 获取某个日期是周几
 const getWeekDay = (date: string) => {
-  const datelist = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  return datelist[new Date(date).getDay()];
+  const dateList = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  return dateList[new Date(date).getDay()];
 };
 </script>
 
@@ -200,9 +265,12 @@ const getWeekDay = (date: string) => {
     align-items: flex-end;
     width: 40%;
 
-    .c-input {
+    .search-sort {
+      display: flex;
+      justify-content: center;
       width: 80%;
       margin: 10px 0;
+      padding-bottom: 10px;
     }
 
     .user-list {
@@ -214,14 +282,22 @@ const getWeekDay = (date: string) => {
 
       .user {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding: 10px;
+        transition: all 0.3s;
         border-radius: 4px;
         cursor: pointer;
 
         &.active {
           background-color: rgb(64 158 255 / 10%);
           color: #409eff;
+        }
+
+        &:hover {
+          height: 40px;
+          background: rgb(46 50 56 / 5%);
+          font-size: 16px;
         }
 
         .user-name {
@@ -258,6 +334,41 @@ const getWeekDay = (date: string) => {
     .c-bold {
       font-size: 16px;
       font-weight: bold;
+    }
+
+    .table-head {
+      display: flex;
+      width: 98%;
+      height: 50px;
+      background-color: #f5f7fa;
+    }
+
+    .table-row {
+      display: flex;
+      width: 98%;
+      min-height: 50px;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: rgb(46 50 56 / 5%);
+        cursor: text;
+      }
+    }
+
+    .row-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #dcdfe6;
+      text-align: center;
+    }
+
+    .col-date {
+      flex: 20%;
+    }
+
+    .col-no {
+      flex: 40%;
     }
   }
 }

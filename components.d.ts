@@ -5,6 +5,7 @@ import '@vue/runtime-core';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CommonHeader: typeof import('./src/components/CommonHeader.vue')['default'];
     ElAlert: typeof import('element-plus/es')['ElAlert'];
     ElButton: typeof import('element-plus/es')['ElButton'];
     ElCard: typeof import('element-plus/es')['ElCard'];
@@ -18,9 +19,13 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput'];
     ElLink: typeof import('element-plus/es')['ElLink'];
     ElMain: typeof import('element-plus/es')['ElMain'];
+    ElOption: typeof import('element-plus/es')['ElOption'];
     ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
+    ElSelect: typeof import('element-plus/es')['ElSelect'];
     FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
+    Github: typeof import('./src/components/svg/Github.vue')['default'];
+    HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
     RouterLink: typeof import('vue-router')['RouterLink'];
