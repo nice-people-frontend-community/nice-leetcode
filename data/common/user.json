@@ -652,7 +652,8 @@
   },
   {
     "userName": "补题补题越补越多",
-    "userId": "wenzhoullq"
+    "userId": "wenzhoullq",
+    "lcus": true
   },
   {
     "userName": "小立由哟",
@@ -689,5 +690,15 @@
   {
     "userName": "博弈论",
     "userId": "tangzhenyu"
+  },
+  {
+    "userName": "补题补题越补越多",
+    "userId": "wenzhoullq",
+    "lcus": true
+  },
+  {
+    "userName": "补题补题越补越多",
+    "userId": "wenzhoullq",
+    "lcus": true
   }
 ]
