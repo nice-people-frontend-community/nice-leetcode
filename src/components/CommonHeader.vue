@@ -1,14 +1,12 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="header">
     <div class="title">
       <img class="logo" src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="leetcode" srcset="" />
       <i>Nice-Leetcode</i>
     </div>
-    <HeaderMenu></HeaderMenu>
+    <header-menu />
     <a href="https://github.com/nice-people-frontend-community/nice-leetcode">
-      <Github></Github>
+      <github />
     </a>
   </div>
 </template>

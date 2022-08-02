@@ -4,14 +4,9 @@
       <div class="search-sort">
         <el-input placeholder="请输入用户昵称或用户id" v-model="userName" clearable>
           <template #append>
-            <ElSelect style="width: 120px" v-model="sortFlag" @change="changeSort">
-              <ElOption
-                v-for="item in sortOptions"
-                :key="item.label"
-                :label="item.label"
-                :value="item.value"
-              ></ElOption>
-            </ElSelect>
+            <el-select style="width: 120px" v-model="sortFlag" @change="changeSort">
+              <el-option v-for="item in sortOptions" :key="item.label" :label="item.label" :value="item.value" />
+            </el-select>
           </template>
         </el-input>
       </div>
@@ -70,7 +65,6 @@
         </div>
       </el-scrollbar>
     </div>
-
     <el-empty class="emptyBox" description="暂无匹配的数据" v-if="showUsers.length === 0" />
   </div>
 </template>
@@ -357,6 +351,7 @@ const getWeekDay = (date: string) => {
 
       &:hover {
         background-color: rgb(46 50 56 / 5%);
+        cursor: text;
       }
     }
 
