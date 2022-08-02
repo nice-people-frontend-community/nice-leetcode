@@ -2,6 +2,7 @@
   "globals": {
     "AxiosError": true,
     "EffectScope": true,
+    "ElLoading": true,
     "ElMessage": true,
     "asyncComputed": true,
     "autoResetRef": true,
