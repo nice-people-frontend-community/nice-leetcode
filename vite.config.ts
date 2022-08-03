@@ -46,5 +46,4 @@ export default defineConfig({
     outDir: 'docs',
     reportCompressedSize: false,
   },
-  publicDir: 'data',
 });
