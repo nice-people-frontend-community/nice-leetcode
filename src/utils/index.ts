@@ -17,11 +17,16 @@ export const getUserHomepage = (user: IUser): string => {
 export const DATE_FORMAT_STRING = 'YYYY-MM-DD';
 
 /***
+ * 七日毫秒时
+ */
+const SEVEN_DAY_MILLISECONDS = 604800000;
+
+/***
  * 年月日格式化字符串
  */
 export function getToday(format = DATE_FORMAT_STRING, backTime = 0) {
   if (backTime) {
-    return dayjs(new Date().getTime() + backTime * 604800000).format(format);
+    return dayjs(new Date().getTime() + backTime * SEVEN_DAY_MILLISECONDS).format(format);
   }
   return dayjs().format(format);
 }
