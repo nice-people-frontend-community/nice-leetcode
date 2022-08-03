@@ -23,6 +23,8 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSelect: typeof import('element-plus/es')['ElSelect'];
+    ElTable: typeof import('element-plus/es')['ElTable'];
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
     FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
     Github: typeof import('./src/components/svg/Github.vue')['default'];
     HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];

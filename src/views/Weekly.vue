@@ -1,101 +1,204 @@
 <template>
   <div class="weekly">
     <rule-alert />
-    <div class="markdown-body" v-html="weekFileContent" ref="mdBody" />
+    <div class="control-wrap">
+      <el-button id="copy-table-btn" @click="copyTable" size="small" type="primary" plain>复制表格</el-button>
+      <el-button @click="takePicture" size="small" type="primary" plain>另存图片</el-button>
+      <el-button @click="showOrHideLazyMan" size="small" type="primary" plain>
+        {{ isShowLazyMan ? '隐藏懒人' : '显示懒人' }}
+      </el-button>
+    </div>
+    <div class="markdown-body" ref="weeklyTableRef">
+      <h1>{{ weekRollupFileName }}周报</h1>
+      <blockquote style="display: flex; align-content: center; justify-content: space-between">
+        更新于: {{ time }}
+        <el-select v-model="currentWeek" class="m-2" placeholder="选择周" size="small">
+          <el-option v-for="item in weekLable" :key="item?.value" :label="item?.label" :value="item?.value || 0" />
+        </el-select>
+      </blockquote>
+      <el-table
+        :data="weeklyData.records.filter((i) => isShowLazyMan || i?.newQuestionsTotal !== 0)"
+        :row-class-name="tableRowClassName"
+        border
+        style="width: 100%"
+      >
+        <template v-for="{ key, label } in labelData.lable" :key="key">
+          <el-table-column v-if="key === 'userId'" :label="label">
+            <template #default="scope">
+              <el-link :href="scope.row.homepage" :underline="false" target="_blank" type="primary">{{
+                scope.row.userId
+              }}</el-link>
+            </template>
+          </el-table-column>
+          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key"></el-table-column>
+          <el-table-column v-else :label="label">
+            <template #default="scope">
+              <div>{{ scope.row.weekly[scope.cellIndex - 2] }}</div>
+            </template>
+          </el-table-column>
+        </template>
+      </el-table>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import clipboardJs from 'clipboard';
 import domToImage from 'dom-to-image';
-import { getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
-import { markdownRender } from '@/utils/markdown';
+import { getISOWeekNumber, getToday, getWeekStartAndEnd, DATE_FORMAT_STRING } from '@/utils';
 
-// 获取当前日期
-const queryDate = getToday();
-// 当前日所在的ISO周数
-const dateList = getWeekStartAndEnd(queryDate);
+interface PersonRecord {
+  userId: string;
+  userName: string;
+  homepage: string;
+  ranking: number;
+  newQuestionsTotal: number;
+  weekly: string[];
+}
+
+interface WeeklyData {
+  title?: string;
+  updatedAt?: string;
+  weekly?: string[];
+  records: (PersonRecord | null)[];
+}
+interface Label {
+  label: string;
+  key: string;
+}
+interface WeekLable {
+  label: string;
+  value: number;
+}
+
+const labelTemplete = [
+  {
+    label: '用户名',
+    key: 'userName',
+  },
+  {
+    label: '力扣',
+    key: 'userId',
+  },
+  {
+    label: '总计',
+    key: 'newQuestionsTotal',
+  },
+  {
+    label: '排名',
+    key: 'ranking',
+  },
+];
+
+const isShowLazyMan = ref(true);
+
+const currentWeek = ref(0);
+const queryDate = ref(getToday());
+
+watch(currentWeek, () => {
+  initData();
+});
 
 // 判断本周属于哪个年度，以当前周四所在的年份为准
 // 周汇总的文件名称
-const weekRollupFileName = `${new Date(dateList[3]).getFullYear()}年第${getISOWeekNumber(queryDate)}周(${dateList[0]}_${
-  dateList[dateList.length - 1]
-})`;
+const weekRollupFileName = ref('');
+const updateWeekRollupFileName = () => {
+  // 获取当前日期
+  // 当前日所在的ISO周数
+  const dateList = getWeekStartAndEnd(queryDate.value);
+  weekRollupFileName.value = `${new Date(dateList[3]).getFullYear()}年第${getISOWeekNumber(queryDate.value)}周(${
+    dateList[0]
+  }_${dateList[dateList.length - 1]})`;
+};
+updateWeekRollupFileName();
 
-const weekFileContent = ref('');
-const queryWeekRollup = () => {
-  weekFileContent.value = '查询中...';
-  axios.get(`/data/weeks/${weekRollupFileName}.md?v=${+new Date()}`).then(({ data }) => {
-    weekFileContent.value = markdownRender(data);
-    nextTick(() => {
-      let blockquote: HTMLQuoteElement | null = document.getElementsByTagName('blockquote')[0];
-      const text = blockquote.innerText;
-      const time = dayjs(text.slice(5, 30));
-      blockquote.innerText = `更新于: ${time.format('YYYY-MM-DD HH:mm:ss')}`;
+const weeklyData: WeeklyData = reactive({ records: [] } as WeeklyData);
 
-      blockquote = null;
-      // 控制台打印前5
-      if (time.day() === 0 && time.hour() === 22 ? time.minute() >= 50 : time.hour() > 22) {
-        // TODO: 需要保证数据一致性
+const showOrHideLazyMan = () => (isShowLazyMan.value = !isShowLazyMan.value);
+
+const time = ref('');
+
+const labelData: { lable: Label[] } = reactive({ lable: [] });
+
+const weeklyTableRef = ref();
+
+const initData = async () => {
+  queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
+  updateWeekRollupFileName();
+  fetch(`/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
+    .then((res) => res.json())
+    .then((res: WeeklyData) => {
+      Object.assign(weeklyData, res);
+      const day = dayjs(weeklyData.updatedAt);
+      time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
+      labelData.lable = labelTemplete.slice(0);
+      const concatLabel = weeklyData.weekly?.map((e, index) => ({ label: e, key: index }));
+
+      concatLabel?.length ? labelData.lable.splice(2, 0, ...(concatLabel as any)) : labelData.lable.splice(2, 0);
+
+      if (day.day() === 0 && day.hour() === 22 ? day.minute() >= 50 : day.hour() > 22) {
         buildSendMessage();
       }
-
-      // 调整 h1 标签居中
-      const h1 = document.querySelector('.markdown-body h1');
-      if (h1) {
-        const divNode = document.createElement('div');
-        divNode.style.cssText = 'display:flex;justify-content:center;';
-        divNode.appendChild(h1.cloneNode(true));
-        document.querySelector('.markdown-body')?.insertBefore(divNode, h1);
-        document.querySelector('.markdown-body')?.removeChild(h1);
-      }
-
-      // 追加操作按钮
-      const buttonGroupNode = document.createElement('div');
-      buttonGroupNode.innerHTML = `<button id='copyTableBtn'>复制表格</button><button id='downloadTableBtn' style='margin-left:8px'>另存成图片</button>`;
-      const blockquoteNode = document.querySelector('.markdown-body blockquote');
-      blockquoteNode?.setAttribute('style', 'display:flex;align-content:center;justify-content:space-between;');
-      blockquoteNode?.append(buttonGroupNode);
-
-      // ===== 复制表格 =====
-      const table = document.querySelector('.markdown-body table');
-      if (table) {
-        const clipboard = new clipboardJs('#copyTableBtn', {
-          target: () => table,
-        });
-        clipboard.on('success', function (e) {
-          e.clearSelection();
-          ElMessage.success('复制成功');
-        });
-        clipboard.on('error', function () {
-          ElMessage.success('复制失败');
-        });
-      }
-
-      // ===== dom 生成图片 =====
-      const node: Node | null = document.querySelector('.markdown-body');
-      document.querySelector('.markdown-body #downloadTableBtn')?.addEventListener('click', () => {
-        node &&
-          domToImage
-            .toPng(node, {
-              style: {
-                background: '#fff',
-              },
-            })
-            .then((dataUrl: string) => {
-              const link = document.createElement('a');
-              link.download = `${weekRollupFileName}.png`;
-              link.href = dataUrl;
-              link.click();
-            });
-      });
+      console.log(labelData, weeklyData);
     });
+};
+initData();
+
+const weekControl = () => {
+  const weeksLable: (WeekLable | null)[] = [];
+  for (let i = getISOWeekNumber(queryDate.value), curweek = i; i >= 19; i--) {
+    weeksLable.push({
+      label: `${i}周`,
+      value: i - curweek,
+    });
+  }
+  return weeksLable;
+};
+
+const weekLable = weekControl();
+
+const tableRowClassName = ({ row }: { row: PersonRecord }) => {
+  if (row.ranking <= 5) {
+    return `row_top--${row.ranking}`;
+  } else if (row.newQuestionsTotal === 0) {
+    return 'row_lazy';
+  }
+  return '';
+};
+
+const notNumber = (data: number | string) => typeof data !== 'number';
+
+const copyTable = () => {
+  if (!weeklyTableRef.value) return;
+  const clipboard = new clipboardJs('#copy-table-btn', {
+    target: () => weeklyTableRef.value,
+  });
+  clipboard.on('success', function (e) {
+    e.clearSelection();
+    ElMessage.success('复制成功');
+  });
+  clipboard.on('error', function () {
+    ElMessage.success('复制失败');
   });
 };
-queryWeekRollup();
+
+const takePicture = () => {
+  if (!weeklyTableRef.value) return;
+  domToImage
+    .toPng(weeklyTableRef.value, {
+      style: {
+        background: '#fff',
+      },
+    })
+    .then((dataUrl: string) => {
+      const link = document.createElement('a');
+      link.download = `${weekRollupFileName.value}.png`;
+      link.href = dataUrl;
+      link.click();
+    });
+};
 
 function buildSendMessage() {
-  const trDomList = document.querySelector('.markdown-body table tbody')?.querySelectorAll('tr');
   const persons = [];
   // Top5 的总人数
   let top5UserTotal = 0;
@@ -109,20 +212,19 @@ function buildSendMessage() {
     users: [],
     questionCount: 0,
   }));
-  if (!trDomList?.length) return;
-  for (let i = 0; i < trDomList.length; i++) {
-    const $tr = trDomList[i];
-    if (!$tr) return;
-    const userName = $tr.querySelector('td:nth-child(1)')?.innerHTML;
-    const day1 = $tr.querySelector('td:nth-child(3)')?.innerHTML;
-    const day2 = $tr.querySelector('td:nth-child(4)')?.innerHTML;
-    const day3 = $tr.querySelector('td:nth-child(5)')?.innerHTML;
-    const day4 = $tr.querySelector('td:nth-child(6)')?.innerHTML;
-    const day5 = $tr.querySelector('td:nth-child(7)')?.innerHTML;
-    const day6 = $tr.querySelector('td:nth-child(8)')?.innerHTML;
-    const day7 = $tr.querySelector('td:nth-child(9)')?.innerHTML;
-    const questionCount = +($tr.querySelector('td:nth-last-child(2)')?.innerHTML || '');
-    const ranking = +($tr.querySelector('td:nth-last-child(1)')?.innerHTML || '');
+  if (!weeklyData.records?.length) return;
+  for (let i = 0; i < weeklyData.records.length; i++) {
+    const record = weeklyData.records[i];
+    const userName = record?.userName;
+    const day1 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day2 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day3 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day4 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day5 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day6 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day7 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const questionCount = record?.newQuestionsTotal || 0;
+    const ranking = record?.ranking;
 
     const fullAttendance = !!day1 && !!day2 && !!day3 && !!day4 && !!day5 && !!day6 && !!day7;
     if (questionCount >= 14 || fullAttendance) {
@@ -134,7 +236,7 @@ function buildSendMessage() {
     }
 
     // 记录top5人员
-    if (ranking <= 5) {
+    if (ranking && ranking <= 5) {
       top5UserTotal += 1;
       top5[ranking - 1] = {
         users: [...top5[ranking - 1].users, userName],
@@ -170,28 +272,80 @@ function buildSendMessage() {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css');
-
 .weekly {
   width: 90%;
-  margin: 20px auto;
+  margin: 1em auto;
   text-align: left;
 }
 
-.markdown-body :deep(blockquote p) {
-  margin-bottom: 0;
+.control-wrap {
+  display: flex;
+  position: fixed;
+  z-index: 10001;
+  top: 50%;
+  right: 10px;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding: 10px 5px;
+  transform: translate(0, -50%);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 1px 0 8px 0 #e6e6e6;
+  text-align: center;
 }
 
-.markdown-body :deep(table) {
-  display: table;
+.markdown-body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 
-  thead th {
-    width: 200px;
-
-    &:nth-last-child(1),
-    &:nth-last-child(2) {
-      width: 80px;
-    }
+  h1 {
+    margin: 0;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #eaecef;
+    white-space: nowrap;
   }
+}
+
+blockquote {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1em 0;
+  padding: 0 1em;
+  border-left: 0.25em solid #dfe2e5;
+  color: #6a737d;
+}
+
+.el-table {
+  /* stylelint-disable */
+  :deep(.row_top--1) {
+    background-color: var(--el-color-success-light-3);
+  }
+
+  :deep(.row_top--2) {
+    background-color: var(--el-color-success-light-5);
+  }
+
+  :deep(.row_top--3) {
+    background-color: var(--el-color-success-light-7);
+  }
+
+  :deep(.row_top--4) {
+    background-color: var(--el-color-success-light-8);
+  }
+
+  :deep(.row_top--5) {
+    background-color: var(--el-color-success-light-9);
+  }
+
+  :deep(.row_lazy) {
+    background-color: var(--el-color-warning-light-5);
+  }
+}
+
+.el-button {
+  margin: 0.5em 0;
 }
 </style>
