@@ -1,0 +1,2447 @@
+{
+  "title": "2022年第30周(2022-07-25_2022-07-31) 周报",
+  "weekly": [
+    "2022-07-25",
+    "2022-07-26",
+    "2022-07-27",
+    "2022-07-28",
+    "2022-07-29",
+    "2022-07-30",
+    "2022-07-31"
+  ],
+  "updatedAt": "2022-07-27T23:25:13+08:00",
+  "records": [
+    {
+      "userId": "dreamjean720",
+      "userName": "悠悠茶蘼",
+      "homepage": "https://leetcode.cn/u/dreamjean720/",
+      "weekly": [
+        "[201][300][139][91][413][322][919][583][1143][673][34][785]",
+        "[1376][802][1206][847][1129][343][202][1466][384][72][149][1306]",
+        "[236][704][592][127][852][35][374][433][752][365]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 34,
+      "ranking": 1
+    },
+    {
+      "userId": "bao-zhen",
+      "userName": "抱枕",
+      "homepage": "https://leetcode.cn/u/bao-zhen/",
+      "weekly": [
+        "[144][637][145][94][31][1008][106]",
+        "[3][8][30][72][剑指 Offer 32 - I][309]",
+        "[141]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 14,
+      "ranking": 2
+    },
+    {
+      "userId": "jbwang-to-zju",
+      "userName": "二不贰",
+      "homepage": "https://leetcode.cn/u/jbwang-to-zju/",
+      "weekly": [
+        "[209][46][59][904][47][332]",
+        "[707][203][51][206]",
+        "[746][70][509]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 13,
+      "ranking": 3
+    },
+    {
+      "userId": "sishenhei7",
+      "userName": "杨舟",
+      "homepage": "https://leetcode.cn/u/sishenhei7/",
+      "weekly": [
+        "[919][剑指 Offer 21][剑指 Offer 26]",
+        "[剑指 Offer 25][剑指 Offer 24][1206]",
+        "[592]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 7,
+      "ranking": 4
+    },
+    {
+      "userId": "younglina",
+      "userName": "哈哈哈嗯",
+      "homepage": "https://leetcode.cn/u/younglina/",
+      "weekly": [
+        "[701][919]",
+        "[1206][865][863][889]",
+        "[592]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 7,
+      "ranking": 4
+    },
+    {
+      "userId": "lcls",
+      "userName": "凉蝉",
+      "homepage": "https://leetcode.cn/u/lcls/",
+      "weekly": [
+        "[剑指 Offer 29][剑指 Offer 27][946]",
+        "[54][剑指 Offer 32 - II]",
+        "[剑指 Offer 39][剑指 Offer 32 - III]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 7,
+      "ranking": 4
+    },
+    {
+      "userId": "xiao-shi-xian",
+      "userName": "鱼乐",
+      "homepage": "https://leetcode.cn/u/xiao-shi-xian/",
+      "weekly": [
+        "[28][500][496][594][575]",
+        "[599][645]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 7,
+      "ranking": 4
+    },
+    {
+      "userId": "huang054",
+      "userName": "逍遥叹",
+      "homepage": "https://leetcode.cn/u/huang054/",
+      "weekly": [
+        "[919]",
+        "[1206][2353]",
+        "[592][2183][189]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 6,
+      "ranking": 5
+    },
+    {
+      "userId": "endlesskiller",
+      "userName": "白色闪光",
+      "homepage": "https://leetcode.cn/u/endlesskiller/",
+      "weekly": [
+        "[697][53]",
+        "[136][228]",
+        "[283][121]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 6,
+      "ranking": 5
+    },
+    {
+      "userId": "clever-vvilsoneye",
+      "userName": "아이유-意优",
+      "homepage": "https://leetcode.cn/u/clever-vvilsoneye/",
+      "weekly": [
+        "[139]",
+        "[221][240]",
+        "[4][84]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 5,
+      "ranking": 6
+    },
+    {
+      "userId": "fei-wu-o",
+      "userName": "废物竟是我自己",
+      "homepage": "https://leetcode.cn/u/fei-wu-o/",
+      "weekly": [
+        "",
+        "",
+        "[509][70][746][62][63]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 5,
+      "ranking": 6
+    },
+    {
+      "userId": "HZwZNJLAn0",
+      "userName": "Echo",
+      "homepage": "https://leetcode.cn/u/HZwZNJLAn0/",
+      "weekly": [
+        "[179][134][280]",
+        "[91][63]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 5,
+      "ranking": 6
+    },
+    {
+      "userId": "asyncguo",
+      "userName": "Async",
+      "homepage": "https://leetcode.cn/u/asyncguo/",
+      "weekly": [
+        "[18][15]",
+        "[剑指 Offer 05][541][344]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 5,
+      "ranking": 6
+    },
+    {
+      "userId": "mystifying-blackburn",
+      "userName": "moye",
+      "homepage": "https://leetcode.cn/u/mystifying-blackburn/",
+      "weekly": [
+        "[21][27]",
+        "[28]",
+        "[35][53]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 5,
+      "ranking": 6
+    },
+    {
+      "userId": "riding-shark",
+      "userName": "小🐟很想写代码",
+      "homepage": "https://leetcode.cn/u/riding-shark/",
+      "weekly": [
+        "[3]",
+        "[20][415][88]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 4,
+      "ranking": 7
+    },
+    {
+      "userId": "mutuyihao",
+      "userName": "mutu",
+      "homepage": "https://leetcode.cn/u/mutuyihao/",
+      "weekly": [
+        "[14]",
+        "[20]",
+        "[26][35]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 4,
+      "ranking": 7
+    },
+    {
+      "userId": "ly_qu",
+      "userName": "ly_qu",
+      "homepage": "https://leetcode.cn/u/ly_qu/",
+      "weekly": [
+        "",
+        "[27][344][283]",
+        "[5]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 4,
+      "ranking": 7
+    },
+    {
+      "userId": "miracles",
+      "userName": "你听得到",
+      "homepage": "https://leetcode.cn/u/miracles/",
+      "weekly": [
+        "[96][剑指 Offer II 054][95]",
+        "[1038]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 4,
+      "ranking": 7
+    },
+    {
+      "userId": "desirelearner-i",
+      "userName": "城南花已开",
+      "homepage": "https://leetcode.cn/u/desirelearner-i/",
+      "weekly": [
+        "[332]",
+        "[51][37]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "sloane_h",
+      "userName": "橙子",
+      "homepage": "https://leetcode.cn/u/sloane_h/",
+      "weekly": [
+        "",
+        "[145][94][144]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "yi-bi-huang-wu",
+      "userName": "一笔荒芜",
+      "homepage": "https://leetcode.cn/u/yi-bi-huang-wu/",
+      "weekly": [
+        "[219]",
+        "[3][389]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "sujianqingfeng",
+      "userName": "素笺",
+      "homepage": "https://leetcode.cn/u/sujianqingfeng/",
+      "weekly": [
+        "[67]",
+        "[415]",
+        "[43]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "sam-f",
+      "userName": "Sam",
+      "homepage": "https://leetcode.cn/u/sam-f/",
+      "weekly": [
+        "[258]",
+        "[404]",
+        "[643]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "qing-jiao-wo-leonali",
+      "userName": "Leona黎",
+      "homepage": "https://leetcode.cn/u/qing-jiao-wo-leonali/",
+      "weekly": [
+        "",
+        "",
+        "[1518][1464][1897]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "jaydon-2",
+      "userName": "Jaydon",
+      "homepage": "https://leetcode.cn/u/jaydon-2/",
+      "weekly": [
+        "[剑指 Offer 39][剑指 Offer 50]",
+        "[剑指 Offer 35]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "chao-xx-shen",
+      "userName": "＜ぅAD派大星＞",
+      "homepage": "https://leetcode.cn/u/chao-xx-shen/",
+      "weekly": [
+        "[485]",
+        "[628][495]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "nice-nightingaleqql",
+      "userName": "内存掠夺者",
+      "homepage": "https://leetcode.cn/u/nice-nightingaleqql/",
+      "weekly": [
+        "[94]",
+        "[55]",
+        "[21]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 3,
+      "ranking": 8
+    },
+    {
+      "userId": "lilychen",
+      "userName": "Chen",
+      "homepage": "https://leetcode.cn/u/lilychen/",
+      "weekly": [
+        "[LCP 07]",
+        "[84]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "flyingmylo",
+      "userName": "Mylo🐘",
+      "homepage": "https://leetcode.cn/u/flyingmylo/",
+      "weekly": [
+        "[374]",
+        "[35]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "XxxxXPENG",
+      "userName": "Lin255",
+      "homepage": "https://leetcode.cn/u/XxxxXPENG/",
+      "weekly": [
+        "[LCP 07]",
+        "[131]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "sneaken",
+      "userName": "凌晨3点半",
+      "homepage": "https://leetcode.cn/u/sneaken/",
+      "weekly": [
+        "[2236][LCP 44]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "motokui",
+      "userName": "普通上班族",
+      "homepage": "https://leetcode.cn/u/motokui/",
+      "weekly": [
+        "",
+        "[34]",
+        "[1704]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "pancake-q",
+      "userName": "Pancake",
+      "homepage": "https://leetcode.cn/u/pancake-q/",
+      "weekly": [
+        "",
+        "[717][706]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "lynne304",
+      "userName": "lynne",
+      "homepage": "https://leetcode.cn/u/lynne304/",
+      "weekly": [
+        "[121]",
+        "[56]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "zi-yi-wei-shi-de-yellow",
+      "userName": "好运来",
+      "homepage": "https://leetcode.cn/u/zi-yi-wei-shi-de-yellow/",
+      "weekly": [
+        "",
+        "[205][203]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "gooing",
+      "userName": "宇",
+      "homepage": "https://leetcode.cn/u/gooing/",
+      "weekly": [
+        "[919]",
+        "[1206]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "codingpitaya",
+      "userName": "Pitaya",
+      "homepage": "https://leetcode.cn/u/codingpitaya/",
+      "weekly": [
+        "[919]",
+        "[1206]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "shuai-ye",
+      "userName": "莫斯科没有眼泪",
+      "homepage": "https://leetcode.cn/u/shuai-ye/",
+      "weekly": [
+        "",
+        "[724][1480]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "jiang-feng-yu-huo-6",
+      "userName": "江枫渔火",
+      "homepage": "https://leetcode.cn/u/jiang-feng-yu-huo-6/",
+      "weekly": [
+        "[181][175]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "i2ecursing-germaintln",
+      "userName": "Ryker-",
+      "homepage": "https://leetcode.cn/u/i2ecursing-germaintln/",
+      "weekly": [
+        "[剑指 Offer 59 - I]",
+        "[剑指 Offer 32 - I]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "levery",
+      "userName": "simple",
+      "homepage": "https://leetcode.cn/u/levery/",
+      "weekly": [
+        "",
+        "[1071]",
+        "[442]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "bi0i68seaP",
+      "userName": "nrubd",
+      "homepage": "https://leetcode.cn/u/bi0i68seaP/",
+      "weekly": [
+        "",
+        "[144][94]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "pedantic-feynmanghl",
+      "userName": "Zooey",
+      "homepage": "https://leetcode.cn/u/pedantic-feynmanghl/",
+      "weekly": [
+        "",
+        "[2][19]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "leiqifan",
+      "userName": "vancats",
+      "homepage": "https://leetcode.cn/u/leiqifan/",
+      "weekly": [
+        "",
+        "[72][309]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "xiao-wan-zi-a-h",
+      "userName": "小婉子啊",
+      "homepage": "https://leetcode.cn/u/xiao-wan-zi-a-h/",
+      "weekly": [
+        "[1]",
+        "[20]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 2,
+      "ranking": 9
+    },
+    {
+      "userId": "crop-circle",
+      "userName": "Circle",
+      "homepage": "https://leetcode.cn/u/crop-circle/",
+      "weekly": [
+        "[647]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "hecate-d",
+      "userName": "阿源 Hecate",
+      "homepage": "https://leetcode.cn/u/hecate-d/",
+      "weekly": [
+        "",
+        "[20]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "ditang-hsp",
+      "userName": "Felix",
+      "homepage": "https://leetcode.cn/u/ditang-hsp/",
+      "weekly": [
+        "",
+        "",
+        "[46]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "fwy",
+      "userName": "FAN",
+      "homepage": "https://leetcode.cn/u/fwy/",
+      "weekly": [
+        "",
+        "[697]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "coderluojz",
+      "userName": "四下有夕",
+      "homepage": "https://leetcode.cn/u/coderluojz/",
+      "weekly": [
+        "[344]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "zhu-201",
+      "userName": "us",
+      "homepage": "https://leetcode.cn/u/zhu-201/",
+      "weekly": [
+        "[327]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "lance-jiangwei",
+      "userName": "姜维",
+      "homepage": "https://leetcode.cn/u/lance-jiangwei/",
+      "weekly": [
+        "[94]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "hikalu-z",
+      "userName": "HIKALU",
+      "homepage": "https://leetcode.cn/u/hikalu-z/",
+      "weekly": [
+        "[1]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "kuai-kuo-shui",
+      "userName": "会吐泡",
+      "homepage": "https://leetcode.cn/u/kuai-kuo-shui/",
+      "weekly": [
+        "",
+        "[704]",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "xiao-tie-jiang-zai-men-wai",
+      "userName": "小铁匠在门外",
+      "homepage": "https://leetcode.cn/u/xiao-tie-jiang-zai-men-wai/",
+      "weekly": [
+        "[209]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "heuristic-i3ooththn",
+      "userName": "藏",
+      "homepage": "https://leetcode.cn/u/heuristic-i3ooththn/",
+      "weekly": [
+        "",
+        "",
+        "[55]",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "jen-16",
+      "userName": "Jen",
+      "homepage": "https://leetcode.cn/u/jen-16/",
+      "weekly": [
+        "[50]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "lucid-vvozniak",
+      "userName": "Alina",
+      "homepage": "https://leetcode.cn/u/lucid-vvozniak/",
+      "weekly": [
+        "[58]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "kevin-13u",
+      "userName": "kevin",
+      "homepage": "https://leetcode.cn/u/kevin-13u/",
+      "weekly": [
+        "[129]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "friendly-merkleqra",
+      "userName": "growing",
+      "homepage": "https://leetcode.cn/u/friendly-merkleqra/",
+      "weekly": [
+        "[58]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "wang-dao-chang-ke-neng-hui-shuai-shou-ji",
+      "userName": "1376",
+      "homepage": "https://leetcode.cn/u/wang-dao-chang-ke-neng-hui-shuai-shou-ji/",
+      "weekly": [
+        "[13]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 1,
+      "ranking": 10
+    },
+    {
+      "userId": "lemon-chen-t",
+      "userName": "LemonChen",
+      "homepage": "https://leetcode.cn/u/lemon-chen-t/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "ni-hao-a-pai-da-xing",
+      "userName": "你好啊派大星",
+      "homepage": "https://leetcode.cn/u/ni-hao-a-pai-da-xing/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "tinyu",
+      "userName": "吹过的风",
+      "homepage": "https://leetcode.cn/u/tinyu/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "panxiaoan",
+      "userName": "P丶A",
+      "homepage": "https://leetcode.cn/u/panxiaoan/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "richard_zhang",
+      "userName": "枫叶",
+      "homepage": "https://leetcode.cn/u/richard_zhang/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "zhu-chen-zhi-meng",
+      "userName": "逐晨之梦",
+      "homepage": "https://leetcode.cn/u/zhu-chen-zhi-meng/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hai-de-si-nian-mian-yan-bu-j-a",
+      "userName": "〆、海的思念绵延不绝",
+      "homepage": "https://leetcode.cn/u/hai-de-si-nian-mian-yan-bu-j-a/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "wang-xi-fa",
+      "userName": "小帅",
+      "homepage": "https://leetcode.cn/u/wang-xi-fa/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "beareleven",
+      "userName": "Bear",
+      "homepage": "https://leetcode.cn/u/beareleven/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "mystifying-perlmanwjh",
+      "userName": "Q.H.Y",
+      "homepage": "https://leetcode.cn/u/mystifying-perlmanwjh/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lc-lqh1008",
+      "userName": "秃头王路飞",
+      "homepage": "https://leetcode.cn/u/lc-lqh1008/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "kpc314",
+      "userName": "柯芃丞",
+      "homepage": "https://leetcode.cn/u/kpc314/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "objective-7iskovx37",
+      "userName": "默海笑",
+      "homepage": "https://leetcode.cn/u/objective-7iskovx37/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "shu-sheng-i",
+      "userName": "书笙",
+      "homepage": "https://leetcode.cn/u/shu-sheng-i/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "yu-yi-fan-a",
+      "userName": "要努🌰",
+      "homepage": "https://leetcode.cn/u/yu-yi-fan-a/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "guming",
+      "userName": "wjm",
+      "homepage": "https://leetcode.cn/u/guming/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "tian-xia-jie-du",
+      "userName": "天下节度",
+      "homepage": "https://leetcode.cn/u/tian-xia-jie-du/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lxchuan12",
+      "userName": "若川",
+      "homepage": "https://leetcode.cn/u/lxchuan12/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "gelxgx",
+      "userName": "瘦虎",
+      "homepage": "https://leetcode.cn/u/gelxgx/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "super456",
+      "userName": "纵倾童鞋",
+      "homepage": "https://leetcode.cn/u/super456/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "Damon0820",
+      "userName": "养乐多",
+      "homepage": "https://leetcode.com/u/Damon0820/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "loringray",
+      "userName": "∠※ヱ",
+      "homepage": "https://leetcode.cn/u/loringray/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "it-smaba",
+      "userName": "Samba 🇨🇳",
+      "homepage": "https://leetcode.cn/u/it-smaba/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "vj97Nwwekr",
+      "userName": "😄😄",
+      "homepage": "https://leetcode.cn/u/vj97Nwwekr/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "forget-me-not",
+      "userName": "DragonPeng",
+      "homepage": "https://leetcode.cn/u/forget-me-not/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "jsonz1993",
+      "userName": "Jsonz",
+      "homepage": "https://leetcode.cn/u/jsonz1993/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "L99xlm9WfZ",
+      "userName": "dc",
+      "homepage": "https://leetcode.cn/u/L99xlm9WfZ/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hulk23",
+      "userName": "Haven",
+      "homepage": "https://leetcode.cn/u/hulk23/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "promiseyxy",
+      "userName": "promise",
+      "homepage": "https://leetcode.cn/u/promiseyxy/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "jiangbj",
+      "userName": "却念",
+      "homepage": "https://leetcode.cn/u/jiangbj/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "yi-dian-10",
+      "userName": "一点",
+      "homepage": "https://leetcode.cn/u/yi-dian-10/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "qingkong-agtonu4Kdi",
+      "userName": "晴空",
+      "homepage": "https://leetcode.cn/u/qingkong-agtonu4Kdi/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "zhangzhichao",
+      "userName": "007",
+      "homepage": "https://leetcode.cn/u/zhangzhichao/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "competent-elionn0e",
+      "userName": "nice",
+      "homepage": "https://leetcode.cn/u/competent-elionn0e/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "uFJ0Yl5SXS",
+      "userName": "-.-😁",
+      "homepage": "https://leetcode.cn/u/uFJ0Yl5SXS/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "daai093",
+      "userName": "千鸟",
+      "homepage": "https://leetcode.cn/u/daai093/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "heuristic-i3oumanbz2",
+      "userName": "七夜²⁰²²",
+      "homepage": "https://leetcode.cn/u/heuristic-i3oumanbz2/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "bian-tong-xue-o",
+      "userName": "边同学",
+      "homepage": "https://leetcode.cn/u/bian-tong-xue-o/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "puresky-",
+      "userName": "ysky-",
+      "homepage": "https://leetcode.cn/u/puresky-/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "letsshi-mu-yi-dai",
+      "userName": "千帆",
+      "homepage": "https://leetcode.cn/u/letsshi-mu-yi-dai/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lyx-12",
+      "userName": "Lyx",
+      "homepage": "https://leetcode.cn/u/lyx-12/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "you-36",
+      "userName": "You",
+      "homepage": "https://leetcode.cn/u/you-36/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "xiao-xiao-re",
+      "userName": "笑笑",
+      "homepage": "https://leetcode.cn/u/xiao-xiao-re/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "zyz-s",
+      "userName": "zyz💤",
+      "homepage": "https://leetcode.cn/u/zyz-s/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lili-1b",
+      "userName": "颅内蹦迪",
+      "homepage": "https://leetcode.cn/u/lili-1b/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hero-nf",
+      "userName": "hero",
+      "homepage": "https://leetcode.cn/u/hero-nf/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "1lo22ghai",
+      "userName": "大海",
+      "homepage": "https://leetcode.cn/u/1lo22ghai/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hao-gu-niang-guang-mang-mo-z-n",
+      "userName": "sunshinerxin",
+      "homepage": "https://leetcode.cn/u/hao-gu-niang-guang-mang-mo-z-n/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lin-zi-6o",
+      "userName": "林子",
+      "homepage": "https://leetcode.cn/u/lin-zi-6o/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "confident-shockleyyqg",
+      "userName": "半岛铁盒",
+      "homepage": "https://leetcode.cn/u/confident-shockleyyqg/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "smilejoker",
+      "userName": "。",
+      "homepage": "https://leetcode.cn/u/smilejoker/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "wei-wen-hua-ming-6u",
+      "userName": "cloudle",
+      "homepage": "https://leetcode.cn/u/wei-wen-hua-ming-6u/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hei-vk",
+      "userName": "limitless",
+      "homepage": "https://leetcode.cn/u/hei-vk/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "xinyw",
+      "userName": "光风",
+      "homepage": "https://leetcode.com/u/xinyw/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "xxxxxy-2",
+      "userName": "许愿有很多头发",
+      "homepage": "https://leetcode.cn/u/xxxxxy-2/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "g4V7o2v9P2",
+      "userName": "边边左轮💪",
+      "homepage": "https://leetcode.cn/u/g4V7o2v9P2/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "yu-yue-1",
+      "userName": "鱼跃",
+      "homepage": "https://leetcode.cn/u/yu-yue-1/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "hcyety",
+      "userName": "syandeg",
+      "homepage": "https://leetcode.cn/u/hcyety/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "feng-xiao-jian-i",
+      "userName": "小贱",
+      "homepage": "https://leetcode.cn/u/feng-xiao-jian-i/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "yeye-ch",
+      "userName": "HL",
+      "homepage": "https://leetcode.cn/u/yeye-ch/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "qiannianchong25",
+      "userName": "千年虫cc",
+      "homepage": "https://leetcode.cn/u/qiannianchong25/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "le-yu-wang-you",
+      "userName": "乐予忘忧",
+      "homepage": "https://leetcode.cn/u/le-yu-wang-you/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "all-of-meup",
+      "userName": "null",
+      "homepage": "https://leetcode.cn/u/all-of-meup/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "shyhhh",
+      "userName": "hone",
+      "homepage": "https://leetcode.cn/u/shyhhh/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "jintianyuhahaha",
+      "userName": "Guonan",
+      "homepage": "https://leetcode.cn/u/jintianyuhahaha/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "chu-kong-v",
+      "userName": "初空",
+      "homepage": "https://leetcode.cn/u/chu-kong-v/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "kind-volhardl2t",
+      "userName": "愚方",
+      "homepage": "https://leetcode.cn/u/kind-volhardl2t/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "jawilx",
+      "userName": "o.o",
+      "homepage": "https://leetcode.cn/u/jawilx/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "island-w",
+      "userName": "_island",
+      "homepage": "https://leetcode.cn/u/island-w/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "wei-lu-e",
+      "userName": "为鹿",
+      "homepage": "https://leetcode.cn/u/wei-lu-e/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "bigbigDreamer",
+      "userName": "不换",
+      "homepage": "https://leetcode.cn/u/bigbigDreamer/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "brightzoe",
+      "userName": "子夜",
+      "homepage": "https://leetcode.cn/u/brightzoe/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lu-chang-7",
+      "userName": "鹿长。",
+      "homepage": "https://leetcode.cn/u/lu-chang-7/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "haru-o1",
+      "userName": "haru",
+      "homepage": "https://leetcode.cn/u/haru-o1/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "ajunge",
+      "userName": "Omos",
+      "homepage": "https://leetcode.cn/u/ajunge/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "bu-ai-qi-shui",
+      "userName": "超超",
+      "homepage": "https://leetcode.cn/u/bu-ai-qi-shui/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "lu-chi-17",
+      "userName": "寇敏琦",
+      "homepage": "https://leetcode.cn/u/lu-chi-17/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "jin-ri-shuo-fa",
+      "userName": "近日说法",
+      "homepage": "https://leetcode.cn/u/jin-ri-shuo-fa/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "yooooooo_o",
+      "userName": "杨东虎",
+      "homepage": "https://leetcode.cn/u/yooooooo_o/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "zhang-qi-ling-35",
+      "userName": "张起灵",
+      "homepage": "https://leetcode.cn/u/zhang-qi-ling-35/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "shi-qi-2i",
+      "userName": "Jet",
+      "homepage": "https://leetcode.cn/u/shi-qi-2i/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "mungdong",
+      "userName": "懵懂",
+      "homepage": "https://leetcode.cn/u/mungdong/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "Tbd63WI6jm",
+      "userName": "喝杯星巴克",
+      "homepage": "https://leetcode.cn/u/Tbd63WI6jm/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "chuckqu",
+      "userName": "chuck",
+      "homepage": "https://leetcode.cn/u/chuckqu/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "preciously",
+      "userName": "十三",
+      "homepage": "https://leetcode.cn/u/preciously/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "gonewiththe-wind",
+      "userName": "风走了以后",
+      "homepage": "https://leetcode.cn/u/gonewiththe-wind/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "alisa-7u",
+      "userName": "Alisa💍",
+      "homepage": "https://leetcode.cn/u/alisa-7u/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "xu-mao-long",
+      "userName": "路人甲",
+      "homepage": "https://leetcode.cn/u/xu-mao-long/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "ou-mai-ge-c",
+      "userName": "焕斌咯！",
+      "homepage": "https://leetcode.cn/u/ou-mai-ge-c/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "nanfangzhe",
+      "userName": "程序员南方者",
+      "homepage": "https://leetcode.cn/u/nanfangzhe/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    },
+    {
+      "userId": "max-ruz",
+      "userName": "Max",
+      "homepage": "https://leetcode.cn/u/max-ruz/",
+      "weekly": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "newQuestionsTotal": 0,
+      "ranking": 11
+    }
+  ]
+}
