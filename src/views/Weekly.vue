@@ -22,7 +22,7 @@
         border
         style="width: 100%"
       >
-        <template v-for="{ key, label } in labelData.lable" :key="key">
+        <template v-for="{ key, label } in labelData.label" :key="key">
           <el-table-column v-if="key === 'userId'" :label="label">
             <template #default="scope">
               <el-link :href="scope.row.homepage" :underline="false" target="_blank" type="primary">{{
@@ -118,28 +118,32 @@ const showOrHideLazyMan = () => (isShowLazyMan.value = !isShowLazyMan.value);
 
 const time = ref('');
 
-const labelData: { lable: Label[] } = reactive({ lable: [] });
+const labelData: { label: Label[] } = reactive({ label: [] });
 
 const weeklyTableRef = ref();
 
 const initData = async () => {
   queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
   updateWeekRollupFileName();
-  fetch(`/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
+  fetch(`${location.host.includes('github') ? '/data' : ''}/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
     .then((res) => res.json())
     .then((res: WeeklyData) => {
       Object.assign(weeklyData, res);
       const day = dayjs(weeklyData.updatedAt);
       time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
-      labelData.lable = labelTemplete.slice(0);
+      labelData.label = labelTemplete.slice(0);
       const concatLabel = weeklyData.weekly?.map((e, index) => ({ label: e, key: index }));
 
-      concatLabel?.length ? labelData.lable.splice(2, 0, ...(concatLabel as any)) : labelData.lable.splice(2, 0);
+      concatLabel?.length ? labelData.label.splice(2, 0, ...(concatLabel as any)) : labelData.label.splice(2, 0);
 
       if (day.day() === 0 && day.hour() === 22 ? day.minute() >= 50 : day.hour() > 22) {
         buildSendMessage();
       }
-      console.log(labelData, weeklyData);
+    })
+    .catch(() => {
+      weeklyData.records = [];
+      weeklyData.weekly = [];
+      labelData.label = labelTemplete.slice(0);
     });
 };
 initData();
