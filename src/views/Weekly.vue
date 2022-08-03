@@ -125,9 +125,9 @@ const weeklyTableRef = ref();
 const initData = async () => {
   queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
   updateWeekRollupFileName();
-  fetch(`${location.host.includes('github') ? '/data' : ''}/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
-    .then((res) => res.json())
-    .then((res: WeeklyData) => {
+  axios
+    .get<WeeklyData>(`/data/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
+    .then(({ data: res }) => {
       Object.assign(weeklyData, res);
       const day = dayjs(weeklyData.updatedAt);
       time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
