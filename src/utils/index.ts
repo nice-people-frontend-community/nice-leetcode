@@ -1,4 +1,4 @@
-import type { IUser } from 'scripts/typings';
+import type { IQuestion, IUser } from 'scripts/typings';
 
 import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
@@ -9,6 +9,16 @@ dayjs.extend(isoWeek);
  */
 export const getUserHomepage = (user: IUser): string => {
   return (user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId;
+};
+
+/**
+ * 获取题目地址
+ * @param question 题目内容
+ * @param lcus 是否是美服
+ * @returns 题目地址
+ */
+export const getQuestionUrl = (question: IQuestion, lcus: boolean): string => {
+  return (lcus ? 'https://leetcode.com/problems/' : 'https://leetcode.cn/problems/') + question.question__title_slug;
 };
 
 /***
@@ -92,4 +102,17 @@ export const formatAwardLevel = (level: number, step = 4) => {
   }
 
   return levelText;
+};
+
+/**
+ * 将题目字符串解析成纯净的题目数组
+ * @param questionIdText 题目合集，例如 [258][237][206][169][70]
+ * @returns 题目ID数组 ['258', '237', '206', '169', '70']
+ */
+export const getFrontendQuestionIds = (questionIdText?: string): string[] => {
+  if (!questionIdText) {
+    return [];
+  }
+  // 解析
+  return questionIdText.match(/(?<=\[)(.+?)(?=\])/g) || [];
 };

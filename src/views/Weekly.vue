@@ -33,7 +33,9 @@
           <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key"></el-table-column>
           <el-table-column v-else :label="label">
             <template #default="scope">
-              <div>{{ scope.row.weekly[scope.cellIndex - 2] }}</div>
+              <template v-for="id in getFrontendQuestionIds(scope.row.weekly[scope.cellIndex - 2])" :key="id">
+                <question :question="questionsMap[id]" :lcus="scope.row.homepage.includes('leetcode.com')" />
+              </template>
             </template>
           </el-table-column>
         </template>
@@ -43,9 +45,10 @@
 </template>
 
 <script lang="ts" setup>
+import { DATE_FORMAT_STRING, getFrontendQuestionIds, getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
+import type { IQuestion } from '@@/scripts/typings';
 import clipboardJs from 'clipboard';
 import domToImage from 'dom-to-image';
-import { getISOWeekNumber, getToday, getWeekStartAndEnd, DATE_FORMAT_STRING } from '@/utils';
 
 interface PersonRecord {
   userId: string;
@@ -70,6 +73,8 @@ interface WeekLable {
   label: string;
   value: number;
 }
+
+type QuestionMap = Record<string, IQuestion>;
 
 const labelTemplete = [
   {
@@ -113,6 +118,8 @@ const updateWeekRollupFileName = () => {
 updateWeekRollupFileName();
 
 const weeklyData: WeeklyData = reactive({ records: [] } as WeeklyData);
+// 所有题目集合
+const questionsMap: QuestionMap = reactive({});
 
 const showOrHideLazyMan = () => (isShowLazyMan.value = !isShowLazyMan.value);
 
@@ -123,6 +130,16 @@ const labelData: { label: Label[] } = reactive({ label: [] });
 const weeklyTableRef = ref();
 
 const initData = async () => {
+  // 获取所有题目集合
+  try {
+    const { data: quertionMapRes } = await axios.get<QuestionMap>(
+      `/data/common/all_questions_map.json?v=${+new Date()}`,
+    );
+    Object.assign(questionsMap, quertionMapRes);
+  } catch (error) {
+    console.error('获取所有题目数据出错');
+  }
+
   queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
   updateWeekRollupFileName();
   axios
@@ -220,13 +237,13 @@ function buildSendMessage() {
   for (let i = 0; i < weeklyData.records.length; i++) {
     const record = weeklyData.records[i];
     const userName = record?.userName;
-    const day1 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day2 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day3 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day4 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day5 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day6 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
-    const day7 = (record?.weekly?.[0]?.split('[')?.length || 1) - 1;
+    const day1 = getFrontendQuestionIds(record?.weekly?.[0]).length;
+    const day2 = getFrontendQuestionIds(record?.weekly?.[1]).length;
+    const day3 = getFrontendQuestionIds(record?.weekly?.[2]).length;
+    const day4 = getFrontendQuestionIds(record?.weekly?.[3]).length;
+    const day5 = getFrontendQuestionIds(record?.weekly?.[4]).length;
+    const day6 = getFrontendQuestionIds(record?.weekly?.[5]).length;
+    const day7 = getFrontendQuestionIds(record?.weekly?.[6]).length;
     const questionCount = record?.newQuestionsTotal || 0;
     const ranking = record?.ranking;
 

@@ -8,19 +8,12 @@ declare module '@vue/runtime-core' {
     CommonHeader: typeof import('./src/components/CommonHeader.vue')['default'];
     ElAlert: typeof import('element-plus/es')['ElAlert'];
     ElButton: typeof import('element-plus/es')['ElButton'];
-    ElCard: typeof import('element-plus/es')['ElCard'];
-    ElCol: typeof import('element-plus/es')['ElCol'];
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider'];
-    ElContainer: typeof import('element-plus/es')['ElContainer'];
-    ElDatePicker: typeof import('element-plus/es')['ElDatePicker'];
     ElDivider: typeof import('element-plus/es')['ElDivider'];
     ElEmpty: typeof import('element-plus/es')['ElEmpty'];
-    ElHeader: typeof import('element-plus/es')['ElHeader'];
     ElInput: typeof import('element-plus/es')['ElInput'];
     ElLink: typeof import('element-plus/es')['ElLink'];
-    ElMain: typeof import('element-plus/es')['ElMain'];
     ElOption: typeof import('element-plus/es')['ElOption'];
-    ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSelect: typeof import('element-plus/es')['ElSelect'];
     ElTable: typeof import('element-plus/es')['ElTable'];
@@ -30,6 +23,7 @@ declare module '@vue/runtime-core' {
     HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
+    Question: typeof import('./src/components/Question.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
     RuleAlert: typeof import('./src/components/RuleAlert.vue')['default'];
