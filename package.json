@@ -32,6 +32,8 @@
     "dom-to-image": "^2.6.0",
     "dotenv": "^16.0.0",
     "element-plus": "^2.2.6",
+    "highcharts": "^10.2.0",
+    "highcharts-vue": "^1.4.0",
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "typescript": "^4.6.4",

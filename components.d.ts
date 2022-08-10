@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
+    Pie: typeof import('./src/components/Pie.vue')['default'];
     Question: typeof import('./src/components/Question.vue')['default'];
     QuestionDifficulty: typeof import('./src/components/QuestionDifficulty.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];

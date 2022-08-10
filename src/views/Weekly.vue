@@ -34,7 +34,13 @@
               }}</el-link>
             </template>
           </el-table-column>
-          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key" :width="width"></el-table-column>
+          <!-- 统计 -->
+          <el-table-column v-else-if="key === 'stats'" :label="label" :prop="key" :width="width">
+            <template #default="scope">
+              <pie :questions="scope.row.weekly.join('')" />
+            </template>
+          </el-table-column>
+          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key" :width="width" />
           <el-table-column v-else :label="label" :width="width">
             <template #default="scope">
               <template v-for="id in getFrontendQuestionIds(scope.row.weekly[scope.cellIndex - 2])" :key="id">
@@ -87,6 +93,11 @@ const columnTemplete: Column[] = [
   {
     label: '力扣',
     key: 'userId',
+  },
+  {
+    label: '统计',
+    key: 'stats',
+    width: 100,
   },
   {
     label: '总计',

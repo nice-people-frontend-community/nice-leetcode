@@ -1,0 +1,117 @@
+<template>
+  <Chart v-if="show" :options="chartOptions" ref="chart" />
+</template>
+
+<script lang="ts">
+import useGlobalProperties from '@/hooks/useGlobalProperties';
+import { getFrontendQuestionIds } from '@/utils';
+import { Chart } from 'highcharts-vue';
+import { defineComponent } from 'vue';
+import { nextTick } from 'vue';
+
+export default defineComponent({
+  props: {
+    questions: {
+      type: String,
+      default: () => {
+        // 例如 [1][2][3][4]
+        return '';
+      },
+      required: true,
+    },
+  },
+  components: {
+    Chart,
+  },
+  created() {
+    // 所有题目集合
+    const questionsMap = useGlobalProperties().$quertionMap;
+    const questionIds = getFrontendQuestionIds(this.questions);
+    // 遍历题目，获取题目的难题程度
+    let easyCount = 0;
+    let mediumCount = 0;
+    let hardCount = 0;
+    questionIds.forEach((id) => {
+      const question = questionsMap[id];
+      if (question.level === 1) {
+        easyCount++;
+      }
+      if (question.level === 2) {
+        mediumCount++;
+      }
+      if (question.level === 3) {
+        hardCount++;
+      }
+    });
+
+    this.chartData = [
+      ['简单', easyCount],
+      ['中等', mediumCount],
+      ['困难', hardCount],
+    ];
+  },
+  data() {
+    return {
+      show: false,
+      chartData: [] as [string, number][],
+      chartOptions: {
+        chart: {
+          height: 100,
+          type: 'pie',
+          margin: [0, 0, 0, 0],
+          backgroundColor: 'transparent',
+        },
+        title: {
+          text: null,
+        },
+        exporting: {
+          enabled: false,
+        },
+        credits: {
+          enabled: false,
+        },
+        tooltip: {
+          useHTML: true,
+          confine: true,
+          outside: true,
+          headerFormat: null,
+          pointFormat: '{point.name}<br/>数量: <b>{point.y}<br/>占比: {point.percentage:.1f}%</b>',
+        },
+        plotOptions: {
+          pie: {
+            innerSize: 20,
+            dataLabels: {
+              enabled: false,
+            },
+            showInLegend: false,
+          },
+        },
+        colors: ['#00af9b', '#ffb800', '#ff2d55'],
+        series: [
+          {
+            name: '占比',
+            data: this.chartData,
+          },
+        ],
+      },
+    };
+  },
+  watch: {
+    chartData: {
+      handler(newValue, oldValue) {
+        // this destroys the chart
+        this.show = false;
+        nextTick(() => {
+          this.show = true;
+        });
+      },
+    },
+  },
+});
+</script>
+
+<style>
+.highcharts-tooltip > span {
+  width: 100px !important;
+}
+</style>
