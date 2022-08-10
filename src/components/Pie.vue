@@ -1,5 +1,5 @@
 <template>
-  <Chart v-if="show" :options="chartOptions" ref="chart" />
+  <Chart :options="chartOptions" ref="chart" />
 </template>
 
 <script lang="ts">
@@ -7,7 +7,6 @@ import useGlobalProperties from '@/hooks/useGlobalProperties';
 import { getFrontendQuestionIds } from '@/utils';
 import { Chart } from 'highcharts-vue';
 import { defineComponent } from 'vue';
-import { nextTick } from 'vue';
 
 export default defineComponent({
   props: {
@@ -44,16 +43,19 @@ export default defineComponent({
       }
     });
 
-    this.chartData = [
-      ['简单', easyCount],
-      ['中等', mediumCount],
-      ['困难', hardCount],
-    ];
+    this.chartOptions.series = [
+      {
+        name: '占比',
+        data: [
+          ['简单', easyCount],
+          ['中等', mediumCount],
+          ['困难', hardCount],
+        ],
+      },
+    ] as any;
   },
   data() {
     return {
-      show: false,
-      chartData: [] as [string, number][],
       chartOptions: {
         chart: {
           height: 100,
@@ -87,25 +89,9 @@ export default defineComponent({
           },
         },
         colors: ['#00af9b', '#ffb800', '#ff2d55'],
-        series: [
-          {
-            name: '占比',
-            data: this.chartData,
-          },
-        ],
+        series: [],
       },
     };
-  },
-  watch: {
-    chartData: {
-      handler(newValue, oldValue) {
-        // this destroys the chart
-        this.show = false;
-        nextTick(() => {
-          this.show = true;
-        });
-      },
-    },
   },
 });
 </script>
