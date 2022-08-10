@@ -12,9 +12,13 @@
       <h1>{{ weekRollupFileName }}周报</h1>
       <blockquote style="display: flex; align-content: center; justify-content: space-between">
         更新于: {{ time }}
-        <el-select v-model="currentWeek" class="m-2" placeholder="选择周" size="small">
-          <el-option v-for="item in weekLable" :key="item?.value" :label="item?.label" :value="item?.value || 0" />
-        </el-select>
+
+        <div class="action">
+          <question-difficulty />
+          <el-select v-model="currentWeek" class="m-2" placeholder="选择周" size="small">
+            <el-option v-for="item in weekLable" :key="item?.value" :label="item?.label" :value="item?.value || 0" />
+          </el-select>
+        </div>
       </blockquote>
       <el-table
         :data="weeklyData.records.filter((i) => isShowLazyMan || i?.newQuestionsTotal !== 0)"
@@ -22,16 +26,16 @@
         border
         style="width: 100%"
       >
-        <template v-for="{ key, label } in labelData.label" :key="key">
-          <el-table-column v-if="key === 'userId'" :label="label">
+        <template v-for="{ key, label, width } in columnData.data" :key="key">
+          <el-table-column v-if="key === 'userId'" :label="label" :width="width">
             <template #default="scope">
               <el-link :href="scope.row.homepage" :underline="false" target="_blank" type="primary">{{
                 scope.row.userId
               }}</el-link>
             </template>
           </el-table-column>
-          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key"></el-table-column>
-          <el-table-column v-else :label="label">
+          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key" :width="width"></el-table-column>
+          <el-table-column v-else :label="label" :width="width">
             <template #default="scope">
               <template v-for="id in getFrontendQuestionIds(scope.row.weekly[scope.cellIndex - 2])" :key="id">
                 <question :question="questionsMap[id]" :lcus="scope.row.homepage.includes('leetcode.com')" />
@@ -45,8 +49,8 @@
 </template>
 
 <script lang="ts" setup>
+import useGlobalProperties from '@/hooks/useGlobalProperties';
 import { DATE_FORMAT_STRING, getFrontendQuestionIds, getISOWeekNumber, getToday, getWeekStartAndEnd } from '@/utils';
-import type { IQuestion } from '@@/scripts/typings';
 import clipboardJs from 'clipboard';
 import domToImage from 'dom-to-image';
 
@@ -65,18 +69,17 @@ interface WeeklyData {
   weekly?: string[];
   records: (PersonRecord | null)[];
 }
-interface Label {
+interface Column {
   label: string;
   key: string;
+  width?: number;
 }
 interface WeekLable {
   label: string;
   value: number;
 }
 
-type QuestionMap = Record<string, IQuestion>;
-
-const labelTemplete = [
+const columnTemplete: Column[] = [
   {
     label: '用户名',
     key: 'userName',
@@ -88,10 +91,12 @@ const labelTemplete = [
   {
     label: '总计',
     key: 'newQuestionsTotal',
+    width: 60,
   },
   {
     label: '排名',
     key: 'ranking',
+    width: 60,
   },
 ];
 
@@ -119,27 +124,17 @@ updateWeekRollupFileName();
 
 const weeklyData: WeeklyData = reactive({ records: [] } as WeeklyData);
 // 所有题目集合
-const questionsMap: QuestionMap = reactive({});
+const questionsMap = useGlobalProperties().$quertionMap;
 
 const showOrHideLazyMan = () => (isShowLazyMan.value = !isShowLazyMan.value);
 
 const time = ref('');
 
-const labelData: { label: Label[] } = reactive({ label: [] });
+const columnData: { data: Column[] } = reactive({ data: [] });
 
 const weeklyTableRef = ref();
 
 const initData = async () => {
-  // 获取所有题目集合
-  try {
-    const { data: quertionMapRes } = await axios.get<QuestionMap>(
-      `/data/common/all_questions_map.json?v=${+new Date()}`,
-    );
-    Object.assign(questionsMap, quertionMapRes);
-  } catch (error) {
-    console.error('获取所有题目数据出错');
-  }
-
   queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
   updateWeekRollupFileName();
   axios
@@ -148,10 +143,10 @@ const initData = async () => {
       Object.assign(weeklyData, res);
       const day = dayjs(weeklyData.updatedAt);
       time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
-      labelData.label = labelTemplete.slice(0);
+      columnData.data = columnTemplete.slice(0);
       const concatLabel = weeklyData.weekly?.map((e, index) => ({ label: e, key: index }));
 
-      concatLabel?.length ? labelData.label.splice(2, 0, ...(concatLabel as any)) : labelData.label.splice(2, 0);
+      concatLabel?.length ? columnData.data.splice(2, 0, ...(concatLabel as any)) : columnData.data.splice(2, 0);
 
       if (day.day() === 0 && day.hour() === 22 ? day.minute() >= 50 : day.hour() > 22) {
         buildSendMessage();
@@ -160,7 +155,7 @@ const initData = async () => {
     .catch(() => {
       weeklyData.records = [];
       weeklyData.weekly = [];
-      labelData.label = labelTemplete.slice(0);
+      columnData.data = columnTemplete.slice(0);
     });
 };
 initData();
@@ -339,34 +334,38 @@ blockquote {
   color: #6a737d;
 }
 
-.el-table {
-  /* stylelint-disable */
-  :deep(.row_top--1) {
-    background-color: var(--el-color-success-light-3);
-  }
+// .el-table {
+//   /* stylelint-disable */
+//   :deep(.row_top--1) {
+//     background-color: var(--el-color-success-light-3);
+//   }
 
-  :deep(.row_top--2) {
-    background-color: var(--el-color-success-light-5);
-  }
+//   :deep(.row_top--2) {
+//     background-color: var(--el-color-success-light-5);
+//   }
 
-  :deep(.row_top--3) {
-    background-color: var(--el-color-success-light-7);
-  }
+//   :deep(.row_top--3) {
+//     background-color: var(--el-color-success-light-7);
+//   }
 
-  :deep(.row_top--4) {
-    background-color: var(--el-color-success-light-8);
-  }
+//   :deep(.row_top--4) {
+//     background-color: var(--el-color-success-light-8);
+//   }
 
-  :deep(.row_top--5) {
-    background-color: var(--el-color-success-light-9);
-  }
+//   :deep(.row_top--5) {
+//     background-color: var(--el-color-success-light-9);
+//   }
 
-  :deep(.row_lazy) {
-    background-color: var(--el-color-warning-light-5);
-  }
-}
+//   :deep(.row_lazy) {
+//     background-color: var(--el-color-warning-light-5);
+//   }
+// }
 
 .el-button {
   margin: 0.5em 0 !important;
+}
+
+.action {
+  display: flex;
 }
 </style>

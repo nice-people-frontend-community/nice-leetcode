@@ -21,12 +21,36 @@ export default {
 </script>
 
 <template>
-  <el-link
+  <a
+    :class="{ link: true, easy: question.level === 1, medium: question.level === 2, hard: question.level === 3 }"
     type="primary"
     target="_blank"
     :underline="false"
     :href="(lcus ? 'https://leetcode.com/problems/' : 'https://leetcode.cn/problems/') + question.question__title_slug"
   >
     [{{ lcus ? question?.question__title_slug : question?.frontend_question_id }}]
-  </el-link>
+  </a>
 </template>
+
+<style scoped>
+.link {
+  color: #409eff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.easy {
+  color: var(--q-easy-color);
+}
+
+.medium {
+  color: var(--q-medium-color);
+}
+
+.hard {
+  color: var(--q-hard-color);
+}
+</style>

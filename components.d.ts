@@ -18,12 +18,14 @@ declare module '@vue/runtime-core' {
     ElSelect: typeof import('element-plus/es')['ElSelect'];
     ElTable: typeof import('element-plus/es')['ElTable'];
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
+    ElTag: typeof import('element-plus/es')['ElTag'];
     FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
     Github: typeof import('./src/components/svg/Github.vue')['default'];
     HeaderMenu: typeof import('./src/components/HeaderMenu.vue')['default'];
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default'];
     Loading: typeof import('element-plus/es')['ElLoadingDirective'];
     Question: typeof import('./src/components/Question.vue')['default'];
+    QuestionDifficulty: typeof import('./src/components/QuestionDifficulty.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
     RuleAlert: typeof import('./src/components/RuleAlert.vue')['default'];
