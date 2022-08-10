@@ -88,7 +88,7 @@ export interface IQuestion {
    * 难度等级
    * - 1-简单
    * - 2-中等
-   * - 3-复杂
+   * - 3-困难
    */
   level: 1 | 2 | 3;
   /**
