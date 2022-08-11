@@ -41,6 +41,9 @@ export default defineConfig({
       '@@': fileURLToPath(new URL('./', import.meta.url)),
     },
   },
+  server: {
+    port: 5173,
+  },
   base: process.env.NODE_ENV === 'production' ? '/nice-leetcode/docs' : '/',
   build: {
     outDir: 'docs',
