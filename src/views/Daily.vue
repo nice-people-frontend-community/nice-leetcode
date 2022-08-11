@@ -290,12 +290,12 @@ const getWeekDay = (date: string) => {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 40%;
+    width: 500px;
 
     .search-sort {
       display: flex;
       justify-content: center;
-      width: 80%;
+      width: 90%;
       margin: 10px 0;
       padding-bottom: 10px;
     }
@@ -303,7 +303,7 @@ const getWeekDay = (date: string) => {
     .user-list {
       display: flex;
       flex-direction: column;
-      width: 80%;
+      width: 90%;
       height: calc(100vh - 50px);
       overflow-y: auto;
 

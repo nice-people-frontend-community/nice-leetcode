@@ -20,40 +20,68 @@
           </el-select>
         </div>
       </blockquote>
-      <el-table
-        :data="weeklyData.records.filter((i) => isShowLazyMan || i?.newQuestionsTotal !== 0)"
-        :row-class-name="tableRowClassName"
-        border
-        style="width: 100%"
-      >
-        <template v-for="{ key, label, width } in columnData.data" :key="key">
-          <el-table-column v-if="key === 'userId'" :label="label" :width="width">
-            <template #default="scope">
-              <el-link :href="scope.row.homepage" :underline="false" target="_blank" type="primary">{{
-                scope.row.userId
-              }}</el-link>
-            </template>
-          </el-table-column>
-          <!-- 统计 -->
-          <el-table-column v-else-if="key === 'stats'" :label="label" :prop="key" :width="width">
-            <template #default="scope">
-              <pie :questions="scope.row.weekly.join('')" />
-            </template>
-          </el-table-column>
-          <el-table-column v-else-if="notNumber(key)" :label="label" :prop="key" :width="width" />
-          <el-table-column v-else :label="label" :width="width">
-            <template #default="scope">
-              <template v-for="id in getFrontendQuestionIds(scope.row.weekly[scope.cellIndex - 2])" :key="id">
-                <question
-                  :question-id="id"
-                  :question="questionsMap[id]"
-                  :lcus="scope.row.homepage.includes('leetcode.com')"
-                />
+      <el-skeleton :rows="5" animated :loading="loading">
+        <el-table
+          :data="weeklyData.records.filter((i) => isShowLazyMan || i?.newQuestionsTotal !== 0)"
+          :row-class-name="tableRowClassName"
+          :border="true"
+          style="width: 100%"
+        >
+          <template v-for="{ key, label, width, dateIndex } in columnData.data" :key="key">
+            <!-- 用户名称 -->
+            <el-table-column v-if="key === 'userName'" :label="label" :width="width" :resizable="false">
+              <template #default="scope">
+                <div>{{ scope.row.userName }}</div>
+                <el-link :href="scope.row.homepage" :underline="false" target="_blank" type="primary">{{
+                  scope.row.userId
+                }}</el-link>
               </template>
-            </template>
-          </el-table-column>
-        </template>
-      </el-table>
+            </el-table-column>
+            <!-- 统计 -->
+            <el-table-column
+              v-else-if="key === 'stats'"
+              :label="label"
+              :prop="key"
+              :width="width"
+              :resizable="false"
+              align="center"
+            >
+              <template #default="scope">
+                <pie :questions="scope.row.weekly.join('')" />
+              </template>
+            </el-table-column>
+            <!-- 操作 -->
+            <el-table-column
+              v-else-if="key === 'newQuestionsTotal' || key === 'ranking'"
+              :label="label"
+              :prop="key"
+              :width="width"
+              :resizable="false"
+              align="center"
+            />
+            <!-- 题目 -->
+            <el-table-column
+              v-else
+              :label="label"
+              :prop="key"
+              :width="width"
+              :resizable="false"
+              header-align="center"
+              align="left"
+            >
+              <template #default="scope">
+                <template v-for="id in getFrontendQuestionIds(scope.row.weekly[dateIndex!])" :key="id">
+                  <question
+                    :question-id="id"
+                    :question="questionsMap[id]"
+                    :lcus="scope.row.homepage.includes('leetcode.com')"
+                  />
+                </template>
+              </template>
+            </el-table-column>
+          </template>
+        </el-table>
+      </el-skeleton>
     </div>
   </div>
 </template>
@@ -82,6 +110,8 @@ interface WeeklyData {
 interface Column {
   label: string;
   key: string;
+  /** 对应日期的序号 */
+  dateIndex?: number;
   width?: number;
 }
 interface WeekLable {
@@ -94,28 +124,10 @@ const columnTemplete: Column[] = [
     label: '用户名',
     key: 'userName',
   },
-  {
-    label: '力扣',
-    key: 'userId',
-  },
-  {
-    label: '统计',
-    key: 'stats',
-    width: 100,
-  },
-  {
-    label: '总计',
-    key: 'newQuestionsTotal',
-    width: 60,
-  },
-  {
-    label: '排名',
-    key: 'ranking',
-    width: 60,
-  },
 ];
 
 const isShowLazyMan = ref(true);
+const loading = ref(true);
 
 const currentWeek = ref(0);
 const queryDate = ref(getToday());
@@ -152,6 +164,7 @@ const weeklyTableRef = ref();
 const initData = async () => {
   queryDate.value = getToday(DATE_FORMAT_STRING, currentWeek.value);
   updateWeekRollupFileName();
+  loading.value = true;
   axios
     .get<WeeklyData>(`/data/weeks/${weekRollupFileName.value}.json?v=${+new Date()}`)
     .then(({ data: res }) => {
@@ -159,9 +172,31 @@ const initData = async () => {
       const day = dayjs(weeklyData.updatedAt);
       time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
       columnData.data = columnTemplete.slice(0);
-      const concatLabel = weeklyData.weekly?.map((e, index) => ({ label: e, key: index }));
 
-      concatLabel?.length ? columnData.data.splice(2, 0, ...(concatLabel as any)) : columnData.data.splice(2, 0);
+      const dateColumn = weeklyData.weekly?.map((date, index) => ({ label: date, key: date, dateIndex: index })) ?? [];
+
+      columnData.data = [
+        {
+          label: '用户名',
+          key: 'userName',
+        },
+        ...dateColumn,
+        {
+          label: '统计',
+          key: 'stats',
+          width: 100,
+        },
+        {
+          label: '总计',
+          key: 'newQuestionsTotal',
+          width: 60,
+        },
+        {
+          label: '排名',
+          key: 'ranking',
+          width: 60,
+        },
+      ];
 
       if (day.day() === 0 && day.hour() === 22 ? day.minute() >= 50 : day.hour() > 22) {
         buildSendMessage();
@@ -171,6 +206,9 @@ const initData = async () => {
       weeklyData.records = [];
       weeklyData.weekly = [];
       columnData.data = columnTemplete.slice(0);
+    })
+    .finally(() => {
+      loading.value = false;
     });
 };
 initData();
@@ -196,8 +234,6 @@ const tableRowClassName = ({ row }: { row: PersonRecord }) => {
   }
   return '';
 };
-
-const notNumber = (data: number | string) => typeof data !== 'number';
 
 const copyTable = () => {
   if (!weeklyTableRef.value) return;
@@ -348,33 +384,6 @@ blockquote {
   border-left: 0.25em solid #dfe2e5;
   color: #6a737d;
 }
-
-// .el-table {
-//   /* stylelint-disable */
-//   :deep(.row_top--1) {
-//     background-color: var(--el-color-success-light-3);
-//   }
-
-//   :deep(.row_top--2) {
-//     background-color: var(--el-color-success-light-5);
-//   }
-
-//   :deep(.row_top--3) {
-//     background-color: var(--el-color-success-light-7);
-//   }
-
-//   :deep(.row_top--4) {
-//     background-color: var(--el-color-success-light-8);
-//   }
-
-//   :deep(.row_top--5) {
-//     background-color: var(--el-color-success-light-9);
-//   }
-
-//   :deep(.row_lazy) {
-//     background-color: var(--el-color-warning-light-5);
-//   }
-// }
 
 .el-button {
   margin: 0.5em 0 !important;
