@@ -44,7 +44,11 @@
           <el-table-column v-else :label="label" :width="width">
             <template #default="scope">
               <template v-for="id in getFrontendQuestionIds(scope.row.weekly[scope.cellIndex - 2])" :key="id">
-                <question :question="questionsMap[id]" :lcus="scope.row.homepage.includes('leetcode.com')" />
+                <question
+                  :question-id="id"
+                  :question="questionsMap[id]"
+                  :lcus="scope.row.homepage.includes('leetcode.com')"
+                />
               </template>
             </template>
           </el-table-column>

@@ -12,6 +12,10 @@ export default {
         question__title_slug: '',
       }),
     },
+    questionId: {
+      type: String,
+      required: true,
+    },
     lcus: {
       type: Boolean,
       required: true,
@@ -22,6 +26,7 @@ export default {
 
 <template>
   <a
+    v-if="question.frontend_question_id"
     :class="{ link: true, easy: question.level === 1, medium: question.level === 2, hard: question.level === 3 }"
     type="primary"
     target="_blank"
@@ -30,6 +35,7 @@ export default {
   >
     [{{ lcus ? question?.question__title_slug : question?.frontend_question_id }}]
   </a>
+  <span v-else>[{{ questionId }}]</span>
 </template>
 
 <style scoped>

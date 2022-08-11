@@ -64,6 +64,7 @@
                 v-else
                 v-for="questionId in getFrontendQuestionIds(log.questionIds.join(''))"
                 :key="questionId"
+                :question-id="questionId"
                 :question="questionsMap[questionId]"
                 :lcus="selectUser?.lcus"
               />
@@ -75,6 +76,7 @@
                 v-else
                 v-for="questionId in getFrontendQuestionIds(log.reviewQuestionIds.join(''))"
                 :key="questionId"
+                :question-id="questionId"
                 :question="questionsMap[questionId]"
                 :lcus="selectUser?.lcus"
               />

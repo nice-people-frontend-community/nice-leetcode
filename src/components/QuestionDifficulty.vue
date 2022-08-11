@@ -7,6 +7,7 @@ const difficultyLevel = ref<Array<Level>>([
   { label: '简单', className: 'easy' },
   { label: '中等', className: 'medium' },
   { label: '困难', className: 'hard' },
+  { label: 'VIP', className: 'vip' },
 ]);
 </script>
 
@@ -44,6 +45,10 @@ const difficultyLevel = ref<Array<Level>>([
 
   .hard {
     background-color: var(--q-hard-color);
+  }
+
+  .vip {
+    background-color: #bfbfbf;
   }
 }
 </style>

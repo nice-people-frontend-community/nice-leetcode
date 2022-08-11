@@ -5,6 +5,7 @@
 <script lang="ts">
 import useGlobalProperties from '@/hooks/useGlobalProperties';
 import { getFrontendQuestionIds } from '@/utils';
+import type { QuestionMap } from '@@/scripts/typings';
 import { Chart } from 'highcharts-vue';
 import { defineComponent } from 'vue';
 
@@ -24,38 +25,51 @@ export default defineComponent({
   },
   created() {
     // 所有题目集合
-    const questionsMap = useGlobalProperties().$quertionMap;
-    const questionIds = getFrontendQuestionIds(this.questions);
-    // 遍历题目，获取题目的难题程度
-    let easyCount = 0;
-    let mediumCount = 0;
-    let hardCount = 0;
-    questionIds.forEach((id) => {
-      const question = questionsMap[id];
-      if (question.level === 1) {
-        easyCount++;
-      }
-      if (question.level === 2) {
-        mediumCount++;
-      }
-      if (question.level === 3) {
-        hardCount++;
-      }
-    });
+    this.questionsMap = useGlobalProperties().$quertionMap;
+    this.updateChart();
+  },
+  methods: {
+    updateChart() {
+      const questionIds = getFrontendQuestionIds(this.questions);
+      // 遍历题目，获取题目的难题程度
+      let easyCount = 0;
+      let mediumCount = 0;
+      let hardCount = 0;
+      let vipCount = 0;
+      questionIds.forEach((id) => {
+        const question = this.questionsMap[id];
+        if (!question) {
+          vipCount++;
+        } else if (question.level === 1) {
+          easyCount++;
+        } else if (question.level === 2) {
+          mediumCount++;
+        } else if (question.level === 3) {
+          hardCount++;
+        }
+      });
 
-    this.chartOptions.series = [
-      {
-        name: '占比',
-        data: [
-          ['简单', easyCount],
-          ['中等', mediumCount],
-          ['困难', hardCount],
-        ],
-      },
-    ] as any;
+      this.chartOptions.series = [
+        {
+          name: '占比',
+          data: [
+            ['简单', easyCount],
+            ['中等', mediumCount],
+            ['困难', hardCount],
+            ['VIP', vipCount],
+          ],
+        },
+      ] as any;
+    },
+  },
+  watch: {
+    questions(newVals) {
+      this.updateChart();
+    },
   },
   data() {
     return {
+      questionsMap: {} as QuestionMap,
       chartOptions: {
         chart: {
           height: 100,
@@ -88,7 +102,7 @@ export default defineComponent({
             showInLegend: false,
           },
         },
-        colors: ['#00af9b', '#ffb800', '#ff2d55'],
+        colors: ['#00af9b', '#ffb800', '#ff2d55', '#bfbfbf'],
         series: [],
       },
     };
