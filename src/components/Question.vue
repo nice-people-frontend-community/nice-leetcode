@@ -25,16 +25,24 @@ export default {
 </script>
 
 <template>
-  <a
+  <el-tooltip
     v-if="question.frontend_question_id"
-    :class="{ link: true, easy: question.level === 1, medium: question.level === 2, hard: question.level === 3 }"
-    type="primary"
-    target="_blank"
-    :underline="false"
-    :href="'https://leetcode.cn/problems/' + question.question__title_slug"
+    effect="dark"
+    placement="top"
+    :content="question?.question__title"
+    :hide-after="0"
   >
-    [{{ lcus ? question?.question__title_slug : question?.frontend_question_id }}]
-  </a>
+    <a
+      :class="{ link: true, easy: question.level === 1, medium: question.level === 2, hard: question.level === 3 }"
+      type="primary"
+      target="_blank"
+      :underline="false"
+      :href="'https://leetcode.cn/problems/' + question.question__title_slug"
+    >
+      [{{ lcus ? question?.question__title_slug : question?.frontend_question_id }}]
+    </a>
+  </el-tooltip>
+
   <span v-else>[{{ questionId }}]</span>
 </template>
 
