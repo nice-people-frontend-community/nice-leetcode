@@ -80,17 +80,19 @@ export interface IUserList {
 }
 
 /**
+ * 难度等级
+ * - 1-简单
+ * - 2-中等
+ * - 3-困难
+ */
+export type QuestionLevel = 1 | 2 | 3;
+
+/**
  * 国服题目的类型定义
  * @see https://leetcode.cn/api/problems/all/
  */
 export interface IQuestion {
-  /**
-   * 难度等级
-   * - 1-简单
-   * - 2-中等
-   * - 3-困难
-   */
-  level: 1 | 2 | 3;
+  level: QuestionLevel;
   /**
    * web 展示的问题ID
    * @example 1

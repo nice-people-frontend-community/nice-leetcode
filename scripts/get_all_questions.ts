@@ -2,12 +2,12 @@ import axios from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import type { IQuestion } from './typings';
+import type { IQuestion, QuestionLevel } from './typings';
 
 interface IAllProblemResponse {
   stat_status_pairs: {
     /** 难度等级 */
-    difficulty: { level: number };
+    difficulty: { level: QuestionLevel };
     stat: IQuestion;
   }[];
 }
