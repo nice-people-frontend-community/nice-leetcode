@@ -84,8 +84,13 @@ export interface IUserList {
  * @see https://leetcode.cn/api/problems/all/
  */
 export interface IQuestion {
-  /** 难度等级 */
-  level: number;
+  /**
+   * 难度等级
+   * - 1-简单
+   * - 2-中等
+   * - 3-困难
+   */
+  level: 1 | 2 | 3;
   /**
    * web 展示的问题ID
    * @example 1

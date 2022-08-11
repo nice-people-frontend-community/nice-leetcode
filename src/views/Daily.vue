@@ -39,7 +39,10 @@
           </el-link>
         </h2>
       </div>
-      <span class="d-time">更新于: {{ formatUpdateAt }}</span>
+      <div class="r-description">
+        <span class="d-time">更新于: {{ formatUpdateAt }}</span>
+        <question-difficulty />
+      </div>
       <el-scrollbar class="r-scroll">
         <div v-for="(log, index) in userArchivesData?.logs" :key="index">
           <template v-if="new Date(log.date).getDay() === 0 || index === 0">
@@ -54,12 +57,27 @@
           </template>
           <div class="table-row">
             <div class="row-item col-date">{{ log.date }}({{ getWeekDay(log.date) }})</div>
-            <div class="row-item col-no">
-              ({{ log.questionIds.length }}): {{ log.questionIds.length > 0 ? log.questionIds.join('') : '无' }}
+            <div class="row-item col-no col-question">
+              ({{ log.questionIds ? log.questionIds.length : 0 }}):
+              <span v-if="log.questionIds.length === 0">无</span>
+              <question
+                v-else
+                v-for="questionId in getFrontendQuestionIds(log.questionIds.join(''))"
+                :key="questionId"
+                :question="questionsMap[questionId]"
+                :lcus="selectUser?.lcus"
+              />
             </div>
-            <div class="row-item col-no">
+            <div class="row-item col-no col-question">
               ({{ log.reviewQuestionIds ? log.reviewQuestionIds.length : 0 }}):
-              {{ log.reviewQuestionIds && log.reviewQuestionIds.length > 0 ? log.reviewQuestionIds.join('') : '无' }}
+              <span v-if="log.reviewQuestionIds.length === 0">无</span>
+              <question
+                v-else
+                v-for="questionId in getFrontendQuestionIds(log.reviewQuestionIds.join(''))"
+                :key="questionId"
+                :question="questionsMap[questionId]"
+                :lcus="selectUser?.lcus"
+              />
             </div>
           </div>
         </div>
@@ -71,9 +89,13 @@
 
 <script lang="ts" setup>
 import debounce from 'lodash/debounce';
-import { getWeekStartAndEnd } from '@/utils';
+import { getWeekStartAndEnd, getFrontendQuestionIds } from '@/utils';
 import type { IUser, IArchivesLog } from '@@/scripts/typings';
 import type { ElScrollbar } from 'element-plus';
+import useGlobalProperties from '@/hooks/useGlobalProperties';
+
+// 所有题目集合
+const questionsMap = useGlobalProperties().$quertionMap;
 
 /** 所有用户列表 */
 const showUsers = ref<IUser[]>([]);
@@ -83,6 +105,9 @@ let allUsers: IUser[] = [];
 
 /**当前选中的userId */
 const selectUserId = ref('');
+const selectUser = computed(() => {
+  return allUsers.find((user) => user.userId === selectUserId.value);
+});
 
 /**当前某人的打卡记录 */
 const userArchivesData = ref<IArchivesLog>();
@@ -326,6 +351,12 @@ const getWeekDay = (date: string) => {
       color: #666;
     }
 
+    .r-description {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .r-scroll {
       flex: 1;
       overflow-y: auto;
@@ -359,8 +390,13 @@ const getWeekDay = (date: string) => {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 6px;
       border: 1px solid #dcdfe6;
       text-align: center;
+    }
+
+    .col-question {
+      display: block;
     }
 
     .col-date {
