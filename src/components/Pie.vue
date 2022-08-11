@@ -35,11 +35,11 @@ export default defineComponent({
       let easyCount = 0;
       let mediumCount = 0;
       let hardCount = 0;
-      let vipCount = 0;
+      let otherCount = 0;
       questionIds.forEach((id) => {
         const question = this.questionsMap[id];
         if (!question) {
-          vipCount++;
+          otherCount++;
         } else if (question.level === 1) {
           easyCount++;
         } else if (question.level === 2) {
@@ -56,7 +56,7 @@ export default defineComponent({
             ['简单', easyCount],
             ['中等', mediumCount],
             ['困难', hardCount],
-            ['VIP', vipCount],
+            ['未知', otherCount],
           ],
         },
       ] as any;
