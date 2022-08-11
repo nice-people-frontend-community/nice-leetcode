@@ -31,7 +31,7 @@ export default {
     type="primary"
     target="_blank"
     :underline="false"
-    :href="(lcus ? 'https://leetcode.com/problems/' : 'https://leetcode.cn/problems/') + question.question__title_slug"
+    :href="'https://leetcode.cn/problems/' + question.question__title_slug"
   >
     [{{ lcus ? question?.question__title_slug : question?.frontend_question_id }}]
   </a>
