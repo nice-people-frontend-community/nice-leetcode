@@ -320,9 +320,7 @@ const getWeekDay = (date: string) => {
         }
 
         &:hover {
-          height: 40px;
           background: rgb(46 50 56 / 5%);
-          font-size: 16px;
         }
 
         .user-name {
