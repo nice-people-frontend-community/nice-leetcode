@@ -6,26 +6,14 @@ import '@vue/runtime-core';
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CommonHeader: typeof import('./src/components/CommonHeader.vue')['default'];
-    ElAlert: typeof import('element-plus/es')['ElAlert'];
-    ElButton: typeof import('element-plus/es')['ElButton'];
-    ElCard: typeof import('element-plus/es')['ElCard'];
-    ElCol: typeof import('element-plus/es')['ElCol'];
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider'];
-    ElContainer: typeof import('element-plus/es')['ElContainer'];
-    ElDatePicker: typeof import('element-plus/es')['ElDatePicker'];
     ElDivider: typeof import('element-plus/es')['ElDivider'];
     ElEmpty: typeof import('element-plus/es')['ElEmpty'];
-    ElHeader: typeof import('element-plus/es')['ElHeader'];
     ElInput: typeof import('element-plus/es')['ElInput'];
     ElLink: typeof import('element-plus/es')['ElLink'];
-    ElMain: typeof import('element-plus/es')['ElMain'];
     ElOption: typeof import('element-plus/es')['ElOption'];
-    ElRow: typeof import('element-plus/es')['ElRow'];
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar'];
     ElSelect: typeof import('element-plus/es')['ElSelect'];
-    ElSkeleton: typeof import('element-plus/es')['ElSkeleton'];
-    ElTable: typeof import('element-plus/es')['ElTable'];
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn'];
     ElTag: typeof import('element-plus/es')['ElTag'];
     ElTooltip: typeof import('element-plus/es')['ElTooltip'];
     FixedWidget: typeof import('./src/components/FixedWidget.vue')['default'];
