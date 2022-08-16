@@ -21,24 +21,40 @@
 
 ## 使用方法
 
-### 添加自己的 LC ID
+### 添加 LC ID
 
-修改文件 [user.json](data/common/user.json)
+- Step1. 修改文件 [scripts/add_user.ts](scripts/add_user.ts)
 
-```json5
-{
-  // 用户名称，随便你取什么名字
-  userName: '你好啊派大星',
-  // LeetCode 中用户唯一标识
-  userId: 'ni-hao-a-pai-da-xing',
-  // 是否是美服账号
-  // 此字段选填，默认：false（国服）
-  lcus: true,
-  // 刷题记录是否周报中屏蔽
-  // 此字段选填，默认：false
-  hideInWeek: false,
-}
+```ts
+const newUsers: IUser[] = [
+  {
+    // 用户名称，随便你取什么名字
+    userName: '你好啊派大星',
+    // LeetCode 中用户唯一标识
+    userId: 'ni-hao-a-pai-da-xing',
+    // 是否是美服账号
+    // 此字段选填，默认：false（国服）
+    lcus: false,
+    // 刷题记录是否周报中屏蔽
+    // 此字段选填，默认：false
+    hideInWeek: false,
+  }
+];
 ```
+
+- Step2. 执行命令
+
+该命令会扫描以上人员本周内的提交记录，生成日报 json
+
+并且会把用户信息自动更新到 `data/common/user.json` 文件中。
+
+```sh
+yarn add_user
+```
+
+- Step3. 提交 Git
+
+将生成的用户日报 json 和 `data/common/user.json` 提交到 github
 
 ### 运行
 
