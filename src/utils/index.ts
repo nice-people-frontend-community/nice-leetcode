@@ -8,7 +8,7 @@ dayjs.extend(isoWeek);
  * @param user 用户信息
  */
 export const getUserHomepage = (user: IUser): string => {
-  return (user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId;
+  return (user.lcus ? 'https://leetcode.com/' : 'https://leetcode.cn/u/') + user.userId;
 };
 
 /**

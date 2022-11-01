@@ -24,7 +24,7 @@
             type="primary"
             target="_blank"
             :underline="false"
-            :href="(item.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + item.userId"
+            :href="(item.lcus ? 'https://leetcode.com/' : 'https://leetcode.cn/u/') + item.userId"
             >力扣主页 {{ item.lcus ? '🇺🇸' : '🇨🇳' }}
           </el-link>
         </div>

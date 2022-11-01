@@ -3,7 +3,7 @@
  * @param user 用户信息
  */
 export const getUserHomepage = (user: IUser): string => {
-  return (user.lcus ? 'https://leetcode.com/u/' : 'https://leetcode.cn/u/') + user.userId;
+  return (user.lcus ? 'https://leetcode.com/' : 'https://leetcode.cn/u/') + user.userId;
 };
 
 import axios from 'axios';
@@ -133,7 +133,7 @@ export const getAcSubmissions = async (userInfo: IUser, date: string, callback?:
       JSON.stringify({
         userName,
         userId,
-        homepage: lcus ? `https://leetcode.com/u/${userId}/` : `https://leetcode.cn/u/${userId}/`,
+        homepage: lcus ? `https://leetcode.com/${userId}/` : `https://leetcode.cn/u/${userId}/`,
         logs: [],
       }),
       {
