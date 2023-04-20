@@ -213,13 +213,28 @@ const initData = async () => {
 };
 initData();
 
+function getLastDayOfYear(year: number) {
+  return dayjs().set('year', year).endOf('year').format(DATE_FORMAT_STRING);
+}
+
 const weekControl = () => {
   const weeksLabel: (WeekLabel | null)[] = [];
-  for (let i = getISOWeekNumber(queryDate.value), curweek = i; i >= 19; i--) {
-    weeksLabel.push({
-      label: `${i}周`,
-      value: i - curweek,
-    });
+  const startYear = 2022;
+  const currentYear = new Date().getFullYear();
+  let year = currentYear,
+    howManyWeeksHavePassed = 0;
+  while (year >= startYear) {
+    for (
+      let i = getISOWeekNumber(year !== currentYear ? getLastDayOfYear(year) : queryDate.value);
+      i >= (year === startYear ? 19 : 1);
+      i--
+    ) {
+      weeksLabel.push({
+        label: `${year}年${i}周`,
+        value: howManyWeeksHavePassed--,
+      });
+    }
+    year--;
   }
   return weeksLabel;
 };
