@@ -16,7 +16,7 @@
         <div class="action">
           <question-difficulty />
           <el-select v-model="currentWeek" class="m-2" placeholder="选择周" size="small">
-            <el-option v-for="item in weekLable" :key="item?.value" :label="item?.label" :value="item?.value || 0" />
+            <el-option v-for="item in weekLabel" :key="item?.value" :label="item?.label" :value="item?.value || 0" />
           </el-select>
         </div>
       </blockquote>
@@ -114,12 +114,12 @@ interface Column {
   dateIndex?: number;
   width?: number;
 }
-interface WeekLable {
+interface WeekLabel {
   label: string;
   value: number;
 }
 
-const columnTemplete: Column[] = [
+const columnTemplate: Column[] = [
   {
     label: '用户名',
     key: 'userName',
@@ -171,7 +171,7 @@ const initData = async () => {
       Object.assign(weeklyData, res);
       const day = dayjs(weeklyData.updatedAt);
       time.value = dayjs(weeklyData.updatedAt).format('YYYY-MM-DD HH:mm:ss');
-      columnData.data = columnTemplete.slice(0);
+      columnData.data = columnTemplate.slice(0);
 
       const dateColumn = weeklyData.weekly?.map((date, index) => ({ label: date, key: date, dateIndex: index })) ?? [];
 
@@ -205,7 +205,7 @@ const initData = async () => {
     .catch(() => {
       weeklyData.records = [];
       weeklyData.weekly = [];
-      columnData.data = columnTemplete.slice(0);
+      columnData.data = columnTemplate.slice(0);
     })
     .finally(() => {
       loading.value = false;
@@ -214,17 +214,17 @@ const initData = async () => {
 initData();
 
 const weekControl = () => {
-  const weeksLable: (WeekLable | null)[] = [];
+  const weeksLabel: (WeekLabel | null)[] = [];
   for (let i = getISOWeekNumber(queryDate.value), curweek = i; i >= 19; i--) {
-    weeksLable.push({
+    weeksLabel.push({
       label: `${i}周`,
       value: i - curweek,
     });
   }
-  return weeksLable;
+  return weeksLabel;
 };
 
-const weekLable = weekControl();
+const weekLabel = weekControl();
 
 const tableRowClassName = ({ row }: { row: PersonRecord }) => {
   if (row.ranking <= 5) {
