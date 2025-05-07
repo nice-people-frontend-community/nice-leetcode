@@ -16,7 +16,8 @@
     "ac_record": "tsc scripts/ac_record.ts && node scripts/ac_record.js",
     "week_rollup": "tsc scripts/week_rollup.ts && node scripts/week_rollup.js",
     "add_user": "tsc scripts/add_user.ts && node scripts/add_user.js",
-    "get_all_questions": "tsc scripts/get_all_questions.ts && node scripts/get_all_questions.js"
+    "get_all_questions": "tsc scripts/get_all_questions.ts && node scripts/get_all_questions.js",
+    "add_user_from_issue": "tsc scripts/add_user_from_issue.ts && node scripts/add_user_from_issue.js"
   },
   "keywords": [],
   "author": "",
