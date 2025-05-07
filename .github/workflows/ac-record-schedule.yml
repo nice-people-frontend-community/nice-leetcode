@@ -26,6 +26,7 @@ jobs:
       - name: Run LeetCode
         run: |
           git pull
+          yarn run add_user_from_issue
           yarn run ac_record
           git pull
 
